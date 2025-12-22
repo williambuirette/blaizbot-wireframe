@@ -1,0 +1,27 @@
+# Fichiers système
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Fichiers temporaires
+*.log
+*.tmp
+*.bak
+
+# Python
+__pycache__/
+*.py[cod]
+server.py
+
+# Node (si utilisé plus tard)
+node_modules/
+package-lock.json
+
+# Fichiers de test
+test-module.html

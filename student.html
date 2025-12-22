@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Blaiz'bot - Espace Élève</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Redirection vers la page de connexion si accès direct ou refresh
+        if (!sessionStorage.getItem('authenticated')) {
+            window.location.href = 'index.html';
+        }
+        sessionStorage.removeItem('authenticated');
+    </script>
+</head>
+<body>
+    <div class="admin-wrapper">
+        <!-- Sidebar Latérale -->
+        <aside class="sidebar" style="background-color: #34495e;"> <!-- Bleu foncé pour l'élève -->
+            <div class="sidebar-header">
+                <h2>Blaiz'bot</h2>
+                <p>Espace Élève</p>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-group">
+                    <span>MON PARCOURS</span>
+                    <a href="#" class="nav-link active" data-section="dashboard">Ma Progression</a>
+                    <a href="#" class="nav-link" data-section="cours">Mes Cours</a>
+                    <a href="#" class="nav-link" data-section="exercices">Mes Exercices</a>
+                    <a href="#" class="nav-link" data-section="messages">Centre de Communication <span class="status-pill" style="background: #e74c3c; color: white; padding: 2px 6px; font-size: 0.7rem; margin-left: 5px;">1</span></a>
+                </div>
+                <div class="nav-group">
+                    <span>ASSISTANCE IA</span>
+                    <a href="#" class="nav-link" data-section="chatbot">Mon Assistant IA</a>
+                    <a href="#" class="nav-link" data-section="lab">Blaiz'bot Lab (Libre)</a>
+                    <a href="#" class="nav-link" data-section="knowledge">Base de connaissances</a>
+                    <a href="#" class="nav-link" data-section="revisions">Planning de Révision</a>
+                </div>
+            </nav>
+            <div class="sidebar-footer">
+                <div style="padding: 10px; font-size: 0.8rem; color: #ecf0f1; border-bottom: 1px solid #5d6d7e; margin-bottom: 10px;">
+                    Connecté en tant que :<br><strong>Lucas PETIT (6ème A)</strong>
+                </div>
+                <a href="index.html" class="btn-logout">Déconnexion</a>
+            </div>
+        </aside>
+
+        <!-- Zone de Travail Principale -->
+        <main class="main-content">
+            
+            <!-- SECTION : DASHBOARD / PROGRESSION -->
+            <section id="section-dashboard" class="admin-section active">
+                <header class="content-header">
+                    <div class="header-title">
+                        <h1>Salut Lucas ! 👋</h1>
+                        <p>Tu as complété 75% de tes objectifs cette semaine. Continue comme ça !</p>
+                    </div>
+                </header>
+
+                <div class="stats-grid">
+                    <div class="stats-card">
+                        <h3>Progression Globale</h3>
+                        <div class="stats-value">75%</div>
+                        <div class="performance-bar-container">
+                            <div class="performance-bar" style="width: 75%; background-color: #2ecc71;"></div>
+                        </div>
+                        <p style="font-size: 0.8rem; color: #7f8c8d;">+5% depuis hier</p>
+                    </div>
+                    <div class="stats-card">
+                        <h3>Moyenne Actuelle</h3>
+                        <div class="stats-value">15.2/20</div>
+                        <p>Excellent travail en Mathématiques !</p>
+                    </div>
+                    <div class="stats-card">
+                        <h3>À faire aujourd'hui</h3>
+                        <div class="stats-value" style="font-size: 1.5rem;">3 Devoirs</div>
+                        <ul class="stats-list">
+                            <li>Maths : Exercice fractions</li>
+                            <li>Français : Lecture chapitre 4</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="data-table-container">
+                    <h3>Dernières Notes</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Matière</th>
+                                <th>Évaluation</th>
+                                <th>Note</th>
+                                <th>Commentaire IA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mathématiques</td>
+                                <td>Nombres relatifs</td>
+                                <td><strong>18/20</strong></td>
+                                <td><span class="tag" style="background: #e8f5e9; color: #2e7d32;">Maîtrisé</span></td>
+                            </tr>
+                            <tr>
+                                <td>Anglais</td>
+                                <td>Vocabulaire : The City</td>
+                                <td><strong>14/20</strong></td>
+                                <td><span class="tag" style="background: #fff3e0; color: #ef6c00;">À revoir : Verbes irréguliers</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECTION : MES COURS -->
+            <section id="section-cours" class="admin-section">
+                <header class="content-header">
+                    <div class="header-title">
+                        <h1>Mes Cours</h1>
+                        <p>Accède à tous tes supports de cours</p>
+                    </div>
+                </header>
+                <div class="stats-grid">
+                    <div class="stats-card">
+                        <h3>Mathématiques</h3>
+                        <p>Dernier chapitre : Les fractions</p>
+                        <button class="btn-primary" style="width: 100%; margin-top: 10px;" onclick="openCoursContent('Mathématiques', 'Les fractions')">Ouvrir le cours</button>
+                    </div>
+                    <div class="stats-card">
+                        <h3>Français</h3>
+                        <p>Dernier chapitre : La poésie</p>
+                        <button class="btn-primary" style="width: 100%; margin-top: 10px;" onclick="openCoursContent('Français', 'La poésie')">Ouvrir le cours</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION : CHATBOT IA -->
+            <section id="section-chatbot" class="admin-section">
+                <header class="content-header">
+                    <div class="header-title">
+                        <h1>Mon Assistant IA Blaiz'bot</h1>
+                        <p>Accède aux environnements de cours préparés par tes professeurs.</p>
+                    </div>
+                    <div class="header-actions" id="assistant-header-actions" style="display: none;">
+                        <!-- Les cours sont gérés par le professeur -->
+                    </div>
+                </header>
+
+                <!-- VUE 1 : DASHBOARD ASSISTANT -->
+                <div id="assistant-dashboard" style="padding: 20px;">
+                    <div style="margin-bottom: 20px; padding: 15px; background: #e3f2fd; border-radius: 8px; color: #1565c0; font-size: 0.9rem; display: flex; align-items: center; gap: 10px;">
+                        <span>ℹ️</span>
+                        <span>Voici les espaces de travail déposés par tes professeurs. Sélectionne un cours pour commencer tes révisions.</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;" id="assistant-projects-grid">
+                        <!-- Les cours du professeur s'afficheront ici -->
+                    </div>
+                </div>
+
+                <!-- VUE 2 : WORKSPACE ASSISTANT -->
+                <div id="assistant-workspace-view" style="display: none;">
+                    <div style="padding: 0 20px 15px; display: flex; align-items: center; gap: 15px;">
+                        <button class="btn-secondary" onclick="showAssistantDashboard()" style="padding: 5px 10px; font-size: 0.8rem;">← Retour aux cours</button>
+                        <h2 id="current-assistant-title" style="margin: 0; font-size: 1.1rem; color: #2c3e50;">Cours : Les Fractions</h2>
+                    </div>
+
+                    <div class="lab-container" id="assistant-container">
+                        <!-- Colonne 1 : Sources (Prof + Élève) -->
+                        <div class="lab-column" style="width: 280px; min-width: 280px;" id="assistant-col-sources">
+                        <div style="padding: 15px; background: #f8f9fa; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+                            <h4 style="margin: 0; font-size: 0.9rem;">📚 Sources</h4>
+                            <button class="btn-primary" style="padding: 4px 8px; font-size: 0.7rem; background: #3498db; border: none;" onclick="promptAddAssistantSource()">+ Ajouter</button>
+                        </div>
+                        <div id="assistant-sources-list" style="flex-grow: 1; overflow-y: auto; padding: 15px;">
+                            <!-- Sources Professeur (Verrouillées) -->
+                            <div style="font-size: 0.7rem; color: #7f8c8d; text-transform: uppercase; margin-bottom: 10px; font-weight: bold;">📌 Sources du Professeur</div>
+                            <div class="source-item" style="background: #f0f7ff; border-color: #d1e9ff;">
+                                <div class="source-icon icon-pdf">📄</div>
+                                <span style="flex-grow: 1; font-size: 0.8rem;">Cours_Fractions.pdf</span>
+                                <span title="Source imposée" style="cursor: help;">🔒</span>
+                            </div>
+                            <div class="source-item" style="background: #f0f7ff; border-color: #d1e9ff;">
+                                <div class="source-icon icon-pdf">📄</div>
+                                <span style="flex-grow: 1; font-size: 0.8rem;">Exercices_Fractions.pdf</span>
+                                <span title="Source imposée" style="cursor: help;">🔒</span>
+                            </div>
+                            <div class="source-item" style="background: #f0f7ff; border-color: #d1e9ff;">
+                                <div class="source-icon icon-yt">🎥</div>
+                                <span style="flex-grow: 1; font-size: 0.8rem;">Video_Methode.yt</span>
+                                <span title="Source imposée" style="cursor: help;">🔒</span>
+                            </div>
+
+                            <!-- Sources Élève -->
+                            <div style="font-size: 0.7rem; color: #7f8c8d; text-transform: uppercase; margin: 15px 0 10px; font-weight: bold;">👤 Mes Sources</div>
+                            <div id="assistant-student-sources">
+                                <div style="text-align: center; color: #95a5a6; font-size: 0.75rem; margin-top: 10px;">Aucune source perso.</div>
+                            </div>
+                        </div>
+                        <div style="padding: 12px; background: #e3f2fd; font-size: 0.75rem; color: #1565c0; border-top: 1px solid #eee;">
+                            <strong>Note :</strong> L'IA répond en priorité selon les sources de ton professeur.
+                        </div>
+                    </div>
+
+                    <div class="lab-resizer" onmousedown="initResize(event, 'left', 'assistant')" ondblclick="resetLayout('left', 'assistant')"></div>
+                    
+                    <!-- Colonne 2 : Chat -->
+                    <div class="lab-column" style="flex: 1; min-width: 200px;" id="assistant-col-chat">
+                        <div style="padding: 10px 15px; background: #fff; border-bottom: 1px solid #eee; display: flex; gap: 10px;">
+                            <select class="search-filter" style="font-size: 0.8rem; padding: 5px;" id="chat-subject" onchange="updateChatContext()">
+                                <option value="maths">Mathématiques</option>
+                                <option value="francais">Français</option>
+                                <option value="histoire">Histoire-Géo</option>
+                            </select>
+                            <select class="search-filter" style="font-size: 0.8rem; padding: 5px; flex-grow: 1;" id="chat-theme">
+                                <option>Les Fractions (Cours du 15/12)</option>
+                                <option>Nombres Relatifs</option>
+                                <option>Géométrie : Triangles</option>
+                            </select>
+                        </div>
+                        <div id="chat-messages" style="flex-grow: 1; background: #fff; padding: 20px; overflow-y: auto; height: 400px;">
+                            <div style="margin-bottom: 15px; display: flex; gap: 10px;">
+                                <div style="width: 35px; height: 35px; background: #3498db; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">B</div>
+                                <div style="background: #f1f2f6; padding: 12px; border-radius: 0 15px 15px 15px; max-width: 80%; font-size: 0.9rem;">
+                                    Bonjour Lucas ! Je suis prêt à t'aider sur les <strong>Mathématiques</strong>. 
+                                    <br><br>
+                                    Tu as <strong>3 exercices</strong> en attente sur les fractions. Veux-tu qu'on les regarde ensemble ?
+                                </div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px; background: #f8f9fa; border-top: 1px solid #eee; display: flex; gap: 10px; align-items: center;">
+                            <label for="chat-file-upload" style="cursor: pointer; font-size: 1.2rem;" title="Joindre un fichier">📎</label>
+                            <input type="file" id="chat-file-upload" style="display: none;" onchange="handleStudentFileUpload(this)">
+                            <input type="text" id="chat-input" placeholder="Pose ta question ici..." style="flex-grow: 1; padding: 12px; border: 1px solid #ddd; border-radius: 25px; outline: none;">
+                            <button class="btn-primary" style="border-radius: 50%; width: 45px; height: 45px; padding: 0; display: flex; align-items: center; justify-content: center;" onclick="sendStudentMessage()">➔</button>
+                        </div>
+                    </div>
+
+                    <div class="lab-resizer" onmousedown="initResize(event, 'right', 'assistant')" ondblclick="resetLayout('right', 'assistant')"></div>
+
+                    <!-- Colonne 3 : Workspace -->
+                    <div class="lab-column" style="width: 300px; min-width: 300px;" id="assistant-col-workspace">
+                        <div style="padding: 15px; background: #f8f9fa; border-bottom: 1px solid #eee;">
+                            <h4 style="margin: 0; font-size: 0.9rem;">🛠️ Outils de Réussite</h4>
+                        </div>
+                        <div style="padding: 15px; flex-grow: 1; overflow-y: auto;">
+                            <h5 style="margin: 0 0 10px; font-size: 0.85rem; color: #7f8c8d; text-transform: uppercase;">Générer pour ce cours</h5>
+                            <div style="display: grid; grid-template-columns: 1fr; gap: 8px;">
+                                <button class="btn-small" style="background: #f0f7ff; color: #007bff; border: 1px solid #d1e9ff; text-align: left;" onclick="openAssistantConfig('quiz')">📝 Générer un Quiz d'entraînement</button>
+                                <button class="btn-small" style="background: #f0f7ff; color: #007bff; border: 1px solid #d1e9ff; text-align: left;" onclick="openAssistantConfig('methode')">🧠 Méthode de révision personnalisée</button>
+                                <button class="btn-small" style="background: #f0f7ff; color: #007bff; border: 1px solid #d1e9ff; text-align: left;" onclick="openAssistantConfig('synthese')">📄 Résumé du cours (Fiche)</button>
+                                <button class="btn-small" style="background: #f0f7ff; color: #007bff; border: 1px solid #d1e9ff; text-align: left;" onclick="explainExercise()">❓ Expliquer l'exercice en cours</button>
+                            </div>
+
+                            <div id="assistant-workspace-output" style="margin-top: 20px; padding: 15px; background: #fff; border: 1px dashed #ddd; border-radius: 8px; min-height: 200px; font-size: 0.85rem;">
+                                <p style="color: #95a5a6; text-align: center; margin-top: 50px;">Tes quiz et fiches apparaîtront ici.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION : BLAIZ'BOT LAB (STYLE NOTEBOOK LM) -->
+            <section id="section-lab" class="admin-section">
+                <header class="content-header">
+                    <div class="header-title">
+                        <h1>🧪 Blaiz'bot Lab</h1>
+                        <p>Studio de recherche augmenté par l'IA (Inspiré de NotebookLM).</p>
+                    </div>
+                    <div class="header-actions" id="lab-header-actions">
+                        <button class="btn-primary" style="background: #9b59b6; border: none;" onclick="openCreateProjectModal('lab')">+ Nouveau Projet</button>
+                    </div>
+                </header>
+
+                <!-- VUE 1 : DASHBOARD (LISTE DES PROJETS) -->
+                <div id="lab-dashboard" style="padding: 20px;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;" id="lab-projects-grid">
+                        <!-- Les projets s'afficheront ici -->
+                        <div class="project-card-new" onclick="openCreateProjectModal('lab')">
+                            <div style="font-size: 2rem; margin-bottom: 10px;">➕</div>
+                            <div style="font-weight: bold;">Créer un nouveau projet</div>
+                            <div style="font-size: 0.8rem; color: #7f8c8d; margin-top: 5px;">Importez vos sources et commencez à explorer</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VUE 2 : WORKSPACE (L'INTERFACE 3 COLONNES) -->
+                <div id="lab-workspace-view" style="display: none;">
+                    <div style="padding: 0 20px 15px; display: flex; align-items: center; gap: 15px;">
+                        <button class="btn-secondary" onclick="showLabDashboard()" style="padding: 5px 10px; font-size: 0.8rem;">← Retour aux projets</button>
+                        <h2 id="current-project-title" style="margin: 0; font-size: 1.1rem; color: #2c3e50;">Projet sans titre</h2>
+                    </div>
+                    
+                    <div class="lab-container" id="lab-container">
+                        
+                        <!-- Colonne 1 : Sources -->
+                        <div class="lab-column" style="width: 300px; min-width: 300px;" id="lab-col-sources">
+                        <div style="padding: 15px; background: #f8f9fa; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+                            <h4 style="margin: 0; font-size: 0.9rem;">📚 Sources</h4>
+                            <div style="display: flex; gap: 5px;">
+                                <button class="btn-primary" style="padding: 4px 8px; font-size: 0.7rem; background: #9b59b6; border: none;" onclick="document.getElementById('lab-source-upload').click()">+ Fichier</button>
+                                <button class="btn-icon" title="Ajouter un lien Web" onclick="promptAddSource('web')">🌐</button>
+                                <button class="btn-icon" title="Ajouter une vidéo YouTube" onclick="promptAddSource('yt')">🎥</button>
+                            </div>
+                            <input type="file" id="lab-source-upload" style="display: none;" onchange="addLabSource(this)">
+                        </div>
+                        <div id="lab-sources-list" style="flex-grow: 1; overflow-y: auto; padding: 15px;">
+                            <div style="text-align: center; color: #95a5a6; font-size: 0.8rem; margin-top: 20px;" id="no-sources-msg">
+                                Aucune source.<br>Importez des fichiers, liens ou vidéos.
+                            </div>
+                        </div>
+                        <div style="padding: 12px; background: #fdf2f9; font-size: 0.75rem; color: #8e44ad; border-top: 1px solid #eee;">
+                            <strong>Note :</strong> L'IA utilise ces sources comme base de connaissance exclusive.
+                        </div>
+                    </div>
+
+                    <div class="lab-resizer" onmousedown="initResize(event, 'left')" ondblclick="resetLayout('left', 'lab')"></div>
+
+                    <!-- Colonne 2 : Chat -->
+                    <div class="lab-column" style="flex: 1; min-width: 200px;" id="lab-col-chat">
+                        <div id="lab-chat-messages" style="flex-grow: 1; background: #fff; padding: 20px; overflow-y: auto;">
+                            <div style="margin-bottom: 15px; display: flex; gap: 10px;">
+                                <div style="width: 35px; height: 35px; background: #9b59b6; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">L</div>
+                                <div style="background: #f3e5f5; padding: 12px; border-radius: 0 15px 15px 15px; max-width: 80%; font-size: 0.9rem;">
+                                    Bonjour Lucas ! Je suis ton assistant de recherche. 
+                                    <br><br>
+                                    Importe tes sources à gauche pour commencer à travailler.
+                                </div>
+                            </div>
+                        </div>
+                        <div style="padding: 15px; background: #f8f9fa; border-top: 1px solid #eee; display: flex; gap: 10px; align-items: center;">
+                            <label for="lab-chat-file" style="cursor: pointer; font-size: 1.2rem;" title="Joindre un fichier au chat">📎</label>
+                            <input type="file" id="lab-chat-file" style="display: none;" onchange="handleLabChatFile(this)">
+                            <input type="text" id="lab-chat-input" placeholder="Pose une question sur tes sources..." style="flex-grow: 1; padding: 12px; border: 1px solid #ddd; border-radius: 25px; outline: none;">
+                            <button class="btn-primary" style="background: #9b59b6; border: none; border-radius: 50%; width: 45px; height: 45px; padding: 0; display: flex; align-items: center; justify-content: center;" onclick="sendLabMessage()">➔</button>
+                        </div>
+                    </div>
+
+                    <div class="lab-resizer" onmousedown="initResize(event, 'right')" ondblclick="resetLayout('right', 'lab')"></div>
+
+                    <!-- Colonne 3 : Workspace -->
+                    <div class="lab-column" style="width: 320px; min-width: 320px;" id="lab-col-workspace">
+                        <div style="padding: 15px; background: #f8f9fa; border-bottom: 1px solid #eee;">
+                            <h4 style="margin: 0; font-size: 0.9rem;">🛠️ Espace de Travail</h4>
+                        </div>
+                        <div style="padding: 15px; flex-grow: 1; overflow-y: auto;">
+                            
+                            <h5 style="margin: 0 0 10px; font-size: 0.85rem; color: #7f8c8d; text-transform: uppercase;">Générer des documents</h5>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                                <button class="btn-small" style="background: #f5f0ff; color: #8e44ad; border: 1px solid #d7bde2;" onclick="openLabConfig('synthese')">📝 Synthèse</button>
+                                <button class="btn-small" style="background: #f5f0ff; color: #8e44ad; border: 1px solid #d7bde2;" onclick="openLabConfig('quiz')">🎲 Quiz</button>
+                                <button class="btn-small" style="background: #f5f0ff; color: #8e44ad; border: 1px solid #d7bde2;" onclick="openLabConfig('flashcards')">🗂️ Flashcards</button>
+                                <button class="btn-small" style="background: #f5f0ff; color: #8e44ad; border: 1px solid #d7bde2;" onclick="openLabConfig('mindmap')">🧠 Carte Mentale</button>
+                            </div>
+
+                            <!-- Zone de Configuration Contextuelle (Modal) -->
+                            <div id="lab-config-modal" class="modal-overlay" style="display: none;">
+                                <div class="modal-content" style="max-width: 400px; animation: slideIn 0.3s ease-out;">
+                                    <h3 id="lab-config-title" style="margin-bottom: 15px; color: #8e44ad; display: flex; align-items: center; gap: 10px;">⚙️ Configuration</h3>
+                                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">
+                                        Personnalisez la génération de votre document. Quelles sont vos instructions pour l'IA ?
+                                    </p>
+                                    <textarea id="lab-contextual-prompt" style="width: 100%; height: 120px; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 0.9rem; resize: none; margin-bottom: 20px; font-family: inherit;" placeholder="Ex: 'Fais un quiz de 5 questions difficiles', 'Résumé structuré en 3 parties'..."></textarea>
+                                    <div style="display: flex; gap: 10px;">
+                                        <button class="btn-primary" style="flex: 2; background: #9b59b6; border: none;" id="lab-config-confirm-btn">🚀 Générer maintenant</button>
+                                        <button class="btn-secondary" style="flex: 1;" onclick="closeLabModal()">Annuler</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="lab-workspace-output" style="margin-top: 20px; padding: 15px; background: #fff; border: 1px dashed #ddd; border-radius: 8px; min-height: 150px; font-size: 0.85rem;">
+                                <p style="color: #95a5a6; text-align: center; margin-top: 50px;">Tes documents générés apparaîtront ici.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- SECTION : BASE DE CONNAISSANCES -->
+            <section id="section-knowledge" class="admin-section">
+                <header class="content-header">
+                    <div class="header-title">
+                        <h1>📚 Base de Connaissances</h1>
+                        <p>Accède aux ressources officielles et gère tes propres fiches.</p>
+                    </div>
+                    <div class="header-actions">
+                        <div class="tab-switcher" style="display: flex; background: #eee; padding: 5px; border-radius: 8px; gap: 5px;">
+                            <button class="tab-btn active" onclick="switchKnowledgeTab('teacher')" id="tab-btn-teacher" style="padding: 8px 15px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; background: #fff; color: #2c3e50;">👨‍🏫 Base Professeur</button>
+                            <button class="tab-btn" onclick="switchKnowledgeTab('student')" id="tab-btn-student" style="padding: 8px 15px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; background: transparent; color: #7f8c8d;">👤 Ma Base Perso</button>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- VUE : BASE PROFESSEUR -->
+                <div id="knowledge-teacher-view" class="knowledge-content">
+                    <div style="display: grid; grid-template-columns: 250px 1fr; gap: 20px; padding: 20px; height: calc(100vh - 250px);">
+                        <!-- Sidebar Matières -->
+                        <div class="stats-card" style="padding: 0; overflow-y: auto;">
+                            <div style="padding: 15px; background: #f8f9fa; border-bottom: 1px solid #eee; font-weight: bold;">Matières</div>
+                            <div id="knowledge-teacher-subjects" style="padding: 10px;">
+                                <!-- Liste des matières prof -->
+                            </div>
+                        </div>
+                        <!-- Contenu Thématiques & Documents -->
+                        <div class="stats-card" style="padding: 20px; overflow-y: auto;">
+                            <div id="knowledge-teacher-details">
+                                <div style="text-align: center; color: #95a5a6; margin-top: 100px;">
+                                    <div style="font-size: 3rem; margin-bottom: 20px;">📂</div>
+                                    <h3>Sélectionne une matière pour voir les ressources</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VUE : BASE ÉLÈVE -->
+                <div id="knowledge-student-view" class="knowledge-content" style="display: none;">
+                    <div style="display: grid; grid-template-columns: 250px 1fr; gap: 20px; padding: 20px; height: calc(100vh - 250px);">
+                        <!-- Sidebar Matières -->
+                        <div class="stats-card" style="padding: 0; overflow-y: auto;">
+                            <div style="padding: 15px; background: #f8f9fa; border-bottom: 1px solid #eee; font-weight: bold; display: flex; justify-content: space-between; align-items: center;">
+                                <span>Mes Matières</span>
+                                <button class="btn-icon" onclick="addStudentSubject()" title="Ajouter une matière">➕</button>
+                            </div>
+                            <div id="knowledge-student-subjects" style="padding: 10px;">
+                                <!-- Liste des matières élève -->
+                            </div>
+                        </div>
+                        <!-- Contenu Thématiques & Documents -->
+                        <div class="stats-card" style="padding: 20px; overflow-y: auto;">
+                            <div id="knowledge-student-details">
+                                <div style="text-align: center; color: #95a5a6; margin-top: 100px;">
+                                    <div style="font-size: 3rem; margin-bottom: 20px;">📝</div>
+                                    <h3>Organise tes propres fiches et documents</h3>
+                                    <p>Tes synthèses générées dans le Lab peuvent être enregistrées ici.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION : MESSAGERIE PROFESSEUR -->
+            <section id="section-messages" class="admin-section">
+                <header class="content-header">
+                    <div class="header-title">
+                        <h1>Centre de Communication</h1>
+                        <p>Échanges avec tes enseignants et ta classe</p>
+                    </div>
+                </header>
+                
+                <div style="display: flex; gap: 20px; height: calc(100vh - 200px);">
+                    <!-- Sidebar des thèmes -->
+                    <div class="stats-card" style="flex: 1; display: flex; flex-direction: column; padding: 0; overflow: hidden;">
+                        <div style="padding: 15px; border-bottom: 1px solid #eee; background: #f8f9fa;">
+                            <input type="text" placeholder="Rechercher un thème ou prof..." style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ddd; font-size: 0.85rem;">
+                        </div>
+                        <div style="overflow-y: auto; flex-grow: 1;" id="student-conv-list">
+                            <!-- Général -->
+                            <div onclick="selectStudentChat('Général', 'classe')" style="padding: 12px 15px; border-bottom: 1px solid #eee; cursor: pointer; font-weight: bold; background: #f0f7ff; border-left: 4px solid #3498db; display: flex; justify-content: space-between; align-items: center;">
+                                <span>📢 Chat de Classe (Général)</span>
+                                <span class="status-pill" style="background: #3498db; color: white; padding: 2px 6px; font-size: 0.7rem;">3</span>
+                            </div>
+
+                            <!-- Matière : Mathématiques -->
+                            <div style="background: #f8f9fa; border-bottom: 1px solid #eee;">
+                                <div style="padding: 10px 15px; font-size: 0.85rem; font-weight: bold; color: #2c3e50; background: #eef2f7; display: flex; align-items: center; gap: 8px;">
+                                    📐 Mathématiques
+                                </div>
+                                
+                                <!-- Thème : Fractions -->
+                                <div style="padding: 5px 15px 5px 25px; background: #fff; font-size: 0.8rem; font-weight: bold; color: #7f8c8d; border-bottom: 1px solid #f9f9f9;">
+                                    📘 Thème : Les Fractions
+                                </div>
+                                <div style="background: #fff; padding-left: 25px;">
+                                    <div class="msg-item" onclick="selectStudentChat('Les Fractions', 'classe')" style="padding: 8px 15px; border-bottom: 1px solid #f0f0f0; cursor: pointer; font-size: 0.85rem; color: #34495e;">
+                                        📢 Chat de groupe
+                                    </div>
+                                    <div class="msg-item" onclick="selectStudentChat('Les Fractions', 'prof')" style="padding: 8px 15px; border-bottom: 1px solid #f0f0f0; cursor: pointer; font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center;">
+                                        <span>👤 M. DUPONT (Prof)</span>
+                                        <span class="status-pill" style="background: #e74c3c; color: white; padding: 1px 5px; font-size: 0.6rem; border-radius: 10px;">1</span>
+                                    </div>
+                                </div>
+
+                                <!-- Thème : Géométrie -->
+                                <div style="padding: 5px 15px 5px 25px; background: #fff; font-size: 0.8rem; font-weight: bold; color: #7f8c8d; border-bottom: 1px solid #f9f9f9;">
+                                    📘 Thème : Géométrie
+                                </div>
+                                <div style="background: #fff; padding-left: 25px;">
+                                    <div class="msg-item" onclick="selectStudentChat('Géométrie', 'prof')" style="padding: 8px 15px; border-bottom: 1px solid #f0f0f0; cursor: pointer; font-size: 0.85rem;">
+                                        👤 M. DUPONT (Prof)
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Matière : Français -->
+                            <div style="background: #f8f9fa; border-bottom: 1px solid #eee;">
+                                <div style="padding: 10px 15px; font-size: 0.85rem; font-weight: bold; color: #2c3e50; background: #eef2f7; display: flex; align-items: center; gap: 8px;">
+                                    ✍️ Français
+                                </div>
+                                <div style="padding: 5px 15px 5px 25px; background: #fff; font-size: 0.8rem; font-weight: bold; color: #7f8c8d; border-bottom: 1px solid #f9f9f9;">
+                                    📘 Thème : La Poésie
+                                </div>
+                                <div style="background: #fff; padding-left: 25px;">
+                                    <div class="msg-item" onclick="selectStudentChat('La Poésie', 'prof')" style="padding: 8px 15px; border-bottom: 1px solid #f0f0f0; cursor: pointer; font-size: 0.85rem;">
+                                        👤 Mme. MARTIN (Prof)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fenêtre de Chat -->
+                    <div class="stats-card" style="flex: 2.5; display: flex; flex-direction: column; padding: 0; overflow: hidden;">
+                        <div id="chat-header" style="padding: 15px; border-bottom: 1px solid #eee; background: #fff;">
+                            <h3 id="chat-target-name" style="margin: 0;">📢 Chat de Classe (Général)</h3>
+                            <span id="chat-target-theme" style="font-size: 0.8rem; color: #3498db; font-weight: bold;">Thème : Général</span>
+                        </div>
+
+                        <div class="chat-messages" id="student-chat-messages" style="flex-grow: 1; background: #f4f7f6; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px;">
+                            <div class="message bot" style="align-self: flex-start; background: white; color: #2c3e50; padding: 10px 15px; border-radius: 15px 15px 15px 0; max-width: 70%; border: 1px solid #ddd;">
+                                <span style="font-weight: bold; color: #3498db;">M. DUPONT :</span> Bonjour à tous ! Bienvenue dans le fil de discussion général.
+                            </div>
+                        </div>
+
+                        <div style="padding: 15px; background: #fff; border-top: 1px solid #eee;">
+                            <div class="chat-input" style="display: flex; gap: 10px; align-items: center;">
+                                <button type="button" style="background: #95a5a6; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;" title="Joindre un fichier">📎</button>
+                                <input type="text" id="student-chat-input-text" placeholder="Écrire un message..." style="flex-grow: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+                                <button onclick="sendStudentChatMessage()" style="background: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: bold;">Envoyer ➤</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION : MES EXERCICES -->
+            <section id="section-exercices" class="admin-section">
+                <header class="content-header">
+                    <div class="header-title">
+                        <h1>Mes Exercices</h1>
+                        <p>Entraîne-toi et progresse à ton rythme</p>
+                    </div>
+                </header>
+                <div class="stats-grid">
+                    <div class="stats-card">
+                        <h3>Quiz : Les Fractions (Niveau 1)</h3>
+                        <p>Statut : <span class="status-pill" style="background: #2ecc71; color: white;">Réussi</span></p>
+                        <p>Score : 18/20</p>
+                        <button class="btn-primary">Revoir</button>
+                    </div>
+                    <div class="stats-card">
+                        <h3>Exercice : Géométrie Plane</h3>
+                        <p>Statut : <span class="status-pill" style="background: #f1c40f; color: white;">À faire</span></p>
+                        <p>Date limite : Demain</p>
+                        <button class="btn-primary">Commencer</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION : PLANNING DE RÉVISION -->
+            <section id="section-revisions" class="admin-section">
+                <header class="content-header">
+                    <div class="header-title">
+                        <h1>Planning de Révision</h1>
+                        <p>Ton agenda de cours et d'objectifs personnels</p>
+                    </div>
+                </header>
+                
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <button class="btn-icon" onclick="changeMonth(-1)">◀</button>
+                            <h2 id="calendar-month-year" style="margin: 0; min-width: 200px; text-align: center;">Décembre 2025</h2>
+                            <button class="btn-icon" onclick="changeMonth(1)">▶</button>
+                        </div>
+                        <div class="calendar-legend">
+                            <div class="legend-item">
+                                <div class="dot teacher"></div>
+                                <span>Professeur</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="dot student"></div>
+                                <span>Mes Objectifs</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="calendar-grid" id="calendar-grid">
+                        <!-- En-têtes des jours -->
+                        <div class="calendar-day-header">Lun</div>
+                        <div class="calendar-day-header">Mar</div>
+                        <div class="calendar-day-header">Mer</div>
+                        <div class="calendar-day-header">Jeu</div>
+                        <div class="calendar-day-header">Ven</div>
+                        <div class="calendar-day-header">Sam</div>
+                        <div class="calendar-day-header">Dim</div>
+                        
+                        <!-- Les jours seront générés par JS -->
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- MODAL : CRÉATION DE PROJET LAB -->
+    <div id="create-project-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content" style="max-width: 450px; animation: slideIn 0.3s ease-out;">
+            <h3 id="modal-project-title" style="margin-bottom: 15px; color: #2c3e50; display: flex; align-items: center; gap: 10px;">🧪 Nouveau Projet Lab</h3>
+            <p id="modal-project-desc" style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">
+                Créez un espace de recherche libre pour vos dossiers et exposés.
+            </p>
+            
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; font-size: 0.8rem; font-weight: bold; color: #7f8c8d; margin-bottom: 5px;">TITRE DU PROJET</label>
+                <input type="text" id="new-project-name" placeholder="Ex: Exposé sur la Révolution, Dossier Écologie..." style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; outline: none; border-color: #9b59b6;">
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+                <button class="btn-primary" style="flex: 2; background: #9b59b6; border: none;" id="confirm-create-project">🚀 Créer le projet</button>
+                <button class="btn-secondary" style="flex: 1;" onclick="closeCreateProjectModal()">Annuler</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL : SAISIE GÉNÉRIQUE (Matières, Thèmes, Docs) -->
+    <div id="generic-input-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content" style="max-width: 400px; animation: slideIn 0.3s ease-out;">
+            <h3 id="generic-modal-title" style="margin-bottom: 15px; color: #2c3e50;">Titre</h3>
+            <input type="text" id="generic-modal-input" style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; outline: none;">
+            <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                <button class="btn-secondary" onclick="closeGenericModal()">Annuler</button>
+                <button class="btn-primary" id="generic-modal-confirm">Valider</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL : NOUVEL ÉVÉNEMENT CALENDRIER -->
+    <div id="calendar-event-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content" style="max-width: 500px; animation: slideIn 0.3s ease-out;">
+            <h3 style="margin-bottom: 20px; color: #2c3e50;">📅 Nouvel Événement</h3>
+            
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; font-size: 0.8rem; font-weight: bold; color: #7f8c8d; margin-bottom: 5px;">Titre</label>
+                <input type="text" id="event-title" placeholder="Ex: Réviser Maths" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                <div>
+                    <label style="display: block; font-size: 0.8rem; font-weight: bold; color: #7f8c8d; margin-bottom: 5px;">Date début</label>
+                    <input type="date" id="event-start-date" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                </div>
+                <div>
+                    <label style="display: block; font-size: 0.8rem; font-weight: bold; color: #7f8c8d; margin-bottom: 5px;">Heure début</label>
+                    <input type="time" id="event-start-time" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                <div>
+                    <label style="display: block; font-size: 0.8rem; font-weight: bold; color: #7f8c8d; margin-bottom: 5px;">Date fin</label>
+                    <input type="date" id="event-end-date" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                </div>
+                <div>
+                    <label style="display: block; font-size: 0.8rem; font-weight: bold; color: #7f8c8d; margin-bottom: 5px;">Heure fin</label>
+                    <input type="time" id="event-end-time" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+                </div>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; font-size: 0.8rem; font-weight: bold; color: #7f8c8d; margin-bottom: 5px;">Description / Notes</label>
+                <textarea id="event-desc" rows="3" placeholder="Détails de l'exercice ou de la révision..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; resize: none;"></textarea>
+            </div>
+
+            <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                <button id="btn-delete-event" class="btn-secondary" style="background-color: #e74c3c; color: white; border: none; display: none;" onclick="deleteCalendarEvent()">Supprimer</button>
+                <button class="btn-secondary" onclick="closeCalendarModal()">Annuler</button>
+                <button id="btn-save-event" class="btn-primary" onclick="saveCalendarEvent()">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Legacy - Utilisé temporairement car Simple Browser VS Code ne supporte pas bien les modules ES6 -->
+    <script src="student.js"></script>
+    
+    <!-- Modules ES6 Refactorisés (commentés pour compatibilité Simple Browser)
+    <script type="module" src="js/student.refactored.js"></script>
+    -->
+</body>
+</html>

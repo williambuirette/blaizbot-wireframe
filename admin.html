@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Wireframe - Admin</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // Redirection vers la page de connexion si accès direct ou refresh
+        if (!sessionStorage.getItem('authenticated')) {
+            window.location.href = 'index.html';
+        }
+        sessionStorage.removeItem('authenticated');
+    </script>
+</head>
+<body>
+    <div class="admin-wrapper">
+        <!-- Sidebar Latérale -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Blaiz'bot</h2>
+                <p>Admin Dashboard</p>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-group">
+                    <span>ORGANISATION</span>
+                    <a href="#" class="nav-link active" data-section="matieres">Matières</a>
+                    <a href="#" class="nav-link" data-section="classes">Classes / Niveaux</a>
+                    <a href="#" class="nav-link" data-section="professeurs">Professeurs</a>
+                    <a href="#" class="nav-link" data-section="eleves">Élèves</a>
+                </div>
+                <div class="nav-group">
+                    <span>PÉDAGOGIE</span>
+                    <a href="#" class="nav-link" data-section="programmes">Programmes</a>
+                </div>
+                <div class="nav-group">
+                    <span>PILOTAGE</span>
+                    <a href="#" class="nav-link" data-section="statistiques">Statistiques</a>
+                </div>
+                <div class="nav-group">
+                    <span>SÉCURITÉ</span>
+                    <a href="#" class="nav-link" data-section="utilisateurs">Utilisateurs</a>
+                </div>
+                <div class="nav-group">
+                    <span>CONFIGURATION</span>
+                    <a href="#" class="nav-link" data-section="settings">Paramètres IA</a>
+                </div>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="index.html" class="btn-logout">Déconnexion</a>
+            </div>
+        </aside>
+
+        <!-- Zone de Travail Principale -->
+        <main class="main-content">
+            
+            <!-- SECTION : MATIÈRES -->
+            <section id="section-matieres" class="admin-section active">
+                <header class="content-header">
+                    <div class="header-title">
+                        <h1>Gestion des Matières</h1>
+                        <p>Configuration des enseignements</p>
+                    </div>
+                    <div class="header-actions">
+                        <input type="text" class="search-filter" placeholder="Filtrer les matières..." onkeyup="filterTable('table-matieres-body', this.value)">
+                        <button class="btn-primary" onclick="openModal('modal-matiere')">+ Créer une Matière</button>
+                    </div>
+                </header>
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nom de la Matière</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-matieres-body">
+                            <tr>
+                                <td>Mathématiques</td>
+                                <td><button class="btn-icon">✎</button> <button class="btn-icon">🗑</button></td>
+                            </tr>
+                            <tr>
+                                <td>Français</td>
+                                <td><button class="btn-icon">✎</button> <button class="btn-icon">🗑</button></td>
+                            </tr>
+                            <tr>
+                                <td>Histoire-Géographie</td>
+                                <td><button class="btn-icon">✎</button> <button class="btn-icon">🗑</button></td>
+                            </tr>
+                            <tr>
+                                <td>IA & Technologie</td>
+                                <td><button class="btn-icon">✎</button> <button class="btn-icon">🗑</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECTION : CLASSES -->
+            <section id="section-classes" class="admin-section">
+                <header class="content-header">
+                    <div class="header-title">
+                        <h1>Gestion des Classes & Niveaux</h1>
+                        <p>Structure des groupes d'élèves</p>
+                    </div>
+                    <div class="header-actions">
+                        <input type="text" class="search-filter" placeholder="Filtrer les classes..." onkeyup="filterTable('table-classes-body', this.value)">
+                        <button class="btn-primary" onclick="openModal('modal-classe')">+ Créer une Classe</button>
+                    </div>
+                </header>
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nom de la Classe</th>
+                                <th>Niveau</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-classes-body">
+                            <tr>
+                                <td>6ème A</td>
+                                <td>6ème</td>
+                                <td><button class="btn-icon">✎</button> <button class="btn-icon">🗑</button></td>
+                            </tr>
+                            <tr>
+                                <td>3ème B</td>
+                                <td>3ème</td>
+                                <td><button class="btn-icon">✎</button> <button class="btn-icon">🗑</button></td>
+                            </tr>
+                            <tr>
+                                <td>Terminale S</td>
+                                <td>Terminale</td>
+                                <td><button class="btn-icon">✎</button> <button class="btn-icon">🗑</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECTION : PROFESSEURS -->
+            <section id="section-professeurs" class="admin-section">
+                <header class="content-header">
+                    <div class="header-title">
+                        <h1>Gestion des Professeurs</h1>
+                        <p>Année Scolaire 2024-2025</p>
+                    </div>
+                    <div class="header-actions">
+                        <input type="text" class="search-filter" placeholder="Filtrer les professeurs..." onkeyup="filterTable('table-professeurs-body', this.value)">
+                        <button class="btn-primary" onclick="openModal('modal-professeur')">+ Créer un Professeur</button>
+                    </div>
+                </header>
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Prénom</th>
+                                <th>Email</th>
+                                <th>Matière</th>
+                                <th>Classes Assignées</th>
+                                <th>Statut</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-professeurs-body">
+                            <tr>
+                                <td>DUPONT</td>
+                                <td>Jean</td>
+                                <td>j.dupont@ecole.com</td>
+                                <td><span class="tag">Mathématiques</span> <span class="tag">Physique</span></td>
+                                <td>6ème A, 3ème B</td>
+                                <td><span class="status-pill active">Actif</span></td>
+                                <td><button class="btn-icon">✎</button> <button class="btn-icon">🗑</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECTION : ÉLÈVES -->
+            <section id="section-eleves" class="admin-section">
+                <header class="content-header">
+                    <div class="header-title">
+                        <h1>Gestion des Élèves</h1>
+                        <p>Inscriptions et dossiers scolaires</p>
+                    </div>
+                    <div class="header-actions">
+                        <input type="text" class="search-filter" placeholder="Filtrer les élèves..." onkeyup="filterTable('table-eleves-body', this.value)">
+                        <button class="btn-primary" onclick="openModal('modal-eleve')">+ Inscrire un Élève</button>
+                    </div>
+                </header>
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Prénom</th>
+                                <th>Classe</th>
+                                <th>Matières</th>
+                                <th>Email Élève</th>
+                                <th>Email Parent</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-eleves-body">
+                            <tr>
+                                <td>PETIT</td>
+                                <td>Lucas</td>
+                                <td>6ème A</td>
+                                <td><span class="tag">Maths</span> <span class="tag">Français</span> <span class="tag">Anglais</span></td>
+                                <td>l.petit@ecole.com</td>
+                                <td>parent.petit@email.com</td>
+                                <td><button class="btn-icon">✎</button> <button class="btn-icon">🗑</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECTION : PROGRAMMES -->
+            <section id="section-programmes" class="admin-section">
+                <header class="content-header">
+                    <div class="header-title">
+                        <h1>Gestion des Programmes</h1>
+                        <p>Attribution des programmes par niveau et matière</p>
+                    </div>
+                    <div class="header-actions">
+                        <input type="text" class="search-filter" placeholder="Filtrer les programmes..." onkeyup="filterTable('table-programmes-body', this.value)">
+                        <button class="btn-primary" onclick="openModal('modal-programme')">+ Créer un Programme</button>
+                    </div>
+                </header>
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nom du Programme</th>
+                                <th>Thème</th>
+                                <th>Niveau</th>
+                                <th>Matière</th>
+                                <th>Base de Connaissances</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-programmes-body">
+                            <tr>
+                                <td>Algèbre Fondamentale</td>
+                                <td>Les nombres relatifs</td>
+                                <td>6ème</td>
+                                <td>Mathématiques</td>
+                                <td><span class="tag" style="background: #e8f5e9; color: #2e7d32;">Complète</span></td>
+                                <td><button class="btn-icon">✎</button> <button class="btn-icon">🗑</button></td>
+                            </tr>
+                            <tr>
+                                <td>Géométrie Euclidienne</td>
+                                <td>Les triangles</td>
+                                <td>5ème</td>
+                                <td>Mathématiques</td>
+                                <td><span class="tag" style="background: #fff3e0; color: #ef6c00;">À compléter</span></td>
+                                <td><button class="btn-icon">✎</button> <button class="btn-icon">🗑</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECTION : STATISTIQUES -->
+            <section id="section-statistiques" class="admin-section">
+                <header class="content-header">
+                    <div class="header-title">
+                        <h1>Statistiques & Performance</h1>
+                        <p>Analyse des résultats et suivi pédagogique</p>
+                    </div>
+                </header>
+
+                <!-- Système de Sélection/Filtrage -->
+                <div class="filter-bar" style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 15px;">
+                    <div class="form-group" style="margin-bottom: 0; flex: 1;">
+                        <label style="font-size: 0.8rem; color: #7f8c8d; display: block; margin-bottom: 5px;">Filtrer par Classe</label>
+                        <select id="stats-select-classe" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                            <option value="">Toutes les classes</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0; flex: 1;">
+                        <label style="font-size: 0.8rem; color: #7f8c8d; display: block; margin-bottom: 5px;">Filtrer par Professeur</label>
+                        <select id="stats-select-professeur" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                            <option value="">Tous les professeurs</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0; flex: 1;">
+                        <label style="font-size: 0.8rem; color: #7f8c8d; display: block; margin-bottom: 5px;">Filtrer par Élève</label>
+                        <select id="stats-select-eleve" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                            <option value="">Tous les élèves</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0; flex: 1;">
+                        <label style="font-size: 0.8rem; color: #7f8c8d; display: block; margin-bottom: 5px;">Filtrer par Matière</label>
+                        <select id="stats-select-matiere" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
+                            <option value="">Toutes les matières</option>
+                        </select>
+                    </div>
+                    <button class="btn-primary" style="margin-top: 18px; height: 38px;">Appliquer</button>
+                </div>
+
+                <div class="stats-grid">
+                    <!-- Bloc Performance Élèves -->
+                    <div class="stats-card">
+                        <h3>Performance des Élèves</h3>
+                        <div class="stats-value">14.5/20</div>
+                        <p>Moyenne générale de l'établissement</p>
+                        <div class="performance-bar-container">
+                            <div class="performance-bar" style="width: 72.5%; background-color: #2ecc71;"></div>
+                        </div>
+                        <ul class="stats-list">
+                            <li><strong>Taux de réussite :</strong> 92%</li>
+                            <li><strong>Progression mensuelle :</strong> +1.2 pts</li>
+                            <li><strong>Élèves en difficulté :</strong> 8%</li>
+                        </ul>
+                    </div>
+
+                    <!-- Bloc Performance Professeurs -->
+                    <div class="stats-card">
+                        <h3>Performance des Professeurs</h3>
+                        <div class="stats-value">88%</div>
+                        <p>Indice de complétion des programmes</p>
+                        <div class="performance-bar-container">
+                            <div class="performance-bar" style="width: 88%; background-color: #3498db;"></div>
+                        </div>
+                        <ul class="stats-list">
+                            <li><strong>Supports déposés :</strong> 452</li>
+                            <li><strong>Assiduité moyenne :</strong> 98%</li>
+                            <li><strong>Évaluations corrigées :</strong> 1,240</li>
+                        </ul>
+                    </div>
+
+                    <!-- Bloc Résultats par Matière -->
+                    <div class="stats-card">
+                        <h3>Résultats par Matière</h3>
+                        <div class="mini-chart-placeholder">
+                            <div class="bar" style="height: 80%;" title="Maths"></div>
+                            <div class="bar" style="height: 65%;" title="Français"></div>
+                            <div class="bar" style="height: 90%;" title="IA"></div>
+                            <div class="bar" style="height: 70%;" title="Histoire"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-around; font-size: 0.7rem; color: #7f8c8d; margin-top: 10px;">
+                            <span>Maths</span>
+                            <span>Fran.</span>
+                            <span>IA</span>
+                            <span>Hist.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-table-container" style="margin-top: 2rem;">
+                    <h3>Top Performances (Élèves)</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Élève</th>
+                                <th>Classe</th>
+                                <th>Moyenne</th>
+                                <th>Progression</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>PETIT Lucas</td>
+                                <td>6ème A</td>
+                                <td>18.5/20</td>
+                                <td style="color: #2ecc71;">↑ +2.0</td>
+                            </tr>
+                            <tr>
+                                <td>MARTIN Emma</td>
+                                <td>3ème B</td>
+                                <td>17.8/20</td>
+                                <td style="color: #2ecc71;">↑ +0.5</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECTION : UTILISATEURS -->
+            <section id="section-utilisateurs" class="admin-section">
+                <header class="content-header">
+                    <div class="header-title">
+                        <h1>Gestion des Utilisateurs</h1>
+                        <p>Contrôle des accès et sécurité des comptes</p>
+                    </div>
+                    <div class="header-actions">
+                        <input type="text" class="search-filter" placeholder="Rechercher un utilisateur..." onkeyup="filterTable('table-utilisateurs-body', this.value)">
+                        <button class="btn-primary" onclick="openModal('modal-utilisateur')">+ Créer un Utilisateur</button>
+                    </div>
+                </header>
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Utilisateur</th>
+                                <th>Rôle</th>
+                                <th>Email</th>
+                                <th>Dernière Connexion</th>
+                                <th>Statut</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-utilisateurs-body">
+                            <tr>
+                                <td><strong>ADMIN_PRINCIPAL</strong></td>
+                                <td><span class="tag" style="background: #f3e5f5; color: #7b1fa2;">Administrateur</span></td>
+                                <td>admin@ecole.com</td>
+                                <td>Aujourd'hui, 09:45</td>
+                                <td><span class="status-pill active">Actif</span></td>
+                                <td>
+                                    <button class="btn-icon" title="Modifier">✎</button> 
+                                    <button class="btn-icon" title="Réinitialiser le mot de passe">🔑</button>
+                                    <button class="btn-icon" title="Supprimer">🗑</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>DUPONT Jean</strong></td>
+                                <td><span class="tag" style="background: #e3f2fd; color: #1976d2;">Professeur</span></td>
+                                <td>j.dupont@ecole.com</td>
+                                <td>Hier, 16:20</td>
+                                <td><span class="status-pill active">Actif</span></td>
+                                <td>
+                                    <button class="btn-icon" title="Modifier">✎</button> 
+                                    <button class="btn-icon" title="Réinitialiser le mot de passe">🔑</button>
+                                    <button class="btn-icon" title="Supprimer">🗑</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- MODAL : CRÉER UN PROFESSEUR -->
+            <div id="modal-professeur" class="wireframe-modal">
+                <div class="modal-content" style="width: 600px;">
+                    <div class="modal-header">
+                        <h3>Nouveau Professeur</h3>
+                        <button class="close-modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <div class="form-group" style="flex: 0 0 100px;">
+                                <label>Civilité</label>
+                                <select>
+                                    <option>M.</option>
+                                    <option>Mme</option>
+                                    <option>Dr</option>
+                                    <option>Pr</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Nom</label>
+                                <input type="text" placeholder="ex: DUPONT">
+                            </div>
+                            <div class="form-group">
+                                <label>Prénom</label>
+                                <input type="text" placeholder="ex: Jean">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Date de naissance</label>
+                            <input type="date">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Adresse E-mail</label>
+                            <input type="email" placeholder="ex: jean.dupont@ecole.com">
+                        </div>
+                        
+                        <div class="cross-reference-section">
+                            <h4>Matières enseignées</h4>
+                            <p class="field-hint">Sélectionnez les matières (dépend de la section "Matières") :</p>
+                            <div id="list-matieres-checkboxes" class="selection-grid">
+                                <!-- Dynamique -->
+                            </div>
+                        </div>
+
+                        <div class="cross-reference-section">
+                            <h4>Classes attribuées</h4>
+                            <p class="field-hint">Sélectionnez les classes (dépend de la section "Classes") :</p>
+                            <div id="list-classes-checkboxes" class="selection-grid">
+                                <!-- Dynamique -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn-secondary">Annuler</button>
+                        <button class="btn-primary">Enregistrer le Professeur</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODAL : CRÉER UNE MATIÈRE -->
+            <div id="modal-matiere" class="wireframe-modal">
+                <div class="modal-content" style="width: 400px;">
+                    <div class="modal-header">
+                        <h3>Nouvelle Matière</h3>
+                        <button class="close-modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Nom de la matière</label>
+                            <input type="text" placeholder="ex: Histoire-Géographie">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn-secondary">Annuler</button>
+                        <button class="btn-primary">Enregistrer la Matière</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODAL : CRÉER UNE CLASSE -->
+            <div id="modal-classe" class="wireframe-modal">
+                <div class="modal-content" style="width: 400px;">
+                    <div class="modal-header">
+                        <h3>Nouvelle Classe / Niveau</h3>
+                        <button class="close-modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Nom de la classe</label>
+                            <input type="text" placeholder="ex: 6ème A">
+                        </div>
+                        <div class="form-group">
+                            <label>Niveau</label>
+                            <input type="text" placeholder="ex: 6ème">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn-secondary">Annuler</button>
+                        <button class="btn-primary">Enregistrer la Classe</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODAL : INSCRIRE UN ÉLÈVE -->
+            <div id="modal-eleve" class="wireframe-modal">
+                <div class="modal-content" style="width: 500px;">
+                    <div class="modal-header">
+                        <h3>Nouvel Élève</h3>
+                        <button class="close-modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Nom</label>
+                                <input type="text" placeholder="ex: PETIT">
+                            </div>
+                            <div class="form-group">
+                                <label>Prénom</label>
+                                <input type="text" placeholder="ex: Lucas">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Classe</label>
+                            <select id="select-eleve-classe">
+                                <option value="">Sélectionnez une classe...</option>
+                                <!-- Dynamique -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Élève</label>
+                            <input type="email" placeholder="lucas.petit@ecole.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Email Parent</label>
+                            <input type="email" placeholder="parent@email.com">
+                        </div>
+
+                        <div class="cross-reference-section">
+                            <h4>Matières suivies</h4>
+                            <p class="field-hint">Sélectionnez les options et matières spécifiques :</p>
+                            <div id="list-matieres-eleve-checkboxes" class="selection-grid">
+                                <!-- Dynamique -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn-secondary">Annuler</button>
+                        <button class="btn-primary">Inscrire l'Élève</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODAL : CRÉER UN PROGRAMME -->
+            <div id="modal-programme" class="wireframe-modal">
+                <div class="modal-content" style="width: 600px;">
+                    <div class="modal-header">
+                        <h3>Nouveau Programme & Base de Connaissances</h3>
+                        <button class="close-modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="form-group">
+                                <label>Nom du Programme</label>
+                                <input type="text" placeholder="ex: Géométrie Euclidienne">
+                            </div>
+                            <div class="form-group">
+                                <label>Thème principal</label>
+                                <input type="text" placeholder="ex: Les bases de la géométrie">
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="form-group">
+                                <label>Niveau</label>
+                                <select id="select-programme-niveau">
+                                    <option value="">Sélectionnez un niveau...</option>
+                                    <!-- Dynamique -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Matière</label>
+                                <select id="select-programme-matiere">
+                                    <option value="">Sélectionnez une matière...</option>
+                                    <!-- Dynamique -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Base de connaissances (Cours, PDF, Liens)</label>
+                            <textarea placeholder="Décrivez ici le contenu du cours, insérez des liens vers des PDF ou des ressources externes..." style="height: 80px;"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Base Académique & Directives Direction</label>
+                            <textarea placeholder="Instructions spécifiques de la direction, objectifs pédagogiques nationaux..." style="height: 60px; background-color: #fdfdfd; border-left: 3px solid #3498db;"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Supports Pédagogiques (Dépôt)</label>
+                            <div style="border: 2px dashed #ccc; padding: 15px; text-align: center; border-radius: 5px; background: #fafafa;">
+                                <p style="margin: 0; color: #666;">Glissez-déposez vos fichiers ici ou</p>
+                                <button class="btn-secondary" style="margin-top: 10px; padding: 5px 15px;">Parcourir les fichiers</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn-secondary">Annuler</button>
+                        <button class="btn-primary">Enregistrer le Programme</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MODAL : GESTION UTILISATEUR -->
+            <div id="modal-utilisateur" class="wireframe-modal">
+                <div class="modal-content" style="width: 700px;">
+                    <div class="modal-header">
+                        <h3>Fiche Utilisateur & Sécurité</h3>
+                        <button class="close-modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label>Identifiant de connexion</label>
+                                <input type="text" placeholder="ex: j.dupont">
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label>Rôle système</label>
+                                <select>
+                                    <option value="admin">Administrateur</option>
+                                    <option value="professeur">Professeur</option>
+                                    <option value="eleve">Élève / Parent</option>
+                                    <option value="direction">Direction</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <h4 style="margin: 20px 0 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; color: #2c3e50;">Informations Personnelles</h4>
+                        
+                        <div style="display: grid; grid-template-columns: 100px 1fr 1fr; gap: 15px;">
+                            <div class="form-group">
+                                <label>Civilité</label>
+                                <select><option>M.</option><option>Mme</option><option>Dr</option></select>
+                            </div>
+                            <div class="form-group">
+                                <label>Nom</label>
+                                <input type="text" placeholder="Nom">
+                            </div>
+                            <div class="form-group">
+                                <label>Prénom</label>
+                                <input type="text" placeholder="Prénom">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Adresse postale</label>
+                            <input type="text" placeholder="Numéro et nom de rue">
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 15px;">
+                            <div class="form-group">
+                                <label>Code Postal</label>
+                                <input type="text" placeholder="ex: 75000">
+                            </div>
+                            <div class="form-group">
+                                <label>Ville</label>
+                                <input type="text" placeholder="Ville">
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="form-group">
+                                <label>Téléphone</label>
+                                <input type="tel" placeholder="06 00 00 00 00">
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" placeholder="email@exemple.com">
+                            </div>
+                        </div>
+
+                        <h4 style="margin: 20px 0 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; color: #2c3e50;">Contacts Parents (si élève)</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="form-group">
+                                <label>Téléphone Parents</label>
+                                <input type="tel" placeholder="06 00 00 00 00">
+                            </div>
+                            <div class="form-group">
+                                <label>Email Parents</label>
+                                <input type="email" placeholder="parent@exemple.com">
+                            </div>
+                        </div>
+
+                        <h4 style="margin: 20px 0 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; color: #2c3e50;">Sécurité du Compte</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <div class="form-group">
+                                <label>Nouveau Mot de Passe</label>
+                                <input type="password" placeholder="••••••••">
+                            </div>
+                            <div class="form-group">
+                                <label>Confirmer</label>
+                                <input type="password" placeholder="••••••••">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><input type="checkbox" checked> Compte actif et autorisé à se connecter</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn-secondary">Annuler</button>
+                        <button class="btn-primary">Enregistrer l'Utilisateur</button>
+                    </div>
+                </div>
+            </div>
+
+            </section>
+
+            <!-- SECTION : PARAMÈTRES IA -->
+            <section id="section-settings" class="admin-section">
+                <header class="content-header">
+                    <div class="header-title">
+                        <h1>Paramètres Généraux & IA</h1>
+                        <p>Configurez les connexions aux modèles de langage (LLM) pour l'ensemble de la plateforme.</p>
+                    </div>
+                </header>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <!-- Configuration API -->
+                    <div class="stats-card" style="padding: 25px;">
+                        <h3 style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                            🔌 Connexion API LLM
+                        </h3>
+                        
+                        <div class="form-group">
+                            <label>Fournisseur d'IA par défaut</label>
+                            <select class="search-filter" style="width: 100%;" id="ai-provider" onchange="toggleApiFields()">
+                                <option value="openai">OpenAI (ChatGPT)</option>
+                                <option value="google">Google (Gemini)</option>
+                                <option value="anthropic">Anthropic (Claude)</option>
+                                <option value="mistral">Mistral AI</option>
+                                <option value="custom">Serveur Local / Custom (Ollama)</option>
+                            </select>
+                        </div>
+
+                        <div id="api-key-container" class="form-group">
+                            <label>Clé API (Secret Key)</label>
+                            <input type="password" class="search-filter" style="width: 100%;" placeholder="sk-..." id="ai-api-key">
+                            <small style="color: #7f8c8d;">Votre clé est stockée de manière sécurisée et n'est jamais partagée.</small>
+                        </div>
+
+                        <div id="api-url-container" class="form-group" style="display: none;">
+                            <label>URL du Point de Terminaison (Endpoint)</label>
+                            <input type="text" class="search-filter" style="width: 100%;" placeholder="http://localhost:11434/v1" id="ai-endpoint">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Modèle spécifique</label>
+                            <input type="text" class="search-filter" style="width: 100%;" placeholder="gpt-4o, gemini-1.5-pro, etc." id="ai-model">
+                        </div>
+
+                        <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #3498db;">
+                            <p style="font-size: 0.85rem; color: #34495e;">
+                                ℹ️ <strong>Note :</strong> Cette configuration permet à Blaiz'bot de lire les documents, générer des quiz et analyser la progression des élèves sur toute l'application.
+                            </p>
+                        </div>
+
+                        <div style="margin-top: 20px; display: flex; gap: 10px;">
+                            <button class="btn-primary" onclick="saveAiSettings()">Enregistrer la configuration</button>
+                            <button class="btn-secondary" onclick="testAiConnection()">Tester la connexion</button>
+                        </div>
+                    </div>
+
+                    <!-- Paramètres de l'Application -->
+                    <div class="stats-card" style="padding: 25px;">
+                        <h3 style="margin-bottom: 20px;">⚙️ Paramètres de l'Application</h3>
+                        
+                        <div class="form-group">
+                            <label>Nom de la Plateforme</label>
+                            <input type="text" class="search-filter" style="width: 100%;" value="Blaiz'bot">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Langue par défaut</label>
+                            <select class="search-filter" style="width: 100%;">
+                                <option>Français</option>
+                                <option>Anglais</option>
+                                <option>Espagnol</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Niveau de restriction IA</label>
+                            <select class="search-filter" style="width: 100%;">
+                                <option>Strict (Assistance uniquement)</option>
+                                <option selected>Équilibré (Co-pilote pédagogique)</option>
+                                <option>Créatif (Génération libre)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 20px;">
+                            <label><input type="checkbox" checked> Activer l'analyse automatique des documents PDF</label>
+                        </div>
+                        <div class="form-group">
+                            <label><input type="checkbox" checked> Autoriser les professeurs à modifier les prompts IA</label>
+                        </div>
+                        <div class="form-group">
+                            <label><input type="checkbox"> Mode maintenance</label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="wireframe-modal-hint">
+                <p><i>Note : Utilisez le menu latéral pour naviguer entre les différentes sections de l'organisation.</i></p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Script Legacy (à supprimer après migration complète) -->
+    <!-- <script src="admin.js"></script> -->
+    
+    <!-- Modules ES6 Refactorisés -->
+    <script type="module" src="js/admin.refactored.js"></script>
+</body>
+</html>

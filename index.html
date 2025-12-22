@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe - Connexion</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page">
+    <div class="container">
+        <h1>Connexion - Blaiz'bot</h1>
+        <div class="wireframe-box">
+            <p>[Champ : Email / Identifiant]</p>
+            <p>[Champ : Mot de passe]</p>
+            <button class="btn-login">Se connecter</button>
+        </div>
+
+        <div class="role-selection">
+            <h3>Simuler la redirection par rôle (Wireframe uniquement) :</h3>
+            <div class="btn-group">
+                <a href="admin.html" class="btn" onclick="sessionStorage.setItem('authenticated', 'true')">Interface Administrateur</a>
+                <a href="teacher.html" class="btn" onclick="sessionStorage.setItem('authenticated', 'true')">Interface Professeur</a>
+                <a href="student.html" class="btn" onclick="sessionStorage.setItem('authenticated', 'true')">Interface Élève</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
