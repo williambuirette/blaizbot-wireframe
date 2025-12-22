@@ -361,7 +361,7 @@ release/*     ← Préparation release
 
 ## 📞 Contact
 
-**Développeur** : William Buirette  
+**Développeur** : Maxime Buirette  
 **Projet** : Blaiz'bot - Vibecoding  
 **Année** : 2025
 
