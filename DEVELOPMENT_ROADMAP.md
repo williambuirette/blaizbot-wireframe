@@ -55,21 +55,19 @@
 ┌─────────────────────────────────────────────────────────────┐
 │                        BACKEND                               │
 ├─────────────────────────────────────────────────────────────┤
-│  Option A    : Node.js + Express/Fastify (JS full-stack)    │
-│  Option B    : Python + FastAPI (si IA lourde serveur)      │
-│  Option C    : Supabase (Backend-as-a-Service rapide)       │
-│  Auth        : JWT avec refresh tokens                      │
-│  Validation  : Zod ou Joi                                   │
+│  Framework   : Next.js 15 App Router (API Routes)           │
+│  Database    : Vercel Postgres + Prisma ORM                 │
+│  Auth        : NextAuth.js v5 (JWT sessions)                │
+│  Validation  : Zod                                          │
 └─────────────────────────────────────────────────────────────┘
                             │
                             ▼
 ┌─────────────────────────────────────────────────────────────┐
 │                     BASE DE DONNÉES                          │
 ├─────────────────────────────────────────────────────────────┤
-│  Principal   : PostgreSQL (robuste, relations)              │
-│  Alternative : MongoDB (si données très flexibles)          │
-│  Cache       : Redis (sessions chat, performances)          │
-│  ORM         : Prisma (TypeScript) ou Drizzle               │
+│  Principal   : Vercel Postgres (PostgreSQL managé)          │
+│  ORM         : Prisma (TypeScript, migrations)              │
+│  Cache       : Redis (optionnel, sessions chat)             │
 └─────────────────────────────────────────────────────────────┘
                             │
                             ▼
