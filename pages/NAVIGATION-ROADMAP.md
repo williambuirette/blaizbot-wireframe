@@ -170,7 +170,7 @@ dossier/
   - [teacher/courses/detail/cards/quiz/[cardId].md](teacher/courses/detail/cards/quiz/[cardId].md) - ❓ Carte Quiz (QCM/Vrai-Faux/Réponse courte + scoring automatique)
 
 #### Agendas et Assignations
-- [teacher/assignments/liste.md](teacher/assignments/liste.md) - Gestion des devoirs et calendrier (à documenter)
+- [teacher/agendas-assignations/liste.md](teacher/agendas-assignations/liste.md) - Calendrier interactif (4 vues : Mois/Semaine/Jour/Agenda) + filtres multi-critères + assignations avec stats
 
 #### Messages
 - [teacher/messages/liste.md](teacher/messages/liste.md) - Messagerie professeur (à documenter)
@@ -226,9 +226,15 @@ admin/subjects/liste.md
 | **Admin - Classes** | 3 | ✅ Complété |
 | **Admin - Matières** | 3 | ✅ Complété |
 | **Élève** | - | ⏳ À faire |
-| **Professeur** | - | ⏳ À faire |
+| **Professeur - Dashboard** | 1 | ✅ Complété |
+| **Professeur - Header Menu** | 2 | ✅ Complété |
+| **Professeur - Classes** | 2 | ✅ Complété |
+| **Professeur - Élèves** | 2 | ✅ Complété |
+| **Professeur - Cours** | 7 | ✅ Complété |
+| **Professeur - Agendas** | 1 | ✅ Complété |
+| **Professeur - Messages** | - | ⏳ À faire |
 
-**Total** : 16 fichiers documentés
+**Total** : 32 fichiers documentés
 
 ---
 
