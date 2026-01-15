@@ -1,6 +1,6 @@
 # Mon Profil (Menu Utilisateur)
 
-> **Chemin de navigation** : Login → Dashboard Admin → Avatar (Header) → Menu déroulant → **Mon profil**  
+> **Chemin de navigation** : Login → Dashboard Teacher → Avatar (Header) → Menu déroulant → **Mon profil**  
 > **Accessible depuis** : Header (tous les rôles)  
 > **Composant source** : `src/components/features/user/ProfileModal.tsx`
 
@@ -12,15 +12,14 @@
 1. Pages publiques
    └── 01-login.md
 
-2. Authentification réussie (Admin)
-   └── admin/00-dashboard.md
+2. Authentification réussie (Professeur)
+   └── teacher/dashboard.md
 
 3. Header (présent sur toutes les pages)
-   └── Avatar [AS] Admin SYSTÈME ▼
+   └── Avatar [MD] Marc DUPONT ▼
        └── Menu déroulant
            ├── Mon profil ← VOUS ÊTES ICI
            ├── Paramètres
-           ├── Configuration IA (admin only)
            └── Déconnexion
 ```
 
@@ -39,17 +38,17 @@
 │  └─────────────────────┘  └──────────────┘                 │
 │      (actif/souligné)                                       │
 │                                                             │
-│  📅 Membre depuis 10 janvier 2026        Administrateur    │
-│                                          (badge gris)       │
+│  📅 Membre depuis 10 janvier 2026        Professeur        │
+│                                          (badge bleu)       │
 │                                                             │
 │  Email                                                      │
 │  ┌──────────────────────────────────────────────────────┐  │
-│  │ admin@blaizbot.edu                                   │  │
+│  │ m.dupont@blaizbot.edu                                │  │
 │  └──────────────────────────────────────────────────────┘  │
 │                                                             │
 │  Prénom                              Nom                   │
 │  ┌────────────────────────┐  ┌──────────────────────────┐  │
-│  │ Admin                  │  │ SYSTÈME                  │  │
+│  │ Marc                   │  │ DUPONT                   │  │
 │  └────────────────────────┘  └──────────────────────────┘  │
 │                                                             │
 │  Téléphone                                                  │
@@ -163,7 +162,7 @@ interface PasswordFormData {
 
 | Action | Destination |
 |--------|-------------|
-| ← Fermer [×] | Retour au Dashboard Admin |
+| ← Fermer [×] | Retour au Dashboard Teacher |
 | Succès | Toast + fermeture automatique |
 | Onglet Informations | Modification profil |
 | Onglet Sécurité | Changement mot de passe |
@@ -172,11 +171,14 @@ interface PasswordFormData {
 
 ## 📝 Notes
 
-> **Composant partagé** : Cette modale est utilisée par tous les rôles (ADMIN, TEACHER, STUDENT). Seul le badge change.
+> **Composant partagé** : Cette modale est utilisée par tous les rôles (ADMIN, TEACHER, STUDENT). Seul le badge change :
+> - ADMIN : Badge violet "Administrateur"
+> - TEACHER : Badge bleu "Professeur"
+> - STUDENT : Badge vert "Élève"
 
 ---
 
-**← Retour** : [Dashboard Admin](../00-dashboard.md)
+**← Retour** : [Dashboard Teacher](../dashboard.md)
 
 *Documentation générée par rétro-ingénierie de BlaizBot-V1*  
 *Date : 13 décembre 2025*

@@ -12,3 +12,4 @@
 - ← [Dashboard](../dashboard.md)
 - → [Créer un supplément](create.md)
 - → [Détail supplément](detail/[id].md)
+

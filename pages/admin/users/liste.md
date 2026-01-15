@@ -245,5 +245,5 @@ Toast : "Mot de passe réinitialisé. Email envoyé à baptiste.curty@blaizbot.e
 - → [Créer un utilisateur](create.md)
 - → [Éditer un utilisateur](edit.md)
 
-*Documentation générée par rétro-ingénierie de BlaizBot-V1*  
 *Date : 13 décembre 2025*
+

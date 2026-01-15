@@ -214,3 +214,4 @@ interface DataType {
 
 *Documentation générée par rétro-ingénierie de BlaizBot-V1*  
 *Date : [DATE]*
+

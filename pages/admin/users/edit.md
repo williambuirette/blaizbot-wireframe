@@ -360,3 +360,4 @@ Permission refusée : "Vous ne pouvez pas modifier cet utilisateur"
 
 *Documentation générée par rétro-ingénierie de BlaizBot-V1*  
 *Date : 13 décembre 2025*
+

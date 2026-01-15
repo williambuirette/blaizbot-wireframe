@@ -11,3 +11,4 @@
 **Navigation** :
 - ← [Dashboard](../dashboard.md)
 - → [Détail cours](detail/[id].md)
+

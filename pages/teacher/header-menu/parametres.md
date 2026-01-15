@@ -1,6 +1,6 @@
 # Paramètres (Menu Utilisateur)
 
-> **Chemin de navigation** : Login → Dashboard Admin → Avatar (Header) → Menu déroulant → **Paramètres**  
+> **Chemin de navigation** : Login → Dashboard Teacher → Avatar (Header) → Menu déroulant → **Paramètres**  
 > **Accessible depuis** : Header (tous les rôles)  
 > **Composant source** : `src/components/features/settings/SettingsModal.tsx`
 
@@ -12,15 +12,14 @@
 1. Pages publiques
    └── 01-login.md
 
-2. Authentification réussie (Admin)
-   └── admin/00-dashboard.md
+2. Authentification réussie (Professeur)
+   └── teacher/dashboard.md
 
 3. Header (présent sur toutes les pages)
-   └── Avatar [AS] Admin SYSTÈME ▼
+   └── Avatar [MD] Marc DUPONT ▼
        └── Menu déroulant
            ├── Mon profil
            ├── Paramètres ← VOUS ÊTES ICI
-           ├── Configuration IA (admin only)
            └── Déconnexion
 ```
 
@@ -129,7 +128,7 @@ interface SettingsFormData {
     theme: 'light' | 'dark' | 'system';
   };
   
-  // Assistant IA (Admin/Teacher uniquement)
+  // Assistant IA (Teacher uniquement)
   ai?: {
     systemPrompt: string;
   };
@@ -163,7 +162,7 @@ const DEFAULT_SETTINGS: SettingsFormData = {
 | **Notifications par email** | ON | Recevoir les notifications par email |
 | **Notifications push** | OFF | Notifications navigateur (nécessite permission) |
 | **Rappels avant les deadlines** | ON | Alertes avant les échéances importantes |
-| **Alertes nouvelles soumissions** | ON | Notification lors de nouvelles soumissions (Teacher/Admin) |
+| **Alertes nouvelles soumissions** | ON | Notification lors de nouvelles soumissions d'élèves |
 
 ### Section Préférences
 | Paramètre | Options | Défaut |
@@ -172,11 +171,11 @@ const DEFAULT_SETTINGS: SettingsFormData = {
 | **Thème** | Clair, Sombre, Système | Système |
 
 ### Section Assistant IA
-> **Visible uniquement pour** : ADMIN et TEACHER
+> **Visible pour** : TEACHER et ADMIN (pas pour STUDENT)
 
 - Zone de texte éditable pour personnaliser le comportement de l'IA
 - Bouton "Restaurer le prompt par défaut" pour réinitialiser
-- Le prompt définit le ton et les limites de l'assistant IA pour les élèves
+- Le prompt définit le ton et les limites de l'assistant IA pour les élèves du professeur
 
 ---
 
@@ -216,9 +215,13 @@ const DEFAULT_SETTINGS: SettingsFormData = {
 > - Prompt IA : sauvegarde automatique (debounce 500ms)
 > - Confirmation pour actions destructives (reset)
 
+> **Scope du prompt IA Teacher** :
+> - Le prompt IA défini par un professeur s'applique uniquement à SES élèves
+> - Chaque professeur peut personnaliser le comportement de l'IA pour ses classes
+
 ---
 
-**← Retour** : [Dashboard Admin](../00-dashboard.md)
+**← Retour** : [Dashboard Teacher](../dashboard.md)
 
 *Documentation générée par rétro-ingénierie de BlaizBot-V1*  
 *Date : 13 décembre 2025*

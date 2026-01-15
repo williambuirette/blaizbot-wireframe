@@ -338,3 +338,4 @@ Erreur réseau : "Impossible de créer l'utilisateur. Veuillez réessayer."
 
 *Documentation générée par rétro-ingénierie de BlaizBot-V1*  
 *Date : 13 décembre 2025*
+
