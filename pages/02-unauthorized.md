@@ -238,4 +238,4 @@ Boutons : [Retour] [Se connecter]
 ---
 
 *Documentation générée par rétro-ingénierie de BlaizBot-V1*  
-*Date : 15 janvier 2026*
+*Date : 13 décembre 2025*
