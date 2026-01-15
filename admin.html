@@ -21,31 +21,12 @@
                 <p>Admin Dashboard</p>
             </div>
             <nav class="sidebar-nav">
-                <div class="nav-group">
-                    <span>ORGANISATION</span>
-                    <a href="#" class="nav-link active" data-section="matieres">Matières</a>
-                    <a href="#" class="nav-link" data-section="classes">Classes / Niveaux</a>
-                    <a href="#" class="nav-link" data-section="professeurs">Professeurs</a>
-                    <a href="#" class="nav-link" data-section="eleves">Élèves</a>
-                </div>
-                <div class="nav-group">
-                    <span>PÉDAGOGIE</span>
-                    <a href="#" class="nav-link" data-section="programmes">Programmes</a>
-                </div>
-                <div class="nav-group">
-                    <span>PILOTAGE</span>
-                    <a href="#" class="nav-link" data-section="statistiques">Statistiques</a>
-                </div>
-                <div class="nav-group">
-                    <span>SÉCURITÉ</span>
-                    <a href="#" class="nav-link" data-section="utilisateurs">Utilisateurs</a>
-                </div>
-                <div class="nav-group">
-                    <span>CONFIGURATION</span>
-                    <a href="#" class="nav-link" data-section="settings">Paramètres IA</a>
-                </div>
+                <a href="#" class="nav-link active" data-section="dashboard" style="display: block; padding: 12px 20px; margin: 8px 0; background: #2196f3; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; transition: all 0.3s;">📊 Dashboard</a>
+                <a href="#" class="nav-link" data-section="users" style="display: block; padding: 12px 20px; margin: 8px 0; background: #1976d2; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; transition: all 0.3s;">👥 Utilisateurs</a>
+                <a href="#" class="nav-link" data-section="classes" style="display: block; padding: 12px 20px; margin: 8px 0; background: #1976d2; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; transition: all 0.3s;">🎓 Classes</a>
+                <a href="#" class="nav-link" data-section="matieres" style="display: block; padding: 12px 20px; margin: 8px 0; background: #1976d2; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; transition: all 0.3s;">📚 Matières</a>
             </nav>
-            <div class="sidebar-footer">
+            <div class="sidebar-footer" style="border: none;">
                 <a href="index.html" class="btn-logout">Déconnexion</a>
             </div>
         </aside>
@@ -53,42 +34,200 @@
         <!-- Zone de Travail Principale -->
         <main class="main-content">
             
+            <!-- Header avec barre de recherche et profil -->
+            <header style="background: white; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e0e0e0; margin-bottom: 2rem;">
+                <h2 style="margin: 0; color: #1a1a1a; font-size: 1.25rem;">Dashboard</h2>
+                
+                <div style="display: flex; align-items: center; gap: 2rem;">
+                    <!-- Barre de recherche -->
+                    <div style="position: relative;">
+                        <input type="text" placeholder="Rechercher..." style="padding: 0.5rem 1rem 0.5rem 2.5rem; border: 1px solid #e0e0e0; border-radius: 8px; width: 300px; font-size: 0.9rem;">
+                        <span style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); color: #999;">🔍</span>
+                    </div>
+                    
+                    <!-- Notification -->
+                    <div style="position: relative; cursor: pointer;">
+                        <span style="font-size: 1.25rem;">🔔</span>
+                    </div>
+                    
+                    <!-- Profil Admin -->
+                    <div style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer; position: relative;" onclick="document.getElementById('admin-menu').style.display = document.getElementById('admin-menu').style.display === 'block' ? 'none' : 'block'">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #2c3e50, #34495e); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.9rem;">AS</div>
+                        <span style="font-weight: 500; color: #1a1a1a;">Admin SYSTÈME</span>
+                        
+                        <!-- Menu déroulant -->
+                        <div id="admin-menu" style="display: none; position: absolute; top: 55px; right: 0; background: white; border: 1px solid #e0e0e0; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 200px; z-index: 1000;">
+                            <div style="padding: 12px 16px; border-bottom: 1px solid #f0f0f0;">
+                                <div style="font-weight: 600; color: #1a1a1a; font-size: 0.9rem;">Admin SYSTÈME</div>
+                                <div style="font-size: 0.75rem; color: #999; margin-top: 2px;">admin@blaizbot.edu</div>
+                            </div>
+                            <div style="padding: 8px 0;">
+                                <a href="#" style="display: block; padding: 10px 16px; color: #1a1a1a; text-decoration: none; font-size: 0.9rem; transition: background 0.2s;" onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='white'">
+                                    👤 Mon Profil
+                                </a>
+                                <a href="#" style="display: block; padding: 10px 16px; color: #1a1a1a; text-decoration: none; font-size: 0.9rem; transition: background 0.2s;" onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='white'">
+                                    ⚙️ Paramètres
+                                </a>
+                                <a href="#" style="display: block; padding: 10px 16px; color: #1a1a1a; text-decoration: none; font-size: 0.9rem; transition: background 0.2s;" onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='white'">
+                                    🔔 Notifications
+                                </a>
+                                <div style="border-top: 1px solid #f0f0f0; margin: 8px 0;"></div>
+                                <a href="index.html" style="display: block; padding: 10px 16px; color: #d32f2f; text-decoration: none; font-size: 0.9rem; transition: background 0.2s;" onmouseover="this.style.background='#ffebee'" onmouseout="this.style.background='white'">
+                                    🚪 Déconnexion
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- SECTION : DASHBOARD -->
+            <section id="section-dashboard" class="admin-section active">
+                <header class="content-header" style="background: linear-gradient(135deg, #9c27b0, #5e35b1); color: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                    <div class="header-title">
+                        <h1 style="color: white; margin: 0;">Administration 🛡️</h1>
+                        <p style="color: rgba(255,255,255,0.9); margin: 0.5rem 0 0;">Vue d'ensemble de la plateforme</p>
+                    </div>
+                </header>
+
+                <div class="kpi-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                    <div class="kpi-card" style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="font-size: 2rem;">👥</div>
+                            <div>
+                                <div style="font-size: 2rem; font-weight: 600; color: #1a1a1a;">41</div>
+                                <div style="color: #666; font-size: 0.9rem;">Utilisateurs</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kpi-card" style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="font-size: 2rem;">🎓</div>
+                            <div>
+                                <div style="font-size: 2rem; font-weight: 600; color: #1a1a1a;">8</div>
+                                <div style="color: #666; font-size: 0.9rem;">Classes</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kpi-card" style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="font-size: 2rem;">📚</div>
+                            <div>
+                                <div style="font-size: 2rem; font-weight: 600; color: #1a1a1a;">7</div>
+                                <div style="color: #666; font-size: 0.9rem;">Matières</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kpi-card" style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="font-size: 2rem;">📄</div>
+                            <div>
+                                <div style="font-size: 2rem; font-weight: 600; color: #1a1a1a;">1</div>
+                                <div style="color: #666; font-size: 0.9rem;">Cours</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
             <!-- SECTION : MATIÈRES -->
-            <section id="section-matieres" class="admin-section active">
+            <section id="section-matieres" class="admin-section">
                 <header class="content-header">
                     <div class="header-title">
-                        <h1>Gestion des Matières</h1>
-                        <p>Configuration des enseignements</p>
+                        <h1>Gestion des matières</h1>
+                        <p style="color: #666; font-size: 0.9rem; margin: 0.25rem 0 0;">7 matières</p>
                     </div>
                     <div class="header-actions">
-                        <input type="text" class="search-filter" placeholder="Filtrer les matières..." onkeyup="filterTable('table-matieres-body', this.value)">
-                        <button class="btn-primary" onclick="openModal('modal-matiere')">+ Créer une Matière</button>
+                        <button class="btn-primary">+ Ajouter</button>
                     </div>
                 </header>
                 <div class="data-table-container">
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th>Nom de la Matière</th>
+                                <th>Matière</th>
+                                <th>Cours</th>
+                                <th>Professeurs</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody id="table-matieres-body">
                             <tr>
-                                <td>Mathématiques</td>
-                                <td><button class="btn-icon">✎</button> <button class="btn-icon">🗑</button></td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <span style="width: 8px; height: 8px; border-radius: 50%; background: #e91e63;"></span>
+                                        <span>Anglais</span>
+                                    </div>
+                                </td>
+                                <td><span style="display: inline-flex; align-items: center; gap: 0.25rem;">📚 0</span></td>
+                                <td><span style="display: inline-flex; align-items: center; gap: 0.25rem;">👤 1</span></td>
+                                <td><button class="btn-icon">...</button></td>
                             </tr>
                             <tr>
-                                <td>Français</td>
-                                <td><button class="btn-icon">✎</button> <button class="btn-icon">🗑</button></td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <span style="width: 8px; height: 8px; border-radius: 50%; background: #f44336;"></span>
+                                        <span>Français</span>
+                                    </div>
+                                </td>
+                                <td><span style="display: inline-flex; align-items: center; gap: 0.25rem;">📚 0</span></td>
+                                <td><span style="display: inline-flex; align-items: center; gap: 0.25rem;">👤 1</span></td>
+                                <td><button class="btn-icon">...</button></td>
                             </tr>
                             <tr>
-                                <td>Histoire-Géographie</td>
-                                <td><button class="btn-icon">✎</button> <button class="btn-icon">🗑</button></td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <span style="width: 8px; height: 8px; border-radius: 50%; background: #2196f3;"></span>
+                                        <span>Histoire-Géographie</span>
+                                    </div>
+                                </td>
+                                <td><span style="display: inline-flex; align-items: center; gap: 0.25rem;">📚 0</span></td>
+                                <td><span style="display: inline-flex; align-items: center; gap: 0.25rem;">👤 1</span></td>
+                                <td><button class="btn-icon">...</button></td>
                             </tr>
                             <tr>
-                                <td>IA & Technologie</td>
-                                <td><button class="btn-icon">✎</button> <button class="btn-icon">🗑</button></td>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <span style="width: 8px; height: 8px; border-radius: 50%; background: #2196f3;"></span>
+                                        <span>Mathématiques</span>
+                                    </div>
+                                </td>
+                                <td><span style="display: inline-flex; align-items: center; gap: 0.25rem;">📚 0</span></td>
+                                <td><span style="display: inline-flex; align-items: center; gap: 0.25rem;">👤 1</span></td>
+                                <td><button class="btn-icon">...</button></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <span style="width: 8px; height: 8px; border-radius: 50%; background: #9e9e9e;"></span>
+                                        <span>Physique-Chimie</span>
+                                    </div>
+                                </td>
+                                <td><span style="display: inline-flex; align-items: center; gap: 0.25rem;">📚 0</span></td>
+                                <td><span style="display: inline-flex; align-items: center; gap: 0.25rem;">👤 0</span></td>
+                                <td><button class="btn-icon">...</button></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <span style="width: 8px; height: 8px; border-radius: 50%; background: #4caf50;"></span>
+                                        <span>SVT</span>
+                                    </div>
+                                </td>
+                                <td><span style="display: inline-flex; align-items: center; gap: 0.25rem;">📚 1</span></td>
+                                <td><span style="display: inline-flex; align-items: center; gap: 0.25rem;">👤 1</span></td>
+                                <td><button class="btn-icon">...</button></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <span style="width: 8px; height: 8px; border-radius: 50%; background: #9e9e9e;"></span>
+                                        <span>math</span>
+                                    </div>
+                                </td>
+                                <td><span style="display: inline-flex; align-items: center; gap: 0.25rem;">📚 0</span></td>
+                                <td><span style="display: inline-flex; align-items: center; gap: 0.25rem;">👤 0</span></td>
+                                <td><button class="btn-icon">...</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -99,280 +238,62 @@
             <section id="section-classes" class="admin-section">
                 <header class="content-header">
                     <div class="header-title">
-                        <h1>Gestion des Classes & Niveaux</h1>
-                        <p>Structure des groupes d'élèves</p>
+                        <h1>Gestion des classes</h1>
+                        <p style="color: #666; font-size: 0.9rem; margin: 0.25rem 0 0;">8 classes</p>
                     </div>
                     <div class="header-actions">
-                        <input type="text" class="search-filter" placeholder="Filtrer les classes..." onkeyup="filterTable('table-classes-body', this.value)">
-                        <button class="btn-primary" onclick="openModal('modal-classe')">+ Créer une Classe</button>
+                        <button class="btn-primary">+ Ajouter</button>
                     </div>
                 </header>
                 <div class="data-table-container">
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th>Nom de la Classe</th>
-                                <th>Niveau</th>
+                                <th>Nom de la classe</th>
+                                <th>Élèves</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody id="table-classes-body">
                             <tr>
-                                <td>6ème A</td>
-                                <td>6ème</td>
-                                <td><button class="btn-icon">✎</button> <button class="btn-icon">🗑</button></td>
+                                <td>10H-A</td>
+                                <td><span style="display: inline-flex; align-items: center; gap: 0.25rem;">👤 6</span></td>
+                                <td><button class="btn-icon">...</button></td>
                             </tr>
                             <tr>
-                                <td>3ème B</td>
-                                <td>3ème</td>
-                                <td><button class="btn-icon">✎</button> <button class="btn-icon">🗑</button></td>
+                                <td>10H-B</td>
+                                <td><span style="display: inline-flex; align-items: center; gap: 0.25rem;">👤 6</span></td>
+                                <td><button class="btn-icon">...</button></td>
                             </tr>
                             <tr>
-                                <td>Terminale S</td>
-                                <td>Terminale</td>
-                                <td><button class="btn-icon">✎</button> <button class="btn-icon">🗑</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- SECTION : PROFESSEURS -->
-            <section id="section-professeurs" class="admin-section">
-                <header class="content-header">
-                    <div class="header-title">
-                        <h1>Gestion des Professeurs</h1>
-                        <p>Année Scolaire 2024-2025</p>
-                    </div>
-                    <div class="header-actions">
-                        <input type="text" class="search-filter" placeholder="Filtrer les professeurs..." onkeyup="filterTable('table-professeurs-body', this.value)">
-                        <button class="btn-primary" onclick="openModal('modal-professeur')">+ Créer un Professeur</button>
-                    </div>
-                </header>
-                <div class="data-table-container">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Nom</th>
-                                <th>Prénom</th>
-                                <th>Email</th>
-                                <th>Matière</th>
-                                <th>Classes Assignées</th>
-                                <th>Statut</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="table-professeurs-body">
-                            <tr>
-                                <td>DUPONT</td>
-                                <td>Jean</td>
-                                <td>j.dupont@ecole.com</td>
-                                <td><span class="tag">Mathématiques</span> <span class="tag">Physique</span></td>
-                                <td>6ème A, 3ème B</td>
-                                <td><span class="status-pill active">Actif</span></td>
-                                <td><button class="btn-icon">✎</button> <button class="btn-icon">🗑</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- SECTION : ÉLÈVES -->
-            <section id="section-eleves" class="admin-section">
-                <header class="content-header">
-                    <div class="header-title">
-                        <h1>Gestion des Élèves</h1>
-                        <p>Inscriptions et dossiers scolaires</p>
-                    </div>
-                    <div class="header-actions">
-                        <input type="text" class="search-filter" placeholder="Filtrer les élèves..." onkeyup="filterTable('table-eleves-body', this.value)">
-                        <button class="btn-primary" onclick="openModal('modal-eleve')">+ Inscrire un Élève</button>
-                    </div>
-                </header>
-                <div class="data-table-container">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Nom</th>
-                                <th>Prénom</th>
-                                <th>Classe</th>
-                                <th>Matières</th>
-                                <th>Email Élève</th>
-                                <th>Email Parent</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="table-eleves-body">
-                            <tr>
-                                <td>PETIT</td>
-                                <td>Lucas</td>
-                                <td>6ème A</td>
-                                <td><span class="tag">Maths</span> <span class="tag">Français</span> <span class="tag">Anglais</span></td>
-                                <td>l.petit@ecole.com</td>
-                                <td>parent.petit@email.com</td>
-                                <td><button class="btn-icon">✎</button> <button class="btn-icon">🗑</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- SECTION : PROGRAMMES -->
-            <section id="section-programmes" class="admin-section">
-                <header class="content-header">
-                    <div class="header-title">
-                        <h1>Gestion des Programmes</h1>
-                        <p>Attribution des programmes par niveau et matière</p>
-                    </div>
-                    <div class="header-actions">
-                        <input type="text" class="search-filter" placeholder="Filtrer les programmes..." onkeyup="filterTable('table-programmes-body', this.value)">
-                        <button class="btn-primary" onclick="openModal('modal-programme')">+ Créer un Programme</button>
-                    </div>
-                </header>
-                <div class="data-table-container">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Nom du Programme</th>
-                                <th>Thème</th>
-                                <th>Niveau</th>
-                                <th>Matière</th>
-                                <th>Base de Connaissances</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="table-programmes-body">
-                            <tr>
-                                <td>Algèbre Fondamentale</td>
-                                <td>Les nombres relatifs</td>
-                                <td>6ème</td>
-                                <td>Mathématiques</td>
-                                <td><span class="tag" style="background: #e8f5e9; color: #2e7d32;">Complète</span></td>
-                                <td><button class="btn-icon">✎</button> <button class="btn-icon">🗑</button></td>
+                                <td style="color: #d32f2f;">11H-A</td>
+                                <td><span style="display: inline-flex; align-items: center; gap: 0.25rem;">👤 3</span></td>
+                                <td><button class="btn-icon">...</button></td>
                             </tr>
                             <tr>
-                                <td>Géométrie Euclidienne</td>
-                                <td>Les triangles</td>
-                                <td>5ème</td>
-                                <td>Mathématiques</td>
-                                <td><span class="tag" style="background: #fff3e0; color: #ef6c00;">À compléter</span></td>
-                                <td><button class="btn-icon">✎</button> <button class="btn-icon">🗑</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- SECTION : STATISTIQUES -->
-            <section id="section-statistiques" class="admin-section">
-                <header class="content-header">
-                    <div class="header-title">
-                        <h1>Statistiques & Performance</h1>
-                        <p>Analyse des résultats et suivi pédagogique</p>
-                    </div>
-                </header>
-
-                <!-- Système de Sélection/Filtrage -->
-                <div class="filter-bar" style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 15px;">
-                    <div class="form-group" style="margin-bottom: 0; flex: 1;">
-                        <label style="font-size: 0.8rem; color: #7f8c8d; display: block; margin-bottom: 5px;">Filtrer par Classe</label>
-                        <select id="stats-select-classe" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
-                            <option value="">Toutes les classes</option>
-                        </select>
-                    </div>
-                    <div class="form-group" style="margin-bottom: 0; flex: 1;">
-                        <label style="font-size: 0.8rem; color: #7f8c8d; display: block; margin-bottom: 5px;">Filtrer par Professeur</label>
-                        <select id="stats-select-professeur" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
-                            <option value="">Tous les professeurs</option>
-                        </select>
-                    </div>
-                    <div class="form-group" style="margin-bottom: 0; flex: 1;">
-                        <label style="font-size: 0.8rem; color: #7f8c8d; display: block; margin-bottom: 5px;">Filtrer par Élève</label>
-                        <select id="stats-select-eleve" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
-                            <option value="">Tous les élèves</option>
-                        </select>
-                    </div>
-                    <div class="form-group" style="margin-bottom: 0; flex: 1;">
-                        <label style="font-size: 0.8rem; color: #7f8c8d; display: block; margin-bottom: 5px;">Filtrer par Matière</label>
-                        <select id="stats-select-matiere" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
-                            <option value="">Toutes les matières</option>
-                        </select>
-                    </div>
-                    <button class="btn-primary" style="margin-top: 18px; height: 38px;">Appliquer</button>
-                </div>
-
-                <div class="stats-grid">
-                    <!-- Bloc Performance Élèves -->
-                    <div class="stats-card">
-                        <h3>Performance des Élèves</h3>
-                        <div class="stats-value">14.5/20</div>
-                        <p>Moyenne générale de l'établissement</p>
-                        <div class="performance-bar-container">
-                            <div class="performance-bar" style="width: 72.5%; background-color: #2ecc71;"></div>
-                        </div>
-                        <ul class="stats-list">
-                            <li><strong>Taux de réussite :</strong> 92%</li>
-                            <li><strong>Progression mensuelle :</strong> +1.2 pts</li>
-                            <li><strong>Élèves en difficulté :</strong> 8%</li>
-                        </ul>
-                    </div>
-
-                    <!-- Bloc Performance Professeurs -->
-                    <div class="stats-card">
-                        <h3>Performance des Professeurs</h3>
-                        <div class="stats-value">88%</div>
-                        <p>Indice de complétion des programmes</p>
-                        <div class="performance-bar-container">
-                            <div class="performance-bar" style="width: 88%; background-color: #3498db;"></div>
-                        </div>
-                        <ul class="stats-list">
-                            <li><strong>Supports déposés :</strong> 452</li>
-                            <li><strong>Assiduité moyenne :</strong> 98%</li>
-                            <li><strong>Évaluations corrigées :</strong> 1,240</li>
-                        </ul>
-                    </div>
-
-                    <!-- Bloc Résultats par Matière -->
-                    <div class="stats-card">
-                        <h3>Résultats par Matière</h3>
-                        <div class="mini-chart-placeholder">
-                            <div class="bar" style="height: 80%;" title="Maths"></div>
-                            <div class="bar" style="height: 65%;" title="Français"></div>
-                            <div class="bar" style="height: 90%;" title="IA"></div>
-                            <div class="bar" style="height: 70%;" title="Histoire"></div>
-                        </div>
-                        <div style="display: flex; justify-content: space-around; font-size: 0.7rem; color: #7f8c8d; margin-top: 10px;">
-                            <span>Maths</span>
-                            <span>Fran.</span>
-                            <span>IA</span>
-                            <span>Hist.</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="data-table-container" style="margin-top: 2rem;">
-                    <h3>Top Performances (Élèves)</h3>
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Élève</th>
-                                <th>Classe</th>
-                                <th>Moyenne</th>
-                                <th>Progression</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>PETIT Lucas</td>
-                                <td>6ème A</td>
-                                <td>18.5/20</td>
-                                <td style="color: #2ecc71;">↑ +2.0</td>
+                                <td>11H-B</td>
+                                <td><span style="display: inline-flex; align-items: center; gap: 0.25rem;">👤 0</span></td>
+                                <td><button class="btn-icon">...</button></td>
                             </tr>
                             <tr>
-                                <td>MARTIN Emma</td>
-                                <td>3ème B</td>
-                                <td>17.8/20</td>
-                                <td style="color: #2ecc71;">↑ +0.5</td>
+                                <td>1A</td>
+                                <td><span style="display: inline-flex; align-items: center; gap: 0.25rem;">👤 6</span></td>
+                                <td><button class="btn-icon">...</button></td>
+                            </tr>
+                            <tr>
+                                <td>23</td>
+                                <td><span style="display: inline-flex; align-items: center; gap: 0.25rem;">👤 0</span></td>
+                                <td><button class="btn-icon">...</button></td>
+                            </tr>
+                            <tr>
+                                <td>9H-A</td>
+                                <td><span style="display: inline-flex; align-items: center; gap: 0.25rem;">👤 3</span></td>
+                                <td><button class="btn-icon">...</button></td>
+                            </tr>
+                            <tr>
+                                <td>9H-B</td>
+                                <td><span style="display: inline-flex; align-items: center; gap: 0.25rem;">👤 6</span></td>
+                                <td><button class="btn-icon">...</button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -380,53 +301,98 @@
             </section>
 
             <!-- SECTION : UTILISATEURS -->
-            <section id="section-utilisateurs" class="admin-section">
+            <section id="section-users" class="admin-section">
                 <header class="content-header">
                     <div class="header-title">
-                        <h1>Gestion des Utilisateurs</h1>
-                        <p>Contrôle des accès et sécurité des comptes</p>
+                        <h1>Gestion des utilisateurs</h1>
+                        <p style="color: #666; font-size: 0.9rem; margin: 0.25rem 0 0;">41 utilisateurs</p>
                     </div>
                     <div class="header-actions">
-                        <input type="text" class="search-filter" placeholder="Rechercher un utilisateur..." onkeyup="filterTable('table-utilisateurs-body', this.value)">
-                        <button class="btn-primary" onclick="openModal('modal-utilisateur')">+ Créer un Utilisateur</button>
+                        <button class="btn-primary">+ Ajouter</button>
                     </div>
                 </header>
+
                 <div class="data-table-container">
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th>Utilisateur</th>
-                                <th>Rôle</th>
+                                <th>Nom</th>
                                 <th>Email</th>
-                                <th>Dernière Connexion</th>
-                                <th>Statut</th>
+                                <th>Rôle</th>
+                                <th>Classes / Matières</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="table-utilisateurs-body">
+                        <tbody>
                             <tr>
-                                <td><strong>ADMIN_PRINCIPAL</strong></td>
-                                <td><span class="tag" style="background: #f3e5f5; color: #7b1fa2;">Administrateur</span></td>
-                                <td>admin@ecole.com</td>
-                                <td>Aujourd'hui, 09:45</td>
-                                <td><span class="status-pill active">Actif</span></td>
-                                <td>
-                                    <button class="btn-icon" title="Modifier">✎</button> 
-                                    <button class="btn-icon" title="Réinitialiser le mot de passe">🔑</button>
-                                    <button class="btn-icon" title="Supprimer">🗑</button>
-                                </td>
+                                <td>Margot PERROUD</td>
+                                <td>margot.perroud@blaizbot.edu</td>
+                                <td><span class="tag" style="background: #e8f5e9; color: #2e7d32;">Élève</span></td>
+                                <td>1A</td>
+                                <td><button class="btn-icon">...</button></td>
                             </tr>
                             <tr>
-                                <td><strong>DUPONT Jean</strong></td>
-                                <td><span class="tag" style="background: #e3f2fd; color: #1976d2;">Professeur</span></td>
-                                <td>j.dupont@ecole.com</td>
-                                <td>Hier, 16:20</td>
-                                <td><span class="status-pill active">Actif</span></td>
-                                <td>
-                                    <button class="btn-icon" title="Modifier">✎</button> 
-                                    <button class="btn-icon" title="Réinitialiser le mot de passe">🔑</button>
-                                    <button class="btn-icon" title="Supprimer">🗑</button>
-                                </td>
+                                <td>Baptiste CURTY</td>
+                                <td>baptiste.curty@blaizbot.edu</td>
+                                <td><span class="tag" style="background: #e8f5e9; color: #2e7d32;">Élève</span></td>
+                                <td>1A</td>
+                                <td><button class="btn-icon">...</button></td>
+                            </tr>
+                            <tr>
+                                <td>Eva SANDOZ</td>
+                                <td>eva.sandoz@blaizbot.edu</td>
+                                <td><span class="tag" style="background: #e8f5e9; color: #2e7d32;">Élève</span></td>
+                                <td>1A</td>
+                                <td><button class="btn-icon">...</button></td>
+                            </tr>
+                            <tr>
+                                <td>Julien DUBOIS</td>
+                                <td>julien.dubois@blaizbot.edu</td>
+                                <td><span class="tag" style="background: #e8f5e9; color: #2e7d32;">Élève</span></td>
+                                <td>11H-A</td>
+                                <td><button class="btn-icon">...</button></td>
+                            </tr>
+                            <tr>
+                                <td>Louise VAUCHER</td>
+                                <td>louise.vaucher@blaizbot.edu</td>
+                                <td><span class="tag" style="background: #e8f5e9; color: #2e7d32;">Élève</span></td>
+                                <td>11H-A</td>
+                                <td><button class="btn-icon">...</button></td>
+                            </tr>
+                            <tr>
+                                <td>Louis MERCIER</td>
+                                <td>louis.mercier@blaizbot.edu</td>
+                                <td><span class="tag" style="background: #e8f5e9; color: #2e7d32;">Élève</span></td>
+                                <td>11H-A</td>
+                                <td><button class="btn-icon">...</button></td>
+                            </tr>
+                            <tr>
+                                <td>Elisa CARDINAUX</td>
+                                <td>elisa.cardinaux@blaizbot.edu</td>
+                                <td><span class="tag" style="background: #e8f5e9; color: #2e7d32;">Élève</span></td>
+                                <td>10H-B</td>
+                                <td><button class="btn-icon">...</button></td>
+                            </tr>
+                            <tr>
+                                <td>Vincent CHAPPUIS</td>
+                                <td>vincent.chappuis@blaizbot.edu</td>
+                                <td><span class="tag" style="background: #e8f5e9; color: #2e7d32;">Élève</span></td>
+                                <td>10H-B</td>
+                                <td><button class="btn-icon">...</button></td>
+                            </tr>
+                            <tr>
+                                <td>Marine PYTHON</td>
+                                <td>marine.python@blaizbot.edu</td>
+                                <td><span class="tag" style="background: #e8f5e9; color: #2e7d32;">Élève</span></td>
+                                <td>10H-B</td>
+                                <td><button class="btn-icon">...</button></td>
+                            </tr>
+                            <tr>
+                                <td>Adrian ZAUGG</td>
+                                <td>adrien.zaugg@blaizbot.edu</td>
+                                <td><span class="tag" style="background: #e8f5e9; color: #2e7d32;">Élève</span></td>
+                                <td>10H-B</td>
+                                <td><button class="btn-icon">...</button></td>
                             </tr>
                         </tbody>
                     </table>

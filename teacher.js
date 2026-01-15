@@ -5,6 +5,8 @@
  * Contient les modèles de données, la gestion du calendrier, et les interactions UI.
  */
 
+console.log('🚀 teacher.js loaded!');
+
 // ==========================================
 // 1. DATA MODELS (MOCK DATA & TYPES)
 // ==========================================
@@ -433,7 +435,79 @@ function applyAiChanges() {
 }
 
 // ==========================================
-// 7. MODAL MANAGEMENT & EVENT LISTENERS
+// 7. ASSIGNMENTS VIEW SWITCH
+// ==========================================
+
+/**
+ * Switch entre les vues Liste, Calendrier et Grille pour les devoirs
+ * @param {string} view - 'list', 'calendar' ou 'grid'
+ */
+window.switchAssignmentView = function(view) {
+    console.log('switchAssignmentView called with:', view);
+    
+    // Récupérer les 3 vues
+    const listView = document.getElementById('assignments-list-view');
+    const calendarView = document.getElementById('assignments-calendar-view');
+    const gridView = document.getElementById('assignments-grid-view');
+    
+    console.log('Found elements:', { listView: !!listView, calendarView: !!calendarView, gridView: !!gridView });
+    
+    // Cacher toutes les vues
+    if (listView) listView.style.display = 'none';
+    if (calendarView) calendarView.style.display = 'none';
+    if (gridView) gridView.style.display = 'none';
+    
+    // Afficher la vue demandée
+    switch(view) {
+        case 'list':
+            if (listView) listView.style.display = 'block';
+            break;
+        case 'calendar':
+            if (calendarView) {
+                calendarView.style.display = 'block';
+                console.log('Calendar view now visible');
+            }
+            break;
+        case 'grid':
+            if (gridView) gridView.style.display = 'grid';
+            break;
+    }
+    
+    // Mettre à jour les boutons actifs
+    const buttons = document.querySelectorAll('.view-toggle button');
+    buttons.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.textContent.includes('Liste') && view === 'list') btn.classList.add('active');
+        if (btn.textContent.includes('Calendrier') && view === 'calendar') btn.classList.add('active');
+        if (btn.textContent.includes('Grille') && view === 'grid') btn.classList.add('active');
+    });
+    
+    console.log('Switched to view:', view);
+}
+
+/**
+ * Change le mois du calendrier des devoirs (placeholder)
+ * @param {number} delta - -1 pour mois précédent, +1 pour mois suivant
+ */
+window.changeAssignmentMonth = function(delta) {
+    // Placeholder - pour le wireframe on affiche juste un message
+    const monthLabel = document.getElementById('assignment-calendar-month');
+    const months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 
+                    'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+    
+    // Pour le wireframe, on alterne juste entre quelques mois
+    if (monthLabel) {
+        const current = monthLabel.textContent;
+        if (delta > 0) {
+            monthLabel.textContent = 'Février 2026';
+        } else {
+            monthLabel.textContent = 'Décembre 2025';
+        }
+    }
+}
+
+// ==========================================
+// 8. MODAL MANAGEMENT & EVENT LISTENERS
 // ==========================================
 
 // Calendar Modal
@@ -502,21 +576,6 @@ document.getElementById('event-subject').addEventListener('change', function() {
     if (teacherData.subjects[subjectVal]) {
         teacherData.subjects[subjectVal].forEach(c => contentSelect.innerHTML += `<option value="${c}">${c}</option>`);
     }
-});
-
-// Navigation
-const navLinks = document.querySelectorAll('.nav-link');
-const sections = document.querySelectorAll('.admin-section');
-
-navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetSection = link.getAttribute('data-section');
-        navLinks.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-        sections.forEach(section => section.classList.toggle('active', section.id === `section-${targetSection}`));
-        if (targetSection === 'planning') renderCalendar(currentCalendarDate);
-    });
 });
 
 // Global Click Handler (Modals & Tree)
@@ -611,5 +670,61 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnUploadDoc = document.getElementById('btn-upload-doc');
     if (btnUploadDoc) btnUploadDoc.addEventListener('click', openUploadModal);
 
-    console.log(" Blaiz'bot Teacher Dashboard Loaded - Vibe Checked ");
+    // Navigation entre sections
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.admin-section');
+    const pageTitle = document.getElementById('page-title');
+
+    const sectionTitles = {
+        'dashboard': 'Dashboard',
+        'classes': 'Mes Classes',
+        'eleves': 'Mes Élèves',
+        'cours': 'Mes Cours',
+        'assignments': 'Agendas et Assignations',
+        'messages': 'Messages'
+    };
+
+    // Initialisation : s'assurer qu'une seule section a la classe active
+    // Le CSS gère l'affichage via .admin-section (hidden) et .admin-section.active (visible)
+    // Ne pas utiliser style.display inline car ça crée des conflits avec le CSS !important
+
+    console.log('Navigation initialized:', navLinks.length, 'links,', sections.length, 'sections');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetSection = link.getAttribute('data-section');
+            console.log('Clicked section:', targetSection);
+            
+            // Mettre à jour le titre de la page
+            if (pageTitle && sectionTitles[targetSection]) {
+                pageTitle.textContent = sectionTitles[targetSection];
+            }
+            
+            // Retirer l'état actif de tous les liens
+            navLinks.forEach(l => {
+                l.classList.remove('active');
+                l.style.background = '#1976d2';
+            });
+            
+            // Ajouter l'état actif au lien cliqué
+            link.classList.add('active');
+            link.style.background = '#2196f3';
+            
+            // Afficher la section correspondante (via classe uniquement, pas style inline)
+            sections.forEach(section => {
+                const isTarget = section.id === `section-${targetSection}`;
+                console.log('Section', section.id, 'isTarget:', isTarget);
+                if (isTarget) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+            
+            if (targetSection === 'planning') renderCalendar(currentCalendarDate);
+        });
+    });
+
+    console.log("✅ Blaiz'bot Teacher Dashboard Loaded - Vibe Checked");
 });

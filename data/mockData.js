@@ -452,6 +452,228 @@ export const adminSubjects = [
 ];
 
 // ==========================================
+// STUDENT COACH DATA - Données Coach Privé
+// ==========================================
+
+/**
+ * Statistiques du coach privé pour l'élève
+ * @type {Object}
+ */
+export const coachStats = {
+    weeklyGoals: {
+        completed: 3,
+        total: 5,
+        goals: [
+            { id: 1, title: "Terminer 5 quiz", completed: true },
+            { id: 2, title: "Réviser Chapitre 3", completed: true },
+            { id: 3, title: "Faire 10 flashcards", completed: true },
+            { id: 4, title: "Lire 2 chapitres", completed: false },
+            { id: 5, title: "Projet Maths", completed: false }
+        ]
+    },
+    xpPoints: {
+        current: 1247,
+        weeklyGain: 125,
+        level: 8,
+        nextLevelAt: 1500
+    },
+    streak: {
+        current: 7,
+        record: 12
+    },
+    badges: {
+        unlocked: [
+            { id: 1, name: "Première Victoire", icon: "🌟", description: "Réussir ton premier quiz", unlockedAt: "2026-01-10" },
+            { id: 2, name: "Marathonien", icon: "🏃", description: "7 jours de suite", unlockedAt: "2026-01-15" },
+            { id: 3, name: "Matheux", icon: "📐", description: "5 quiz de maths réussis", unlockedAt: "2026-01-12" },
+            { id: 4, name: "Lecteur Assidu", icon: "📚", description: "10 chapitres lus", unlockedAt: "2026-01-08" }
+        ],
+        locked: [
+            { id: 5, name: "Expert Maths", icon: "🔒", description: "20 quiz parfaits", requirement: "10/20" },
+            { id: 6, name: "Polyglotte", icon: "🔒", description: "Maîtriser 3 langues", requirement: "1/3" }
+        ]
+    },
+    recommendations: [
+        {
+            id: 1,
+            subject: "Mathématiques",
+            type: "weakness",
+            message: "Tu as du mal avec les fractions. Révise le chapitre 3 📚",
+            action: { label: "Voir le cours", url: "/student/courses/3" }
+        },
+        {
+            id: 2,
+            subject: "Français",
+            type: "opportunity",
+            message: "Tu es proche d'un nouveau badge ! Complète 2 quiz de plus 🎯",
+            action: { label: "Commencer un quiz", url: "/student/exercises" }
+        }
+    ]
+};
+
+// ==========================================
+// AGENDA EVENTS - Événements Agenda Élève
+// ==========================================
+
+/**
+ * Événements de l'agenda élève
+ * @type {Array}
+ */
+export const agendaEvents = [
+    { id: 1, type: "cours", title: "Mathématiques - Les Fractions", subject: "Mathématiques", date: "2026-01-15", startTime: "14:00", endTime: "15:30", location: "Salle 203" },
+    { id: 2, type: "devoir", title: "Exercice Chapitre 3", subject: "Mathématiques", dueDate: "2026-01-17", assignmentId: 5 },
+    { id: 3, type: "evenement", title: "Sortie Musée des Sciences", date: "2026-01-20", startTime: "09:00", endTime: "17:00" },
+    { id: 4, type: "cours", title: "Français - La Poésie", subject: "Français", date: "2026-01-16", startTime: "10:00", endTime: "11:30", location: "Salle 105" },
+    { id: 5, type: "devoir", title: "Analyse de Texte", subject: "Français", dueDate: "2026-01-19" }
+];
+
+// ==========================================
+// SAVED ARTEFACTS - Artefacts Sauvegardés
+// ==========================================
+
+/**
+ * Artefacts générés et sauvegardés par l'élève
+ * @type {Array}
+ */
+export const savedArtefacts = [
+    { id: 1, type: "synthese", title: "Chapitre 3 : Les Fractions", subject: "Mathématiques", createdAt: "2026-01-14", content: "# Les Fractions\n\n## Définition\n..." },
+    { id: 2, type: "flashcards", title: "Vocabulaire Français - La Poésie", subject: "Français", createdAt: "2026-01-12", cards: [
+        { question: "Qu'est-ce qu'une strophe ?", answer: "Un groupe de vers" },
+        { question: "Définir une rime", answer: "Répétition de sons à la fin de vers" }
+    ]},
+    { id: 3, type: "mindmap", title: "Carte Mentale : La Révolution Française", subject: "Histoire", createdAt: "2026-01-10", data: {} },
+    { id: 4, type: "quiz", title: "Quiz Personnalisé - Géométrie", subject: "Mathématiques", createdAt: "2026-01-09", questions: [] }
+];
+
+// ==========================================
+// ASSIGNMENTS - Devoirs (Professeur)
+// ==========================================
+
+/**
+ * Devoirs créés par le professeur
+ * @type {Array}
+ */
+export const assignments = [
+    {
+        id: 1,
+        title: "Exercice sur les Fractions",
+        type: "quiz",
+        subject: "Mathématiques",
+        section: "Chapitre 3",
+        classes: ["6ème A", "6ème B"],
+        dueDate: "2026-01-17",
+        status: "ongoing",
+        stats: { totalStudents: 50, submitted: 32, avgScore: 15.2 },
+        aiConfig: { enabled: true, helpLevel: "moderate", directives: "L'IA peut expliquer mais pas donner les réponses" }
+    },
+    {
+        id: 2,
+        title: "Analyse de Texte - Poème",
+        type: "exercice",
+        subject: "Français",
+        section: "Chapitre 5",
+        classes: ["3ème B"],
+        dueDate: "2026-01-20",
+        status: "upcoming",
+        stats: { totalStudents: 22, submitted: 0, avgScore: null }
+    },
+    {
+        id: 3,
+        title: "Quiz : Les Triangles",
+        type: "quiz",
+        subject: "Mathématiques",
+        section: "Géométrie",
+        classes: ["6ème A"],
+        dueDate: "2026-01-25",
+        status: "upcoming",
+        stats: { totalStudents: 25, submitted: 0, avgScore: null }
+    }
+];
+
+// ==========================================
+// QUIZZES - Quiz Interactifs
+// ==========================================
+
+/**
+ * Quiz avec questions et corrections
+ * @type {Array}
+ */
+export const quizzes = [
+    {
+        id: 1,
+        title: "Quiz : Les Fractions",
+        subject: "Mathématiques",
+        section: "Chapitre 3",
+        totalQuestions: 10,
+        timeLimit: 20,
+        questions: [
+            {
+                id: 1,
+                question: "Calculez : 3/4 + 1/2 = ?",
+                options: [
+                    { id: "A", text: "4/6" },
+                    { id: "B", text: "5/4" },
+                    { id: "C", text: "5/8" },
+                    { id: "D", text: "1/2" }
+                ],
+                correctAnswer: "B",
+                explanation: "Pour additionner des fractions, il faut trouver un dénominateur commun. Ici : 3/4 + 2/4 = 5/4"
+            },
+            {
+                id: 2,
+                question: "Simplifiez : 6/9",
+                options: [
+                    { id: "A", text: "2/3" },
+                    { id: "B", text: "3/4" },
+                    { id: "C", text: "1/2" },
+                    { id: "D", text: "6/9" }
+                ],
+                correctAnswer: "A",
+                explanation: "On divise numérateur et dénominateur par 3 : 6÷3 / 9÷3 = 2/3"
+            }
+        ]
+    }
+];
+
+// ==========================================
+// STUDENT ANALYTICS - Analytics Élèves (Professeur)
+// ==========================================
+
+/**
+ * Analytics détaillées pour un élève
+ * @type {Object}
+ */
+export const studentAnalytics = {
+    studentId: 123,
+    progressionHistory: [
+        { date: "2026-01-08", score: 12.5 },
+        { date: "2026-01-10", score: 14.0 },
+        { date: "2026-01-12", score: 15.2 },
+        { date: "2026-01-15", score: 16.8 }
+    ],
+    iaInteractions: [
+        {
+            id: 1,
+            timestamp: "2026-01-14T14:32:00",
+            type: "question",
+            subject: "Mathématiques",
+            topic: "Fractions",
+            summary: "Demande d'explication sur les dénominateurs communs"
+        },
+        {
+            id: 2,
+            timestamp: "2026-01-13T16:15:00",
+            type: "generation",
+            subject: "Français",
+            topic: "Vocabulaire",
+            summary: "Génération de flashcards"
+        }
+    ],
+    strengths: ["Algèbre", "Géométrie"],
+    weaknesses: ["Fractions", "Problèmes"]
+};
+
+// ==========================================
 // SHARED / COMMON DATA
 // ==========================================
 
@@ -541,12 +763,20 @@ export default {
     studentLabProjects,
     studentCourses,
     studentMessages,
+    coachStats,
+    agendaEvents,
+    savedArtefacts,
 
     // Admin
     adminTeachers,
     adminStudents,
     adminClassStats,
     adminSubjects,
+
+    // Shared
+    assignments,
+    quizzes,
+    studentAnalytics,
 
     // Common
     MONTHS_FR,

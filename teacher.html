@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <title>Blaiz'bot - Espace Professeur</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Script d'authentification désactivé pour le wireframe
     <script>
-        // Redirection vers la page de connexion si accès direct ou refresh
         if (!sessionStorage.getItem('authenticated')) {
             window.location.href = 'index.html';
         }
         sessionStorage.removeItem('authenticated');
     </script>
+    -->
 </head>
 <body>
     <div class="admin-wrapper">
@@ -21,172 +22,203 @@
                 <p>Espace Professeur</p>
             </div>
             <nav class="sidebar-nav">
-                <div class="nav-group">
-                    <span>MON ACTIVITÉ</span>
-                    <a href="#" class="nav-link active" data-section="dashboard">Tableau de bord</a>
-                    <a href="#" class="nav-link" data-section="matieres">Mes Matières</a>
-                    <a href="#" class="nav-link" data-section="classes">Mes Classes</a>
-                    <a href="#" class="nav-link" data-section="eleves">Mes Élèves</a>
-                    <a href="#" class="nav-link" data-section="cours">Mes Cours & Contenus</a>
-                    <a href="#" class="nav-link" data-section="attributions">Gestion des Attributions</a>
-                    <a href="#" class="nav-link" data-section="planning">Planning & Agenda</a>
-                    <a href="#" class="nav-link" data-section="messages">Messagerie <span class="status-pill" style="background: #e74c3c; color: white; padding: 2px 6px; font-size: 0.7rem; margin-left: 5px;">3</span></a>
-                </div>
+                <a href="#" class="nav-link active" data-section="dashboard" style="display: block; padding: 12px 20px; margin: 8px 0; background: #2196f3; color: white; text-decoration: none; border-radius: 8px; font-weight: 500;">📊 Dashboard</a>
+                <a href="#" class="nav-link" data-section="classes" style="display: block; padding: 12px 20px; margin: 8px 0; background: #1976d2; color: white; text-decoration: none; border-radius: 8px; font-weight: 500;">🎓 Mes classes</a>
+                <a href="#" class="nav-link" data-section="eleves" style="display: block; padding: 12px 20px; margin: 8px 0; background: #1976d2; color: white; text-decoration: none; border-radius: 8px; font-weight: 500;">👥 Mes élèves</a>
+                <a href="#" class="nav-link" data-section="cours" style="display: block; padding: 12px 20px; margin: 8px 0; background: #1976d2; color: white; text-decoration: none; border-radius: 8px; font-weight: 500;">📚 Mes cours</a>
+                <a href="#" class="nav-link" data-section="assignments" style="display: block; padding: 12px 20px; margin: 8px 0; background: #1976d2; color: white; text-decoration: none; border-radius: 8px; font-weight: 500;">📅 Agendas et Assignations</a>
+                <a href="#" class="nav-link" data-section="messages" style="display: block; padding: 12px 20px; margin: 8px 0; background: #1976d2; color: white; text-decoration: none; border-radius: 8px; font-weight: 500;">💬 Messages</a>
             </nav>
-            <div class="sidebar-footer">
-                <div style="padding: 10px; font-size: 0.8rem; color: #ecf0f1; border-bottom: 1px solid #34495e; margin-bottom: 10px;">
-                    Connecté en tant que :<br><strong>M. Jean DUPONT</strong>
-                </div>
-                <a href="index.html" class="btn-logout">Déconnexion</a>
+            <div class="sidebar-footer" style="border: none;">
+                <div style="padding: 10px; font-size: 0.75rem; color: #999;">BlaizBot v1.0</div>
             </div>
         </aside>
 
         <!-- Zone de Travail Principale -->
         <main class="main-content">
             
+            <!-- Header avec barre de recherche et profil -->
+            <header style="background: white; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e0e0e0; margin-bottom: 2rem;">
+                <h2 id="page-title" style="margin: 0; color: #1a1a1a; font-size: 1.25rem;">Dashboard</h2>
+                
+                <div style="display: flex; align-items: center; gap: 2rem;">
+                    <!-- Barre de recherche -->
+                    <div style="position: relative;">
+                        <input type="text" placeholder="Rechercher..." style="padding: 0.5rem 1rem 0.5rem 2.5rem; border: 1px solid #e0e0e0; border-radius: 8px; width: 300px; font-size: 0.9rem;">
+                        <span style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); color: #999;">🔍</span>
+                    </div>
+                    
+                    <!-- Notification -->
+                    <div style="position: relative; cursor: pointer;">
+                        <span style="font-size: 1.25rem;">🔔</span>
+                    </div>
+                    
+                    <!-- Profil Professeur -->
+                    <div style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer; position: relative;" onclick="document.getElementById('teacher-menu').style.display = document.getElementById('teacher-menu').style.display === 'block' ? 'none' : 'block'">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #1976d2, #42a5f5); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.9rem;">MD</div>
+                        <span style="font-weight: 500; color: #1a1a1a;">Marc DUPONT</span>
+                        
+                        <!-- Menu déroulant -->
+                        <div id="teacher-menu" style="display: none; position: absolute; top: 55px; right: 0; background: white; border: 1px solid #e0e0e0; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 200px; z-index: 1000;">
+                            <div style="padding: 12px 16px; border-bottom: 1px solid #f0f0f0;">
+                                <div style="font-weight: 600; color: #1a1a1a; font-size: 0.9rem;">Marc DUPONT</div>
+                                <div style="font-size: 0.75rem; color: #999; margin-top: 2px;">marc.dupont@blaizbot.edu</div>
+                            </div>
+                            <div style="padding: 8px 0;">
+                                <a href="#" style="display: block; padding: 10px 16px; color: #1a1a1a; text-decoration: none; font-size: 0.9rem;" onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='white'">👤 Mon Profil</a>
+                                <a href="#" style="display: block; padding: 10px 16px; color: #1a1a1a; text-decoration: none; font-size: 0.9rem;" onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='white'">⚙️ Paramètres</a>
+                                <a href="#" style="display: block; padding: 10px 16px; color: #1a1a1a; text-decoration: none; font-size: 0.9rem;" onmouseover="this.style.background='#f5f5f5'" onmouseout="this.style.background='white'">🔔 Notifications</a>
+                                <div style="border-top: 1px solid #f0f0f0; margin: 8px 0;"></div>
+                                <a href="index.html" style="display: block; padding: 10px 16px; color: #d32f2f; text-decoration: none; font-size: 0.9rem;" onmouseover="this.style.background='#ffebee'" onmouseout="this.style.background='white'">🚺 Déconnexion</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
             <!-- SECTION : DASHBOARD -->
             <section id="section-dashboard" class="admin-section active">
-                <header class="content-header">
-                    <div class="header-title">
-                        <h1>Tableau de Bord Pédagogique</h1>
-                        <p>Analysez les performances et ajustez votre enseignement en temps réel.</p>
-                    </div>
-                    <div class="header-actions" style="display: flex; gap: 10px;">
-                        <select id="dash-filter-classe" class="search-filter" style="width: 150px;" onchange="updateDashboardView()">
-                            <option value="all">Toutes les classes</option>
-                            <option value="6A">6ème A</option>
-                            <option value="3B">3ème B</option>
-                        </select>
-                        <select id="dash-filter-eleve" class="search-filter" style="width: 180px;" onchange="updateDashboardView()">
-                            <option value="all">Tous les élèves</option>
-                            <option>Alice MARTIN</option>
-                            <option>Thomas DUBOIS</option>
-                        </select>
-                    </div>
+                <!-- Bannière verte -->
+                <header style="background: linear-gradient(135deg, #4caf50, #66bb6a); color: white; padding: 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                    <h1 style="color: white; margin: 0; font-size: 1.75rem;">Bonjour, Marc 👋</h1>
+                    <p style="color: rgba(255,255,255,0.9); margin: 0.5rem 0 0;">Bienvenue sur votre espace professeur</p>
                 </header>
 
-                <!-- KPI Principaux -->
-                <div class="stats-grid">
-                    <div class="stats-card">
-                        <h3>Taux de Compréhension</h3>
-                        <div class="stats-value" id="dash-kpi-comprehension">78%</div>
-                        <div class="performance-bar-container">
-                            <div class="performance-bar" style="width: 78%; background-color: #2ecc71;"></div>
-                        </div>
-                        <p>Moyenne sur les quiz IA</p>
-                    </div>
-                    <div class="stats-card">
-                        <h3>Engagement Élèves</h3>
-                        <div class="stats-value" id="dash-kpi-engagement">85%</div>
-                        <p>Élèves actifs cette semaine</p>
-                    </div>
-                    <div class="stats-card">
-                        <h3>Alertes IA Prioritaires</h3>
-                        <div class="stats-value" style="color: #e74c3c;" id="dash-kpi-alerts">4</div>
-                        <p>Interventions recommandées</p>
-                    </div>
-                    <div class="stats-card">
-                        <h3>Temps Moyen / Cours</h3>
-                        <div class="stats-value" id="dash-kpi-time">22 min</div>
-                        <p>Par session d'apprentissage</p>
-                    </div>
-                </div>
-
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
-                    <!-- Analyse des Contenus -->
-                    <div class="stats-card" style="padding: 20px;">
-                        <h3>📈 Performance des Cours</h3>
-                        <div style="margin-top: 15px;">
-                            <h4 style="color: #27ae60; font-size: 0.9rem;">✅ Les mieux compris</h4>
-                            <ul class="stats-list" style="margin-bottom: 20px;">
-                                <li style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee;">
-                                    <span>Introduction aux Nombres Relatifs</span>
-                                    <span style="font-weight: bold; color: #27ae60;">94%</span>
-                                </li>
-                                <li style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee;">
-                                    <span>Géométrie : Les Triangles</span>
-                                    <span style="font-weight: bold; color: #27ae60;">88%</span>
-                                </li>
-                            </ul>
-
-                            <h4 style="color: #e67e22; font-size: 0.9rem;">⚠️ À revoir / Améliorer</h4>
-                            <ul class="stats-list">
-                                <li style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee;">
-                                    <div>
-                                        <span>Les Fractions : Simplification</span><br>
-                                        <small style="color: #7f8c8d;">Point de blocage : Division par le PGCD</small>
-                                    </div>
-                                    <span style="font-weight: bold; color: #e67e22;">52%</span>
-                                </li>
-                                <li style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee;">
-                                    <div>
-                                        <span>Algèbre : Équations 1er degré</span><br>
-                                        <small style="color: #7f8c8d;">Point de blocage : Changement de signe</small>
-                                    </div>
-                                    <span style="font-weight: bold; color: #e67e22;">61%</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Recommandations IA pour le Professeur -->
-                    <div class="stats-card" style="padding: 20px; border-left: 4px solid #3498db; background: #f0f7ff;">
-                        <h3>🤖 Assistant Pédagogique Blaiz'bot</h3>
-                        <div style="margin-top: 15px;">
-                            <div style="background: white; padding: 12px; border-radius: 8px; margin-bottom: 10px; border: 1px solid #d1e9ff;">
-                                <strong>Suggestion de remédiation collective :</strong>
-                                <p style="font-size: 0.85rem; margin-top: 5px; color: #34495e;">
-                                    65% de la classe <strong>6ème A</strong> échoue sur la simplification des fractions. 
-                                    <br><br>
-                                    <strong>Action conseillée :</strong> Organisez une session de 15 min sur la recherche de diviseurs communs avant de poursuivre le chapitre.
-                                </p>
-                                <button class="btn-small" style="background: #3498db; color: white; border: none; margin-top: 5px;">Créer un message de rappel</button>
+                <!-- KPI Cards -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="font-size: 2rem;">🎓</div>
+                            <div>
+                                <div style="font-size: 2rem; font-weight: 600; color: #1a1a1a;">2</div>
+                                <div style="color: #666; font-size: 0.9rem;">Mes classes</div>
                             </div>
-                            <div style="background: white; padding: 12px; border-radius: 8px; border: 1px solid #d1e9ff;">
-                                <strong>Ajustement de contenu :</strong>
-                                <p style="font-size: 0.85rem; margin-top: 5px; color: #34495e;">
-                                    Le cours "Algèbre" semble trop dense. Les élèves décrochent après la page 4.
-                                    <br><br>
-                                    <strong>Action conseillée :</strong> Scindez le document en deux parties et insérez un quiz interactif intermédiaire.
-                                </p>
-                                <button class="btn-small" style="background: #3498db; color: white; border: none; margin-top: 5px;">Modifier le cours</button>
+                        </div>
+                    </div>
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="font-size: 2rem;">📚</div>
+                            <div>
+                                <div style="font-size: 2rem; font-weight: 600; color: #1a1a1a;">1</div>
+                                <div style="color: #666; font-size: 0.9rem;">Mes cours</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="font-size: 2rem;">💬</div>
+                            <div>
+                                <div style="font-size: 2rem; font-weight: 600; color: #1a1a1a;">0</div>
+                                <div style="color: #666; font-size: 0.9rem;">Messages</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="data-table-container" style="margin-top: 20px;">
-                    <h3>Dernières alertes de progression</h3>
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Élève</th>
-                                <th>Classe</th>
-                                <th>Sujet</th>
-                                <th>Diagnostic IA</th>
-                                <th>Urgence</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="dash-alerts-body">
-                            <tr>
-                                <td>Thomas DUBOIS</td>
-                                <td>6ème A</td>
-                                <td>Fractions</td>
-                                <td>Inactivité prolongée sur le quiz (3 jours)</td>
-                                <td><span class="status-pill" style="background: #ffebee; color: #c62828;">Haute</span></td>
-                                <td><button class="btn-small" onclick="selectChat('Thomas DUBOIS', 'eleve', 'Les Fractions')">Relancer</button></td>
-                            </tr>
-                            <tr>
-                                <td>Alice MARTIN</td>
-                                <td>3ème B</td>
-                                <td>Algèbre</td>
-                                <td>Erreurs répétées sur les nombres négatifs</td>
-                                <td><span class="status-pill" style="background: #fff3e0; color: #ef6c00;">Moyenne</span></td>
-                                <td><button class="btn-small" onclick="openEleveDetails('Alice MARTIN')">Voir détails</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <!-- Centre de Pilotage -->
+                <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 2rem;">
+                    <h3 style="margin: 0 0 1rem; display: flex; align-items: center; gap: 0.5rem;">📊 Centre de Pilotage</h3>
+                    
+                    <!-- Filtres -->
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="font-size: 0.9rem; color: #666;">▼ Filtres</span>
+                        </div>
+                        <select style="padding: 0.5rem; border: 1px solid #e0e0e0; border-radius: 6px; font-size: 0.9rem;">
+                            <option>Toutes les classe</option>
+                        </select>
+                        <select style="padding: 0.5rem; border: 1px solid #e0e0e0; border-radius: 6px; font-size: 0.9rem;">
+                            <option>Toutes les matié</option>
+                        </select>
+                        <select style="padding: 0.5rem; border: 1px solid #e0e0e0; border-radius: 6px; font-size: 0.9rem;">
+                            <option>Tous les cours</option>
+                        </select>
+                        <select style="padding: 0.5rem; border: 1px solid #e0e0e0; border-radius: 6px; font-size: 0.9rem;">
+                            <option>Ce mois</option>
+                        </select>
+                    </div>
+
+                    <!-- Métriques -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        <div style="padding: 1rem; border-left: 3px solid #f44336; background: #fafafa; border-radius: 8px;">
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <div>
+                                    <div style="font-size: 0.85rem; color: #666;">Moyenne Générale</div>
+                                    <div style="font-size: 1.5rem; font-weight: 600; margin-top: 0.25rem;">0<span style="font-size: 0.9rem;">%</span></div>
+                                </div>
+                                <span style="color: #999;">●</span>
+                            </div>
+                        </div>
+                        <div style="padding: 1rem; border-left: 3px solid #f44336; background: #fafafa; border-radius: 8px;">
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <div>
+                                    <div style="font-size: 0.85rem; color: #666;">Taux de Réussite</div>
+                                    <div style="font-size: 1.5rem; font-weight: 600; margin-top: 0.25rem;">0<span style="font-size: 0.9rem;">%</span></div>
+                                </div>
+                                <span style="color: #999;">✓</span>
+                            </div>
+                        </div>
+                        <div style="padding: 1rem; border-left: 3px solid #4caf50; background: #fafafa; border-radius: 8px;">
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <div>
+                                    <div style="font-size: 0.85rem; color: #666;">Progression</div>
+                                    <div style="font-size: 1.5rem; font-weight: 600; margin-top: 0.25rem;">100<span style="font-size: 0.9rem;">%</span></div>
+                                </div>
+                                <span style="color: #999;">↗</span>
+                            </div>
+                        </div>
+                        <div style="padding: 1rem; border-left: 3px solid #4caf50; background: #fafafa; border-radius: 8px;">
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <div>
+                                    <div style="font-size: 0.85rem; color: #666;">Alertes Actives</div>
+                                    <div style="font-size: 1.5rem; font-weight: 600; margin-top: 0.25rem;">0</div>
+                                </div>
+                                <span style="color: #999;">⚠</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance des Cours et Élèves à Surveiller -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <h3 style="margin: 0 0 1rem; display: flex; align-items: center; gap: 0.5rem;">📊 Performance des Cours</h3>
+                        <div style="text-align: center; padding: 3rem 0; color: #999; font-size: 0.9rem;">Aucune donnée de performance disponible</div>
+                    </div>
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+                            <h3 style="margin: 0; display: flex; align-items: center; gap: 0.5rem;">👥 Élèves à Surveiller</h3>
+                            <span style="background: #f5f5f5; padding: 4px 12px; border-radius: 12px; font-size: 0.85rem; font-weight: 600;">8</span>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.75rem; background: #fafafa; border-radius: 8px;">
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <div style="width: 32px; height: 32px; border-radius: 50%; background: #e0e0e0; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.75rem;">LM</div>
+                                    <div>
+                                        <div style="font-weight: 500; font-size: 0.9rem;">Louis MERCIER <span style="color: #666; font-size: 0.8rem;">11H-A</span></div>
+                                        <div style="font-size: 0.75rem; color: #999;">🔴 Moy: 0%</div>
+                                    </div>
+                                </div>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <span style="background: #ffebee; color: #d32f2f; padding: 4px 8px; border-radius: 6px; font-size: 0.75rem; font-weight: 500;">0%</span>
+                                    <button style="border: none; background: none; cursor: pointer; font-size: 1rem;">🔗</button>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.75rem; background: #fafafa; border-radius: 8px;">
+                                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                    <div style="width: 32px; height: 32px; border-radius: 50%; background: #e0e0e0; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.75rem;">LV</div>
+                                    <div>
+                                        <div style="font-weight: 500; font-size: 0.9rem;">Louise VAUCHER <span style="color: #666; font-size: 0.8rem;">11H-A</span></div>
+                                        <div style="font-size: 0.75rem; color: #999;">🔴 Moy: 0%</div>
+                                    </div>
+                                </div>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <span style="background: #ffebee; color: #d32f2f; padding: 4px 8px; border-radius: 6px; font-size: 0.75rem; font-weight: 500;">0%</span>
+                                    <button style="border: none; background: none; cursor: pointer; font-size: 1rem;">🔗</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -228,36 +260,174 @@
 
             <!-- SECTION : MES CLASSES -->
             <section id="section-classes" class="admin-section">
-                <header class="content-header">
+                <header class="content-header" style="border-bottom: none; padding-bottom: 0;">
                     <div class="header-title">
-                        <h1>Mes Classes</h1>
-                        <p>Groupes d'élèves sous votre responsabilité</p>
+                        <h1 style="margin: 0;">Mes Classes</h1>
+                        <p style="color: #666; font-size: 0.9rem; margin: 0.25rem 0 0;">2 classes assignées</p>
                     </div>
                 </header>
-                <div class="stats-grid">
-                    <div class="stats-card">
-                        <div class="card-header">
-                            <h3>6ème A</h3>
-                            <span class="tag">Maths</span>
+
+                <!-- Boutons de sélection -->
+                <div style="display: flex; gap: 1rem; margin: 1.5rem 0; align-items: center;">
+                    <button style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border: 1px solid #e0e0e0; background: white; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+                        <input type="checkbox" checked> Tout
+                    </button>
+                    <button style="padding: 0.5rem 1rem; border: 1px solid #e0e0e0; background: white; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">Aucun</button>
+                    <button style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border: 1px solid #e0e0e0; background: white; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+                        🔄 Inverser
+                    </button>
+                </div>
+
+                <!-- Statistiques (2 classes · 9 élèves) -->
+                <div style="background: #e3f2fd; padding: 0.75rem 1rem; border-radius: 8px; margin-bottom: 1.5rem; font-size: 0.9rem; color: #1976d2;">
+                    📊 Statistiques (2 classes · 9 élèves)
+                </div>
+
+                <!-- 5 KPI Cards -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                    <div style="background: #e8f5e9; padding: 1.25rem; border-radius: 12px; border-left: 4px solid #4caf50;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                            <span style="width: 12px; height: 12px; border-radius: 50%; background: #4caf50;"></span>
+                            <span style="font-size: 0.85rem; color: #666;">En réussite</span>
                         </div>
-                        <p>28 Élèves</p>
-                        <p>Moyenne : 13.8/20</p>
-                        <div class="performance-bar-container">
-                            <div class="performance-bar" style="width: 69%; background-color: #2ecc71;"></div>
-                        </div>
-                        <button class="btn-primary btn-voir-classe" onclick="openClasseModal('6ème A')" style="width: 100%; margin-top: 10px;">Voir la classe</button>
+                        <div style="font-size: 2rem; font-weight: 600; color: #1a1a1a;">0</div>
                     </div>
-                    <div class="stats-card">
-                        <div class="card-header">
-                            <h3>3ème B</h3>
-                            <span class="tag">Maths</span>
+                    <div style="background: #fff3e0; padding: 1.25rem; border-radius: 12px; border-left: 4px solid #ff9800;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                            <span style="width: 12px; height: 12px; border-radius: 50%; background: #ff9800;"></span>
+                            <span style="font-size: 0.85rem; color: #666;">À surveiller</span>
                         </div>
-                        <p>24 Élèves</p>
-                        <p>Moyenne : 12.5/20</p>
-                        <div class="performance-bar-container">
-                            <div class="performance-bar" style="width: 62%; background-color: #f1c40f;"></div>
+                        <div style="font-size: 2rem; font-weight: 600; color: #1a1a1a;">0</div>
+                    </div>
+                    <div style="background: #ffebee; padding: 1.25rem; border-radius: 12px; border-left: 4px solid #f44336;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                            <span style="width: 12px; height: 12px; border-radius: 50%; background: #f44336;"></span>
+                            <span style="font-size: 0.85rem; color: #666;">En difficulté</span>
                         </div>
-                        <button class="btn-primary btn-voir-classe" onclick="openClasseModal('3ème B')" style="width: 100%; margin-top: 10px;">Voir la classe</button>
+                        <div style="font-size: 2rem; font-weight: 600; color: #1a1a1a;">0</div>
+                    </div>
+                    <div style="background: #e3f2fd; padding: 1.25rem; border-radius: 12px; border-left: 4px solid #2196f3;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                            <span style="width: 12px; height: 12px; border-radius: 50%; background: #2196f3;"></span>
+                            <span style="font-size: 0.85rem; color: #666;">Moyenne</span>
+                        </div>
+                        <div style="font-size: 2rem; font-weight: 600; color: #1a1a1a;">—</div>
+                    </div>
+                    <div style="background: #f3e5f5; padding: 1.25rem; border-radius: 12px; border-left: 4px solid #9c27b0;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                            <span style="width: 12px; height: 12px; border-radius: 50%; background: #9c27b0;"></span>
+                            <span style="font-size: 0.85rem; color: #666;">Moy IA</span>
+                        </div>
+                        <div style="font-size: 2rem; font-weight: 600; color: #1a1a1a;">—</div>
+                    </div>
+                </div>
+
+                <!-- Section Filtres -->
+                <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 1.5rem;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; color: #2196f3; font-weight: 500;">
+                        🔍 Filtres
+                    </div>
+                    
+                    <div style="margin-bottom: 1rem;">
+                        <input type="text" placeholder="Rechercher une classe..." style="width: 100%; padding: 0.75rem; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 0.9rem;">
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div>
+                            <label style="display: block; font-size: 0.85rem; color: #666; margin-bottom: 0.5rem; font-weight: 500;">Matières</label>
+                            <button style="padding: 0.75rem; border: 1px solid #e0e0e0; background: white; border-radius: 8px; cursor: pointer; font-size: 0.9rem; width: 100%; text-align: left; display: flex; align-items: center; gap: 0.5rem;">
+                                + Ajouter
+                            </button>
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 0.85rem; color: #666; margin-bottom: 0.5rem; font-weight: 500;">Classe</label>
+                            <select style="padding: 0.75rem; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 0.9rem; width: 100%;">
+                                <option>Toutes les classes</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compteur et Cards -->
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; color: #666; font-size: 0.9rem;">
+                        📊 2 classes / 2 total
+                    </div>
+                    <button style="background: none; border: none; cursor: pointer; color: #666;">▼</button>
+                </div>
+
+                <!-- 2 Cartes de Classes -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); gap: 1.5rem;">
+                    <!-- Classe 11H-A -->
+                    <div style="background: white; border: 1px solid #e0e0e0; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                            <input type="checkbox" style="width: 18px; height: 18px;">
+                            <div style="width: 40px; height: 40px; border-radius: 8px; background: linear-gradient(135deg, #42a5f5, #1976d2); display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">
+                                🎓
+                            </div>
+                            <h3 style="margin: 0; font-size: 1.25rem; color: #1a1a1a;">11H-A</h3>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; color: #666; font-size: 0.9rem;">
+                            👥 3 élèves
+                        </div>
+
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="font-size: 0.85rem; color: #666;">Moyenne</span>
+                            <span style="font-size: 1.25rem; font-weight: 600; color: #1a1a1a;">—</span>
+                        </div>
+
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+                            <span style="font-size: 0.85rem; color: #666;">📊 Score IA</span>
+                            <span style="font-size: 1.25rem; font-weight: 600; color: #1a1a1a;">—</span>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                            <span style="font-size: 0.85rem; color: #666;">📚</span>
+                            <span style="background: #f5f5f5; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">Mathématiques</span>
+                            <span style="background: #f5f5f5; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">Français</span>
+                            <span style="background: #f5f5f5; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">SVT</span>
+                        </div>
+
+                        <button style="width: 100%; padding: 0.75rem; background: #2196f3; color: white; border: none; border-radius: 8px; font-weight: 500; cursor: pointer; font-size: 0.9rem;">
+                            Voir la classe
+                        </button>
+                    </div>
+
+                    <!-- Classe 1A -->
+                    <div style="background: white; border: 1px solid #e0e0e0; border-radius: 12px; padding: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
+                            <input type="checkbox" style="width: 18px; height: 18px;">
+                            <div style="width: 40px; height: 40px; border-radius: 8px; background: linear-gradient(135deg, #42a5f5, #1976d2); display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">
+                                🎓
+                            </div>
+                            <h3 style="margin: 0; font-size: 1.25rem; color: #1a1a1a;">1A</h3>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; color: #666; font-size: 0.9rem;">
+                            👥 6 élèves
+                        </div>
+
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="font-size: 0.85rem; color: #666;">Moyenne</span>
+                            <span style="font-size: 1.25rem; font-weight: 600; color: #1a1a1a;">—</span>
+                        </div>
+
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+                            <span style="font-size: 0.85rem; color: #666;">📊 Score IA</span>
+                            <span style="font-size: 1.25rem; font-weight: 600; color: #1a1a1a;">—</span>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                            <span style="font-size: 0.85rem; color: #666;">📚</span>
+                            <span style="background: #f5f5f5; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">Mathématiques</span>
+                            <span style="background: #f5f5f5; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">Français</span>
+                            <span style="background: #f5f5f5; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem;">SVT</span>
+                        </div>
+
+                        <button style="width: 100%; padding: 0.75rem; background: #2196f3; color: white; border: none; border-radius: 8px; font-weight: 500; cursor: pointer; font-size: 0.9rem;">
+                            Voir la classe
+                        </button>
                     </div>
                 </div>
             </section>
@@ -376,80 +546,241 @@
                 </div>
             </section>
 
-            <!-- SECTION : GESTION DES ATTRIBUTIONS -->
-            <section id="section-attributions" class="admin-section">
+            <!-- SECTION : GESTION DES DEVOIRS -->
+            <section id="section-assignments" class="admin-section">
                 <header class="content-header">
                     <div class="header-title">
-                        <h1>Gestion des Attributions</h1>
-                        <p>Distribuez vos contenus aux classes ou aux élèves individuellement</p>
+                        <h1>📚 Gestion des Devoirs</h1>
+                        <p>Créez, assignez et suivez les devoirs de vos élèves</p>
                     </div>
                     <div class="header-actions">
-                        <button class="btn-primary" onclick="openNewAttributionModal()">➕ Nouvelle Attribution</button>
+                        <div class="view-toggle">
+                            <button class="active" onclick="switchAssignmentView('list')">📋 Liste</button>
+                            <button onclick="switchAssignmentView('calendar')">📅 Calendrier</button>
+                            <button onclick="switchAssignmentView('grid')">⬜ Grille</button>
+                        </div>
+                        <button class="btn-primary" onclick="openNewAssignmentModal()">➕ Créer un devoir</button>
                     </div>
                 </header>
 
-                <div class="stats-grid" style="grid-template-columns: 1fr;">
-                    <div class="stats-card">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                            <h3>Attributions en cours</h3>
-                            <div style="display: flex; gap: 10px;">
-                                <select class="filter-select" style="padding: 5px; border-radius: 4px; border: 1px solid #ddd;">
-                                    <option>Toutes les classes</option>
-                                    <option>6ème A</option>
-                                    <option>3ème B</option>
-                                </select>
-                                <input type="text" placeholder="Rechercher un contenu..." style="padding: 5px; border-radius: 4px; border: 1px solid #ddd;">
+                <div class="content-with-sidebar">
+                    <!-- Filtres Sidebar -->
+                    <aside class="filters-sidebar">
+                        <h3>Filtres</h3>
+                        
+                        <div class="filter-group">
+                            <label style="font-weight: 600; margin-bottom: 12px; display: block;">Statut</label>
+                            <label><input type="radio" name="status" checked> Tous</label>
+                            <label><input type="radio" name="status"> À venir</label>
+                            <label><input type="radio" name="status"> En cours</label>
+                            <label><input type="radio" name="status"> Terminés</label>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label style="font-weight: 600; margin-bottom: 12px; display: block;">Classes</label>
+                            <select multiple>
+                                <option>6ème A</option>
+                                <option>6ème B</option>
+                                <option>3ème B</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label style="font-weight: 600; margin-bottom: 12px; display: block;">Matières</label>
+                            <select multiple>
+                                <option>Mathématiques</option>
+                                <option>Français</option>
+                                <option>Histoire-Géo</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label style="font-weight: 600; margin-bottom: 12px; display: block;">Sections</label>
+                            <label><input type="checkbox"> Chapitre 1</label>
+                            <label><input type="checkbox"> Chapitre 2</label>
+                            <label><input type="checkbox"> Chapitre 3</label>
+                        </div>
+                    </aside>
+
+                    <!-- Vue Liste (par défaut) -->
+                    <div id="assignments-list-view" class="flex-1" style="padding: 20px;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Titre</th>
+                                    <th>Classes</th>
+                                    <th>Matière</th>
+                                    <th>Type</th>
+                                    <th>Échéance</th>
+                                    <th>Statut</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Exercice sur les Fractions</strong></td>
+                                    <td><span class="tag">6ème A</span> <span class="tag">6ème B</span></td>
+                                    <td>Maths</td>
+                                    <td>Quiz</td>
+                                    <td>17 janv. 2026</td>
+                                    <td><span class="status-pill ongoing">En cours</span></td>
+                                    <td>
+                                        <button class="btn-icon" title="Modifier">✎</button>
+                                        <button class="btn-icon" title="Résultats">📊</button>
+                                        <button class="btn-icon" title="Supprimer">🗑</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Analyse de Texte - Poème</strong></td>
+                                    <td><span class="tag">3ème B</span></td>
+                                    <td>Français</td>
+                                    <td>Exercice</td>
+                                    <td>20 janv. 2026</td>
+                                    <td><span class="status-pill upcoming">À venir</span></td>
+                                    <td>
+                                        <button class="btn-icon">✎</button>
+                                        <button class="btn-icon">📊</button>
+                                        <button class="btn-icon">🗑</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Vue Calendrier (cachée par défaut) -->
+                    <div id="assignments-calendar-view" class="flex-1" style="display: none; padding: 20px;">
+                        <!-- Navigation du calendrier -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                            <button onclick="changeAssignmentMonth(-1)" style="padding: 0.5rem 1rem; border: 1px solid #e0e0e0; background: white; border-radius: 6px; cursor: pointer;">◀ Précédent</button>
+                            <h3 id="assignment-calendar-month" style="margin: 0; font-size: 1.25rem;">Janvier 2026</h3>
+                            <button onclick="changeAssignmentMonth(1)" style="padding: 0.5rem 1rem; border: 1px solid #e0e0e0; background: white; border-radius: 6px; cursor: pointer;">Suivant ▶</button>
+                        </div>
+                        
+                        <!-- En-têtes des jours -->
+                        <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; background: #e0e0e0; border-radius: 8px 8px 0 0; overflow: hidden;">
+                            <div style="background: #f5f5f5; padding: 0.75rem; text-align: center; font-weight: 600; color: #666;">Lun</div>
+                            <div style="background: #f5f5f5; padding: 0.75rem; text-align: center; font-weight: 600; color: #666;">Mar</div>
+                            <div style="background: #f5f5f5; padding: 0.75rem; text-align: center; font-weight: 600; color: #666;">Mer</div>
+                            <div style="background: #f5f5f5; padding: 0.75rem; text-align: center; font-weight: 600; color: #666;">Jeu</div>
+                            <div style="background: #f5f5f5; padding: 0.75rem; text-align: center; font-weight: 600; color: #666;">Ven</div>
+                            <div style="background: #f5f5f5; padding: 0.75rem; text-align: center; font-weight: 600; color: #666;">Sam</div>
+                            <div style="background: #f5f5f5; padding: 0.75rem; text-align: center; font-weight: 600; color: #666;">Dim</div>
+                        </div>
+                        
+                        <!-- Grille du calendrier -->
+                        <div id="assignment-calendar-grid" style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; background: #e0e0e0; border-radius: 0 0 8px 8px; overflow: hidden;">
+                            <!-- Semaine 1 -->
+                            <div style="background: #f9f9f9; padding: 0.5rem; min-height: 100px; color: #ccc;">29</div>
+                            <div style="background: #f9f9f9; padding: 0.5rem; min-height: 100px; color: #ccc;">30</div>
+                            <div style="background: #f9f9f9; padding: 0.5rem; min-height: 100px; color: #ccc;">31</div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">1</span></div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">2</span></div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">3</span></div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">4</span></div>
+                            <!-- Semaine 2 -->
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">5</span></div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">6</span></div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">7</span></div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">8</span></div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">9</span></div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">10</span></div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">11</span></div>
+                            <!-- Semaine 3 -->
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">12</span></div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">13</span></div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">14</span></div>
+                            <div style="background: #e3f2fd; padding: 0.5rem; min-height: 100px; border: 2px solid #1976d2;">
+                                <span style="font-weight: 600; color: #1976d2;">15</span>
+                                <div style="font-size: 0.7rem; color: #666; margin-top: 2px;">Aujourd'hui</div>
+                            </div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">16</span></div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;">
+                                <span style="font-weight: 600;">17</span>
+                                <div style="background: #ff9800; color: white; padding: 4px 6px; border-radius: 4px; font-size: 0.7rem; margin-top: 4px; cursor: pointer;" title="Exercice sur les Fractions">
+                                    📝 Fractions
+                                </div>
+                            </div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">18</span></div>
+                            <!-- Semaine 4 -->
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">19</span></div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;">
+                                <span style="font-weight: 600;">20</span>
+                                <div style="background: #2196f3; color: white; padding: 4px 6px; border-radius: 4px; font-size: 0.7rem; margin-top: 4px; cursor: pointer;" title="Analyse de Texte - Poème">
+                                    📖 Poème
+                                </div>
+                            </div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">21</span></div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">22</span></div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">23</span></div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">24</span></div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">25</span></div>
+                            <!-- Semaine 5 -->
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">26</span></div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">27</span></div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">28</span></div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">29</span></div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">30</span></div>
+                            <div style="background: white; padding: 0.5rem; min-height: 100px;"><span style="font-weight: 600;">31</span></div>
+                            <div style="background: #f9f9f9; padding: 0.5rem; min-height: 100px; color: #ccc;">1</div>
+                        </div>
+                        
+                        <!-- Légende -->
+                        <div style="display: flex; gap: 1.5rem; margin-top: 1rem; padding: 1rem; background: #f5f5f5; border-radius: 8px;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <div style="width: 12px; height: 12px; background: #ff9800; border-radius: 3px;"></div>
+                                <span style="font-size: 0.85rem; color: #666;">En cours</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <div style="width: 12px; height: 12px; background: #2196f3; border-radius: 3px;"></div>
+                                <span style="font-size: 0.85rem; color: #666;">À venir</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <div style="width: 12px; height: 12px; background: #4caf50; border-radius: 3px;"></div>
+                                <span style="font-size: 0.85rem; color: #666;">Terminé</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vue Grille (cachée par défaut) -->
+                    <div id="assignments-grid-view" class="assignments-grid" style="display: none; padding: 20px;">
+                        <div class="assignment-card">
+                            <div class="card-header">
+                                <h4>Exercice sur les Fractions</h4>
+                                <span class="status-pill ongoing">En cours</span>
+                            </div>
+                            <div class="card-meta">
+                                <span class="tag">6ème A</span>
+                                <span class="tag">6ème B</span>
+                                <span class="tag">Maths</span>
+                            </div>
+                            <p>📅 Échéance : 17 janv. 2026</p>
+                            <div class="card-stats">
+                                <span>✅ 32/50 rendus</span>
+                                <span>📊 Moyenne : 15.2/20</span>
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn-secondary">Modifier</button>
+                                <button class="btn-primary">Résultats</button>
                             </div>
                         </div>
                         
-                        <div class="data-table-container">
-                            <table class="data-table">
-                                <thead>
-                                    <tr>
-                                        <th>Contenu</th>
-                                        <th>Cible</th>
-                                        <th>Date d'attribution</th>
-                                        <th>Échéance</th>
-                                        <th>Statut IA</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>Les fractions - Intro</strong></td>
-                                        <td><span class="tag" style="background: #e3f2fd; color: #1976d2;">Classe : 6ème A</span></td>
-                                        <td>12/12/2025</td>
-                                        <td>20/12/2025</td>
-                                        <td><span class="status-pill" style="background: #2ecc71;">Actif</span></td>
-                                        <td>
-                                            <button class="btn-icon" title="Modifier">✏️</button>
-                                            <button class="btn-icon" style="color: #e74c3c;" title="Supprimer">🗑️</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Quiz Fractions</strong></td>
-                                        <td><span class="tag" style="background: #f3e5f5; color: #7b1fa2;">Élève : Alice MARTIN</span></td>
-                                        <td>14/12/2025</td>
-                                        <td>18/12/2025</td>
-                                        <td><span class="status-pill" style="background: #2ecc71;">Actif</span></td>
-                                        <td>
-                                            <button class="btn-icon" title="Modifier">✏️</button>
-                                            <button class="btn-icon" style="color: #e74c3c;" title="Supprimer">🗑️</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Géométrie de base</strong></td>
-                                        <td><span class="tag" style="background: #e3f2fd; color: #1976d2;">Classe : 3ème B</span></td>
-                                        <td>10/12/2025</td>
-                                        <td>-</td>
-                                        <td><span class="status-pill" style="background: #95a5a6;">Terminé</span></td>
-                                        <td>
-                                            <button class="btn-icon" title="Modifier">✏️</button>
-                                            <button class="btn-icon" style="color: #e74c3c;" title="Supprimer">🗑️</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="assignment-card">
+                            <div class="card-header">
+                                <h4>Analyse de Texte - Poème</h4>
+                                <span class="status-pill upcoming">À venir</span>
+                            </div>
+                            <div class="card-meta">
+                                <span class="tag">3ème B</span>
+                                <span class="tag">Français</span>
+                            </div>
+                            <p>📅 Échéance : 20 janv. 2026</p>
+                            <div class="card-stats">
+                                <span>✅ 0/22 rendus</span>
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn-secondary">Modifier</button>
+                                <button class="btn-secondary">Prévisualiser</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -518,6 +849,82 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <!-- Panel Analytics Élève -->
+                <div id="student-analytics-panel" class="analytics-container" style="margin-top: 30px; display: none;">
+                    <h3 style="margin-bottom: 20px;">📊 Analytics - <span id="selected-student-name">Alice MARTIN</span></h3>
+                    
+                    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+                        <!-- Graphique Progression -->
+                        <div>
+                            <h4 style="margin-bottom: 15px;">Évolution de la Progression</h4>
+                            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; height: 300px; display: flex; align-items: flex-end; gap: 10px; justify-content: space-around;">
+                                <!-- Simulation graphique barres -->
+                                <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                                    <div style="width: 40px; height: 100px; background: linear-gradient(to top, #3498db, #5dade2); border-radius: 4px;"></div>
+                                    <span style="font-size: 0.75rem;">8 janv</span>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                                    <div style="width: 40px; height: 140px; background: linear-gradient(to top, #3498db, #5dade2); border-radius: 4px;"></div>
+                                    <span style="font-size: 0.75rem;">10 janv</span>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                                    <div style="width: 40px; height: 170px; background: linear-gradient(to top, #3498db, #5dade2); border-radius: 4px;"></div>
+                                    <span style="font-size: 0.75rem;">12 janv</span>
+                                </div>
+                                <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                                    <div style="width: 40px; height: 220px; background: linear-gradient(to top, #3498db, #5dade2); border-radius: 4px;"></div>
+                                    <span style="font-size: 0.75rem;">15 janv</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Points forts et faibles -->
+                        <div>
+                            <h4 style="margin-bottom: 15px;">Points forts / Points faibles</h4>
+                            <div style="background: #e8f5e9; padding: 15px; border-radius: 8px; margin-bottom: 12px;">
+                                <strong style="color: #2e7d32;">✓ Points forts</strong>
+                                <ul style="margin: 8px 0 0 20px; font-size: 0.875rem;">
+                                    <li>Algèbre</li>
+                                    <li>Géométrie</li>
+                                </ul>
+                            </div>
+                            <div style="background: #ffebee; padding: 15px; border-radius: 8px;">
+                                <strong style="color: #c62828;">⚠ À améliorer</strong>
+                                <ul style="margin: 8px 0 0 20px; font-size: 0.875rem;">
+                                    <li>Fractions</li>
+                                    <li>Problèmes</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Timeline Interactions IA -->
+                    <div style="margin-top: 30px;">
+                        <h4 style="margin-bottom: 15px;">🤖 Dernières interactions avec Blaiz'bot</h4>
+                        <div class="timeline-item">
+                            <span class="timeline-date">14 janv. 14h32</span>
+                            <div>
+                                <strong>Question</strong> - Mathématiques : Fractions<br>
+                                <small style="color: #666;">Demande d'explication sur les dénominateurs communs</small>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-date">13 janv. 16h15</span>
+                            <div>
+                                <strong>Génération</strong> - Français : Vocabulaire<br>
+                                <small style="color: #666;">Génération de flashcards</small>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-date">12 janv. 10h20</span>
+                            <div>
+                                <strong>Quiz</strong> - Mathématiques : Fractions<br>
+                                <small style="color: #666;">Score : 16/20</small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -1264,7 +1671,7 @@
     </div>
 
     <!-- Script Legacy - Utilisé temporairement car Simple Browser VS Code ne supporte pas bien les modules ES6 -->
-    <script src="teacher.js"></script>
+    <script src="teacher.js?v=20260115"></script>
     
     <!-- Modules ES6 Refactorisés (commentés pour compatibilité Simple Browser)
     <script type="module">

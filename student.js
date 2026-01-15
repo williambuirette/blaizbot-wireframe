@@ -1,3 +1,235 @@
+/**
+ * STUDENT.JS - Logic for the Student Dashboard Wireframe
+ * BlaizBot v1.0
+ */
+
+console.log('🚀 student.js loaded!');
+
+// ==========================================
+// NAVIGATION
+// ==========================================
+
+/**
+ * Navigue vers une section spécifique
+ * @param {string} sectionName - Nom de la section (dashboard, cours, revisions, agenda, assistant, messages)
+ */
+window.navigateTo = function(sectionName) {
+    const navLink = document.querySelector(`.nav-link[data-section="${sectionName}"]`);
+    if (navLink) {
+        navLink.click();
+    }
+};
+
+/**
+ * Switch entre les vues Calendrier et Liste pour l'Agenda étudiant
+ * @param {string} view - 'calendar' ou 'list'
+ */
+window.switchStudentAgendaView = function(view) {
+    const calendarView = document.getElementById('student-agenda-calendar-view');
+    const listView = document.getElementById('student-agenda-list-view');
+    const btnCalendar = document.getElementById('btn-calendar-view');
+    const btnList = document.getElementById('btn-list-view');
+    
+    if (view === 'calendar') {
+        if (calendarView) calendarView.style.display = 'block';
+        if (listView) listView.style.display = 'none';
+        if (btnCalendar) {
+            btnCalendar.style.background = 'white';
+            btnCalendar.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)';
+        }
+        if (btnList) {
+            btnList.style.background = 'transparent';
+            btnList.style.boxShadow = 'none';
+        }
+    } else {
+        if (calendarView) calendarView.style.display = 'none';
+        if (listView) listView.style.display = 'block';
+        if (btnList) {
+            btnList.style.background = 'white';
+            btnList.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)';
+        }
+        if (btnCalendar) {
+            btnCalendar.style.background = 'transparent';
+            btnCalendar.style.boxShadow = 'none';
+        }
+    }
+};
+
+/**
+ * Change le mois du calendrier de l'agenda étudiant (placeholder)
+ * @param {number} delta - -1 pour mois précédent, +1 pour mois suivant
+ */
+window.changeStudentAgendaMonth = function(delta) {
+    const monthLabel = document.getElementById('student-agenda-month');
+    if (monthLabel) {
+        if (delta > 0) {
+            monthLabel.textContent = 'Février 2026';
+        } else {
+            monthLabel.textContent = 'Décembre 2025';
+        }
+    }
+};
+
+// ==========================================
+// BLAIZ'BOT STUDIO (Assistant IA)
+// ==========================================
+
+/**
+ * Crée une nouvelle conversation
+ */
+window.newBotConversation = function() {
+    const welcomeScreen = document.getElementById('bot-welcome-screen');
+    const messagesContainer = document.getElementById('bot-messages-container');
+    const chatTitle = document.getElementById('bot-chat-title');
+    
+    if (welcomeScreen) welcomeScreen.style.display = 'flex';
+    if (messagesContainer) messagesContainer.style.display = 'none';
+    if (chatTitle) chatTitle.textContent = 'Blaiz\'bot Studio';
+    
+    // Reset la sélection de conversation
+    const items = document.querySelectorAll('.bot-conversation-item');
+    items.forEach(item => {
+        item.style.background = 'transparent';
+        item.style.borderLeft = 'none';
+    });
+};
+
+/**
+ * Toggle les filtres du bot
+ */
+window.toggleBotFilters = function() {
+    const panel = document.getElementById('bot-filters-panel');
+    const arrow = document.getElementById('bot-filters-arrow');
+    if (panel && arrow) {
+        if (panel.style.display === 'none') {
+            panel.style.display = 'block';
+            arrow.textContent = '▼';
+        } else {
+            panel.style.display = 'none';
+            arrow.textContent = '▶';
+        }
+    }
+};
+
+/**
+ * Ouvre une conversation existante
+ * @param {string} convId - ID de la conversation
+ */
+window.openBotConversation = function(convId) {
+    const welcomeScreen = document.getElementById('bot-welcome-screen');
+    const messagesContainer = document.getElementById('bot-messages-container');
+    const chatTitle = document.getElementById('bot-chat-title');
+    
+    // Afficher les messages
+    if (welcomeScreen) welcomeScreen.style.display = 'none';
+    if (messagesContainer) messagesContainer.style.display = 'block';
+    
+    // Mettre à jour le titre
+    const titles = {
+        'algebre': 'algèbre',
+        'revolution': 'Révolution française',
+        'poesie': 'Analyse poème'
+    };
+    if (chatTitle) chatTitle.textContent = titles[convId] || convId;
+    
+    // Mettre en évidence la conversation sélectionnée
+    const items = document.querySelectorAll('.bot-conversation-item');
+    items.forEach(item => {
+        item.style.background = 'transparent';
+        item.style.borderLeft = 'none';
+    });
+    
+    const selectedItem = document.querySelector(`.bot-conversation-item[onclick*="${convId}"]`);
+    if (selectedItem) {
+        selectedItem.style.background = '#f0f7ff';
+        selectedItem.style.borderLeft = '3px solid #2563eb';
+    }
+};
+
+/**
+ * Configure Blaiz'bot Studio
+ */
+window.configureBotStudio = function() {
+    alert('Configuration du Blaiz\'bot Studio (fonctionnalité simulée)');
+};
+
+/**
+ * Ferme la conversation courante
+ */
+window.closeBotConversation = function() {
+    window.newBotConversation();
+};
+
+/**
+ * Pose une question rapide au bot
+ * @param {string} question - La question à poser
+ */
+window.askBotQuestion = function(question) {
+    const input = document.getElementById('bot-chat-input');
+    if (input) {
+        input.value = question;
+        window.sendBotMessage();
+    }
+};
+
+/**
+ * Envoie un message au bot
+ */
+window.sendBotMessage = function() {
+    const input = document.getElementById('bot-chat-input');
+    if (input && input.value.trim()) {
+        // Créer une nouvelle conversation si nécessaire
+        const welcomeScreen = document.getElementById('bot-welcome-screen');
+        const messagesContainer = document.getElementById('bot-messages-container');
+        
+        if (welcomeScreen && welcomeScreen.style.display !== 'none') {
+            welcomeScreen.style.display = 'none';
+            if (messagesContainer) {
+                messagesContainer.style.display = 'block';
+                messagesContainer.innerHTML = ''; // Clear default messages
+            }
+        }
+        
+        // Ajouter le message utilisateur
+        const userMessage = `
+            <div style="display: flex; gap: 12px; margin-bottom: 20px; justify-content: flex-end;">
+                <div style="background: #2563eb; padding: 14px 18px; border-radius: 18px 18px 4px 18px; max-width: 70%;">
+                    <p style="margin: 0; font-size: 0.95rem; color: white; line-height: 1.5;">${input.value}</p>
+                </div>
+                <div style="width: 36px; height: 36px; background: #e5e7eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <span style="font-size: 0.85rem;">LP</span>
+                </div>
+            </div>
+        `;
+        if (messagesContainer) messagesContainer.innerHTML += userMessage;
+        
+        input.value = '';
+        
+        // Simuler une réponse du bot après 1s
+        setTimeout(() => {
+            const botResponse = `
+                <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+                    <div style="width: 36px; height: 36px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <span style="color: white; font-size: 1rem;">🤖</span>
+                    </div>
+                    <div style="background: #f3f4f6; padding: 14px 18px; border-radius: 4px 18px 18px 18px; max-width: 70%;">
+                        <p style="margin: 0; font-size: 0.95rem; color: #333; line-height: 1.5;">
+                            Je suis là pour t'aider ! Cette fonctionnalité est simulée dans le wireframe. 
+                            Dans l'application finale, je pourrai répondre à toutes tes questions sur tes cours. 😊
+                        </p>
+                    </div>
+                </div>
+            `;
+            if (messagesContainer) messagesContainer.innerHTML += botResponse;
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }, 1000);
+    }
+};
+
+// ==========================================
+// COURS CONTENT
+// ==========================================
+
 // --- OUVRIR UN COURS ---
 function openCoursContent(matiere, chapitre) {
     // Redirige vers la section chatbot avec le contexte du cours
@@ -974,22 +1206,55 @@ function addStudentSubject() {
 document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('.admin-section');
+    const pageTitle = document.getElementById('page-title');
+
+    // Mapping des titres de pages
+    const sectionTitles = {
+        'dashboard': 'Dashboard',
+        'cours': 'Mes Cours',
+        'revisions': 'Mes Révisions',
+        'agenda': 'Agenda',
+        'assistant': 'Assistant IA',
+        'messages': 'Messages',
+        'chatbot': 'Assistant IA',
+        'lab': 'Blaiz\'bot Lab',
+        'knowledge': 'Base de connaissances',
+        'coach': 'Mon Coach',
+        'exercices': 'Mes Exercices'
+    };
 
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const targetSection = link.getAttribute('data-section');
             
-            navLinks.forEach(l => l.classList.remove('active'));
+            // Mise à jour du titre de la page
+            if (pageTitle && sectionTitles[targetSection]) {
+                pageTitle.textContent = sectionTitles[targetSection];
+            }
+            
+            // Mise à jour des liens de navigation (styles)
+            navLinks.forEach(l => {
+                l.classList.remove('active');
+                l.style.background = 'transparent';
+                l.style.color = 'rgba(255,255,255,0.7)';
+            });
             link.classList.add('active');
+            link.style.background = 'rgba(102, 126, 234, 0.2)';
+            link.style.color = '#667eea';
 
+            // Afficher la section correspondante
             sections.forEach(section => {
-                section.classList.toggle('active', section.id === `section-${targetSection}`);
+                if (section.id === `section-${targetSection}`) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
             });
 
             // Dashboards par défaut
             if (targetSection === 'lab') showLabDashboard();
-            if (targetSection === 'chatbot') showAssistantDashboard();
+            if (targetSection === 'chatbot' || targetSection === 'assistant') showAssistantDashboard();
             if (targetSection === 'knowledge') switchKnowledgeTab('teacher');
             if (targetSection === 'revisions') renderCalendar(currentCalendarDate);
         });
@@ -1001,14 +1266,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('section-knowledge') && document.getElementById('section-knowledge').classList.contains('active')) switchKnowledgeTab('teacher');
     if (document.getElementById('section-revisions') && document.getElementById('section-revisions').classList.contains('active')) renderCalendar(currentCalendarDate);
 
-    // Recherche dans la messagerie
-    document.querySelector('#section-messages input[type="text"]')?.addEventListener('input', function(e) {
-        const term = e.target.value.toLowerCase();
-        document.querySelectorAll('#student-conv-list .msg-item, #student-conv-list > div[onclick]').forEach(item => {
-            const text = item.innerText.toLowerCase();
-            item.style.display = text.includes(term) ? 'flex' : 'none';
-        });
-    });
+    console.log("✅ BlaizBot Student Dashboard Loaded");
 });
 
 // --- MESSAGERIE ---

@@ -2,254 +2,428 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Blaiz'bot - Espace Élève</title>
+    <title>BlaizBot - Espace Élève</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Désactivé pour le wireframe
     <script>
-        // Redirection vers la page de connexion si accès direct ou refresh
         if (!sessionStorage.getItem('authenticated')) {
             window.location.href = 'index.html';
         }
         sessionStorage.removeItem('authenticated');
     </script>
+    -->
 </head>
 <body>
     <div class="admin-wrapper">
         <!-- Sidebar Latérale -->
-        <aside class="sidebar" style="background-color: #34495e;"> <!-- Bleu foncé pour l'élève -->
-            <div class="sidebar-header">
-                <h2>Blaiz'bot</h2>
-                <p>Espace Élève</p>
+        <aside class="sidebar" style="background: #1a1a2e; width: 220px;">
+            <div class="sidebar-header" style="padding: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <div style="width: 36px; height: 36px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 1.25rem;">🎓</span>
+                    </div>
+                    <span style="font-size: 1.25rem; font-weight: 700; color: white;">BlaizBot</span>
+                </div>
             </div>
-            <nav class="sidebar-nav">
-                <div class="nav-group">
-                    <span>MON PARCOURS</span>
-                    <a href="#" class="nav-link active" data-section="dashboard">Ma Progression</a>
-                    <a href="#" class="nav-link" data-section="cours">Mes Cours</a>
-                    <a href="#" class="nav-link" data-section="exercices">Mes Exercices</a>
-                    <a href="#" class="nav-link" data-section="messages">Centre de Communication <span class="status-pill" style="background: #e74c3c; color: white; padding: 2px 6px; font-size: 0.7rem; margin-left: 5px;">1</span></a>
-                </div>
-                <div class="nav-group">
-                    <span>ASSISTANCE IA</span>
-                    <a href="#" class="nav-link" data-section="chatbot">Mon Assistant IA</a>
-                    <a href="#" class="nav-link" data-section="lab">Blaiz'bot Lab (Libre)</a>
-                    <a href="#" class="nav-link" data-section="knowledge">Base de connaissances</a>
-                    <a href="#" class="nav-link" data-section="revisions">Planning de Révision</a>
-                </div>
+            <nav class="sidebar-nav" style="padding: 1rem 0;">
+                <a href="#" class="nav-link active" data-section="dashboard" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.5rem; margin: 4px 12px; background: rgba(102, 126, 234, 0.2); color: #667eea; text-decoration: none; border-radius: 8px; font-weight: 500;">
+                    <span>🏠</span> Dashboard
+                </a>
+                <a href="#" class="nav-link" data-section="cours" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.5rem; margin: 4px 12px; color: rgba(255,255,255,0.7); text-decoration: none; border-radius: 8px;">
+                    <span>📚</span> Mes cours
+                </a>
+                <a href="#" class="nav-link" data-section="revisions" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.5rem; margin: 4px 12px; color: rgba(255,255,255,0.7); text-decoration: none; border-radius: 8px;">
+                    <span>📝</span> Mes révisions
+                </a>
+                <a href="#" class="nav-link" data-section="agenda" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.5rem; margin: 4px 12px; color: rgba(255,255,255,0.7); text-decoration: none; border-radius: 8px;">
+                    <span>📅</span> Agenda
+                </a>
+                <a href="#" class="nav-link" data-section="chatbot" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.5rem; margin: 4px 12px; color: rgba(255,255,255,0.7); text-decoration: none; border-radius: 8px;">
+                    <span>🤖</span> Assistant IA
+                </a>
+                <a href="#" class="nav-link" data-section="messages" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1.5rem; margin: 4px 12px; color: rgba(255,255,255,0.7); text-decoration: none; border-radius: 8px;">
+                    <span>💬</span> Messages
+                </a>
             </nav>
-            <div class="sidebar-footer">
-                <div style="padding: 10px; font-size: 0.8rem; color: #ecf0f1; border-bottom: 1px solid #5d6d7e; margin-bottom: 10px;">
-                    Connecté en tant que :<br><strong>Lucas PETIT (6ème A)</strong>
-                </div>
-                <a href="index.html" class="btn-logout">Déconnexion</a>
+            <div class="sidebar-footer" style="position: absolute; bottom: 1rem; left: 0; right: 0; padding: 0 1rem; border: none;">
+                <div style="font-size: 0.75rem; color: rgba(255,255,255,0.5);">BlaizBot v1.0</div>
             </div>
         </aside>
 
         <!-- Zone de Travail Principale -->
-        <main class="main-content">
+        <main class="main-content" style="background: #f8fafc;">
+            <!-- Header -->
+            <header style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: white; border-bottom: 1px solid #e5e7eb;">
+                <h1 id="page-title" style="margin: 0; font-size: 1.5rem; font-weight: 600; color: #1a1a1a;">Dashboard</h1>
+                <div style="display: flex; align-items: center; gap: 1.5rem;">
+                    <div style="position: relative;">
+                        <input type="text" placeholder="Rechercher..." style="padding: 0.5rem 1rem 0.5rem 2.5rem; border: 1px solid #e5e7eb; border-radius: 8px; width: 250px; font-size: 0.9rem;">
+                        <span style="position: absolute; left: 0.75rem; top: 50%; transform: translateY(-50%); color: #9ca3af;">🔍</span>
+                    </div>
+                    <button style="background: none; border: none; font-size: 1.25rem; cursor: pointer; position: relative;">
+                        🔔
+                    </button>
+                    <div style="display: flex; align-items: center; gap: 0.75rem; cursor: pointer;">
+                        <div style="width: 36px; height: 36px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.85rem;">LM</div>
+                        <span style="font-weight: 500; color: #1a1a1a;">Lucas MARTIN</span>
+                    </div>
+                </div>
+            </header>
             
-            <!-- SECTION : DASHBOARD / PROGRESSION -->
-            <section id="section-dashboard" class="admin-section active">
-                <header class="content-header">
-                    <div class="header-title">
-                        <h1>Salut Lucas ! 👋</h1>
-                        <p>Tu as complété 75% de tes objectifs cette semaine. Continue comme ça !</p>
-                    </div>
-                </header>
+            <!-- SECTION : DASHBOARD -->
+            <section id="section-dashboard" class="admin-section active" style="padding: 2rem;">
 
-                <div class="stats-grid">
-                    <div class="stats-card">
-                        <h3>Progression Globale</h3>
-                        <div class="stats-value">75%</div>
-                        <div class="performance-bar-container">
-                            <div class="performance-bar" style="width: 75%; background-color: #2ecc71;"></div>
+                <!-- Bannière de bienvenue -->
+                <div style="background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); color: white; padding: 2rem; border-radius: 16px; margin-bottom: 2rem;">
+                    <h1 style="color: white; margin: 0; font-size: 1.75rem; font-weight: 600;">Bonjour, Lucas 👋</h1>
+                    <p style="color: rgba(255,255,255,0.9); margin: 0.5rem 0 0; font-size: 1rem;">Prêt à apprendre quelque chose de nouveau ?</p>
+                    <p style="color: rgba(255,255,255,0.8); margin: 0.25rem 0 0; font-size: 0.9rem;">Classe : 1A</p>
+                </div>
+
+                <!-- KPI Cards -->
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 2rem;">
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="font-size: 1.5rem; color: #3b82f6;">📚</div>
+                            <div>
+                                <div style="font-size: 1.75rem; font-weight: 700; color: #1a1a1a;">0/2</div>
+                                <div style="color: #6b7280; font-size: 0.875rem;">Cours terminés</div>
+                            </div>
                         </div>
-                        <p style="font-size: 0.8rem; color: #7f8c8d;">+5% depuis hier</p>
                     </div>
-                    <div class="stats-card">
-                        <h3>Moyenne Actuelle</h3>
-                        <div class="stats-value">15.2/20</div>
-                        <p>Excellent travail en Mathématiques !</p>
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="font-size: 1.5rem; color: #10b981;">🎯</div>
+                            <div>
+                                <div style="font-size: 1.75rem; font-weight: 700; color: #1a1a1a;">0%</div>
+                                <div style="color: #6b7280; font-size: 0.875rem;">Progression</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="stats-card">
-                        <h3>À faire aujourd'hui</h3>
-                        <div class="stats-value" style="font-size: 1.5rem;">3 Devoirs</div>
-                        <ul class="stats-list">
-                            <li>Maths : Exercice fractions</li>
-                            <li>Français : Lecture chapitre 4</li>
-                        </ul>
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="font-size: 1.5rem; color: #f59e0b;">🏆</div>
+                            <div>
+                                <div style="font-size: 1.75rem; font-weight: 700; color: #1a1a1a;">0%</div>
+                                <div style="color: #6b7280; font-size: 0.875rem;">Score moyen</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="font-size: 1.5rem; color: #8b5cf6;">⏱️</div>
+                            <div>
+                                <div style="font-size: 1.75rem; font-weight: 700; color: #1a1a1a;">0h</div>
+                                <div style="color: #6b7280; font-size: 0.875rem;">Heures passées</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="data-table-container">
-                    <h3>Dernières Notes</h3>
-                    <table class="data-table">
+                <!-- Accès rapide -->
+                <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <h3 style="margin: 0 0 1.5rem; font-size: 1rem; font-weight: 600; color: #1a1a1a;">Accès rapide</h3>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
+                        <button onclick="navigateTo('messages')" style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem; padding: 1.5rem; background: white; border: 1px solid #e5e7eb; border-radius: 12px; cursor: pointer; transition: all 0.2s;">
+                            <span style="font-size: 1.5rem; color: #3b82f6;">💬</span>
+                            <span style="font-size: 0.9rem; color: #1a1a1a; font-weight: 500;">Messagerie</span>
+                        </button>
+                        <button onclick="navigateTo('agenda')" style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem; padding: 1.5rem; background: white; border: 1px solid #e5e7eb; border-radius: 12px; cursor: pointer; transition: all 0.2s;">
+                            <span style="font-size: 1.5rem; color: #10b981;">📅</span>
+                            <span style="font-size: 0.9rem; color: #1a1a1a; font-weight: 500;">Agenda</span>
+                        </button>
+                        <button onclick="navigateTo('cours')" style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem; padding: 1.5rem; background: white; border: 1px solid #e5e7eb; border-radius: 12px; cursor: pointer; transition: all 0.2s;">
+                            <span style="font-size: 1.5rem; color: #3b82f6;">📚</span>
+                            <span style="font-size: 0.9rem; color: #1a1a1a; font-weight: 500;">Mes Cours</span>
+                        </button>
+                        <button onclick="navigateTo('assistant')" style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem; padding: 1.5rem; background: white; border: 1px solid #e5e7eb; border-radius: 12px; cursor: pointer; transition: all 0.2s;">
+                            <span style="font-size: 1.5rem; color: #f59e0b;">🤖</span>
+                            <span style="font-size: 0.9rem; color: #1a1a1a; font-weight: 500;">Assistant IA</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION : MES COURS -->
+            <section id="section-cours" class="admin-section" style="padding: 2rem;">
+                <!-- Header -->
+                <div style="margin-bottom: 2rem;">
+                    <h1 style="margin: 0; font-size: 1.5rem; font-weight: 600; color: #1a1a1a;">Mes Cours</h1>
+                    <p style="margin: 0.25rem 0 0; color: #6b7280; font-size: 0.9rem;">Accédez à vos cours et suivez votre progression.</p>
+                </div>
+
+                <!-- KPI Cards -->
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 2rem;">
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-size: 0.85rem; color: #6b7280; margin-bottom: 0.25rem;">Mes Cours</div>
+                            <div style="font-size: 2rem; font-weight: 700; color: #3b82f6;">1</div>
+                            <div style="font-size: 0.8rem; color: #9ca3af;">cours disponibles</div>
+                        </div>
+                        <div style="width: 48px; height: 48px; background: #eff6ff; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                            <span style="font-size: 1.5rem; color: #3b82f6;">📚</span>
+                        </div>
+                    </div>
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-size: 0.85rem; color: #6b7280; margin-bottom: 0.25rem;">Terminés</div>
+                            <div style="font-size: 2rem; font-weight: 700; color: #10b981;">1</div>
+                            <div style="font-size: 0.8rem; color: #9ca3af;">cours complétés</div>
+                        </div>
+                        <div style="width: 48px; height: 48px; background: #ecfdf5; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                            <span style="font-size: 1.5rem; color: #10b981;">✓</span>
+                        </div>
+                    </div>
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-size: 0.85rem; color: #6b7280; margin-bottom: 0.25rem;">En Cours</div>
+                            <div style="font-size: 2rem; font-weight: 700; color: #f97316;">0</div>
+                            <div style="font-size: 0.8rem; color: #9ca3af;">cours en progression</div>
+                        </div>
+                        <div style="width: 48px; height: 48px; background: #fff7ed; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                            <span style="font-size: 1.5rem; color: #f97316;">⏱</span>
+                        </div>
+                    </div>
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-size: 0.85rem; color: #6b7280; margin-bottom: 0.25rem;">Progression</div>
+                            <div style="font-size: 2rem; font-weight: 700; color: #ec4899;">100%</div>
+                            <div style="font-size: 0.8rem; color: #9ca3af;">moyenne globale</div>
+                        </div>
+                        <div style="width: 48px; height: 48px; background: #fdf2f8; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                            <span style="font-size: 1.5rem; color: #ec4899;">📈</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filtres -->
+                <div style="background: white; padding: 1rem 1.5rem; border-radius: 12px; border: 1px solid #e5e7eb; margin-bottom: 1.5rem; display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 0.85rem; color: #6b7280;">Professeur :</span>
+                        <select style="padding: 0.5rem 1rem; border: 1px solid #e5e7eb; border-radius: 6px; font-size: 0.85rem; background: white;">
+                            <option>Tous les profs</option>
+                            <option>Marc DUPONT</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 0.85rem; color: #6b7280;">Matière :</span>
+                        <select style="padding: 0.5rem 1rem; border: 1px solid #e5e7eb; border-radius: 6px; font-size: 0.85rem; background: white;">
+                            <option>Toutes</option>
+                            <option>SVT</option>
+                            <option>Mathématiques</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 0.85rem; color: #6b7280;">Thématique :</span>
+                        <select style="padding: 0.5rem 1rem; border: 1px solid #e5e7eb; border-radius: 6px; font-size: 0.85rem; background: white;">
+                            <option>Toutes</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 0.85rem; color: #6b7280;">Statut :</span>
+                        <select style="padding: 0.5rem 1rem; border: 1px solid #e5e7eb; border-radius: 6px; font-size: 0.85rem; background: white;">
+                            <option>Tous les statuts</option>
+                            <option>En cours</option>
+                            <option>Terminé</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Tableau des cours -->
+                <div style="background: white; border-radius: 12px; border: 1px solid #e5e7eb; overflow: hidden;">
+                    <table style="width: 100%; border-collapse: collapse;">
                         <thead>
-                            <tr>
-                                <th>Matière</th>
-                                <th>Évaluation</th>
-                                <th>Note</th>
-                                <th>Commentaire IA</th>
+                            <tr style="background: #f9fafb; border-bottom: 1px solid #e5e7eb;">
+                                <th style="padding: 1rem 1.5rem; text-align: left; font-weight: 500; color: #6b7280; font-size: 0.85rem;">Matière</th>
+                                <th style="padding: 1rem 1.5rem; text-align: left; font-weight: 500; color: #6b7280; font-size: 0.85rem;">Thème</th>
+                                <th style="padding: 1rem 1.5rem; text-align: left; font-weight: 500; color: #6b7280; font-size: 0.85rem;">Professeur</th>
+                                <th style="padding: 1rem 1.5rem; text-align: center; font-weight: 500; color: #6b7280; font-size: 0.85rem;">📄 Chapitres</th>
+                                <th style="padding: 1rem 1.5rem; text-align: center; font-weight: 500; color: #6b7280; font-size: 0.85rem;">📝 Exercices</th>
+                                <th style="padding: 1rem 1.5rem; text-align: left; font-weight: 500; color: #6b7280; font-size: 0.85rem;">Progression</th>
+                                <th style="padding: 1rem 1.5rem; text-align: left; font-weight: 500; color: #6b7280; font-size: 0.85rem;">Statut</th>
+                                <th style="padding: 1rem 1.5rem; text-align: center; font-weight: 500; color: #6b7280; font-size: 0.85rem;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Mathématiques</td>
-                                <td>Nombres relatifs</td>
-                                <td><strong>18/20</strong></td>
-                                <td><span class="tag" style="background: #e8f5e9; color: #2e7d32;">Maîtrisé</span></td>
-                            </tr>
-                            <tr>
-                                <td>Anglais</td>
-                                <td>Vocabulaire : The City</td>
-                                <td><strong>14/20</strong></td>
-                                <td><span class="tag" style="background: #fff3e0; color: #ef6c00;">À revoir : Verbes irréguliers</span></td>
+                            <tr style="border-bottom: 1px solid #e5e7eb;">
+                                <td style="padding: 1rem 1.5rem; font-size: 0.9rem; color: #1a1a1a;">SVT</td>
+                                <td style="padding: 1rem 1.5rem; font-size: 0.9rem; color: #1a1a1a;">La photosynthèse</td>
+                                <td style="padding: 1rem 1.5rem; font-size: 0.9rem; color: #6b7280;">Marc DUPONT</td>
+                                <td style="padding: 1rem 1.5rem; text-align: center; font-size: 0.9rem; color: #6b7280;">1/1</td>
+                                <td style="padding: 1rem 1.5rem; text-align: center; font-size: 0.9rem; color: #6b7280;">0</td>
+                                <td style="padding: 1rem 1.5rem;">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <div style="flex: 1; height: 8px; background: #e5e7eb; border-radius: 4px; overflow: hidden;">
+                                            <div style="width: 100%; height: 100%; background: #1a1a1a; border-radius: 4px;"></div>
+                                        </div>
+                                        <span style="font-size: 0.85rem; color: #1a1a1a; font-weight: 500;">100%</span>
+                                    </div>
+                                </td>
+                                <td style="padding: 1rem 1.5rem;">
+                                    <span style="background: #ecfdf5; color: #059669; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 500;">Terminé</span>
+                                </td>
+                                <td style="padding: 1rem 1.5rem; text-align: center;">
+                                    <button style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: white; border: 1px solid #e5e7eb; border-radius: 6px; cursor: pointer; font-size: 0.85rem; color: #1a1a1a;">
+                                        👁 Voir
+                                    </button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </section>
 
-            <!-- SECTION : MES COURS -->
-            <section id="section-cours" class="admin-section">
-                <header class="content-header">
-                    <div class="header-title">
-                        <h1>Mes Cours</h1>
-                        <p>Accède à tous tes supports de cours</p>
-                    </div>
-                </header>
-                <div class="stats-grid">
-                    <div class="stats-card">
-                        <h3>Mathématiques</h3>
-                        <p>Dernier chapitre : Les fractions</p>
-                        <button class="btn-primary" style="width: 100%; margin-top: 10px;" onclick="openCoursContent('Mathématiques', 'Les fractions')">Ouvrir le cours</button>
-                    </div>
-                    <div class="stats-card">
-                        <h3>Français</h3>
-                        <p>Dernier chapitre : La poésie</p>
-                        <button class="btn-primary" style="width: 100%; margin-top: 10px;" onclick="openCoursContent('Français', 'La poésie')">Ouvrir le cours</button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION : CHATBOT IA -->
-            <section id="section-chatbot" class="admin-section">
-                <header class="content-header">
-                    <div class="header-title">
-                        <h1>Mon Assistant IA Blaiz'bot</h1>
-                        <p>Accède aux environnements de cours préparés par tes professeurs.</p>
-                    </div>
-                    <div class="header-actions" id="assistant-header-actions" style="display: none;">
-                        <!-- Les cours sont gérés par le professeur -->
-                    </div>
-                </header>
-
-                <!-- VUE 1 : DASHBOARD ASSISTANT -->
-                <div id="assistant-dashboard" style="padding: 20px;">
-                    <div style="margin-bottom: 20px; padding: 15px; background: #e3f2fd; border-radius: 8px; color: #1565c0; font-size: 0.9rem; display: flex; align-items: center; gap: 10px;">
-                        <span>ℹ️</span>
-                        <span>Voici les espaces de travail déposés par tes professeurs. Sélectionne un cours pour commencer tes révisions.</span>
-                    </div>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;" id="assistant-projects-grid">
-                        <!-- Les cours du professeur s'afficheront ici -->
-                    </div>
-                </div>
-
-                <!-- VUE 2 : WORKSPACE ASSISTANT -->
-                <div id="assistant-workspace-view" style="display: none;">
-                    <div style="padding: 0 20px 15px; display: flex; align-items: center; gap: 15px;">
-                        <button class="btn-secondary" onclick="showAssistantDashboard()" style="padding: 5px 10px; font-size: 0.8rem;">← Retour aux cours</button>
-                        <h2 id="current-assistant-title" style="margin: 0; font-size: 1.1rem; color: #2c3e50;">Cours : Les Fractions</h2>
-                    </div>
-
-                    <div class="lab-container" id="assistant-container">
-                        <!-- Colonne 1 : Sources (Prof + Élève) -->
-                        <div class="lab-column" style="width: 280px; min-width: 280px;" id="assistant-col-sources">
-                        <div style="padding: 15px; background: #f8f9fa; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
-                            <h4 style="margin: 0; font-size: 0.9rem;">📚 Sources</h4>
-                            <button class="btn-primary" style="padding: 4px 8px; font-size: 0.7rem; background: #3498db; border: none;" onclick="promptAddAssistantSource()">+ Ajouter</button>
-                        </div>
-                        <div id="assistant-sources-list" style="flex-grow: 1; overflow-y: auto; padding: 15px;">
-                            <!-- Sources Professeur (Verrouillées) -->
-                            <div style="font-size: 0.7rem; color: #7f8c8d; text-transform: uppercase; margin-bottom: 10px; font-weight: bold;">📌 Sources du Professeur</div>
-                            <div class="source-item" style="background: #f0f7ff; border-color: #d1e9ff;">
-                                <div class="source-icon icon-pdf">📄</div>
-                                <span style="flex-grow: 1; font-size: 0.8rem;">Cours_Fractions.pdf</span>
-                                <span title="Source imposée" style="cursor: help;">🔒</span>
-                            </div>
-                            <div class="source-item" style="background: #f0f7ff; border-color: #d1e9ff;">
-                                <div class="source-icon icon-pdf">📄</div>
-                                <span style="flex-grow: 1; font-size: 0.8rem;">Exercices_Fractions.pdf</span>
-                                <span title="Source imposée" style="cursor: help;">🔒</span>
-                            </div>
-                            <div class="source-item" style="background: #f0f7ff; border-color: #d1e9ff;">
-                                <div class="source-icon icon-yt">🎥</div>
-                                <span style="flex-grow: 1; font-size: 0.8rem;">Video_Methode.yt</span>
-                                <span title="Source imposée" style="cursor: help;">🔒</span>
-                            </div>
-
-                            <!-- Sources Élève -->
-                            <div style="font-size: 0.7rem; color: #7f8c8d; text-transform: uppercase; margin: 15px 0 10px; font-weight: bold;">👤 Mes Sources</div>
-                            <div id="assistant-student-sources">
-                                <div style="text-align: center; color: #95a5a6; font-size: 0.75rem; margin-top: 10px;">Aucune source perso.</div>
-                            </div>
-                        </div>
-                        <div style="padding: 12px; background: #e3f2fd; font-size: 0.75rem; color: #1565c0; border-top: 1px solid #eee;">
-                            <strong>Note :</strong> L'IA répond en priorité selon les sources de ton professeur.
-                        </div>
-                    </div>
-
-                    <div class="lab-resizer" onmousedown="initResize(event, 'left', 'assistant')" ondblclick="resetLayout('left', 'assistant')"></div>
+            <!-- SECTION : ASSISTANT IA (BLAIZ'BOT STUDIO) -->
+            <section id="section-chatbot" class="admin-section" style="padding: 0 !important; margin: 0;">
+                <div style="display: flex; height: calc(100vh - 140px); background: #f8f9fa;">
                     
-                    <!-- Colonne 2 : Chat -->
-                    <div class="lab-column" style="flex: 1; min-width: 200px;" id="assistant-col-chat">
-                        <div style="padding: 10px 15px; background: #fff; border-bottom: 1px solid #eee; display: flex; gap: 10px;">
-                            <select class="search-filter" style="font-size: 0.8rem; padding: 5px;" id="chat-subject" onchange="updateChatContext()">
-                                <option value="maths">Mathématiques</option>
-                                <option value="francais">Français</option>
-                                <option value="histoire">Histoire-Géo</option>
-                            </select>
-                            <select class="search-filter" style="font-size: 0.8rem; padding: 5px; flex-grow: 1;" id="chat-theme">
-                                <option>Les Fractions (Cours du 15/12)</option>
-                                <option>Nombres Relatifs</option>
-                                <option>Géométrie : Triangles</option>
-                            </select>
+                    <!-- PANNEAU GAUCHE : Liste des conversations -->
+                    <div style="width: 280px; background: #fff; border-right: 1px solid #e0e0e0; display: flex; flex-direction: column;">
+                        <!-- Header conversations -->
+                        <div style="padding: 20px; border-bottom: 1px solid #e0e0e0;">
+                            <h3 style="margin: 0 0 15px; font-size: 1rem; font-weight: 600; color: #333;">Conversations</h3>
+                            <button onclick="window.newBotConversation()" style="width: 100%; padding: 10px 16px; background: #2563eb; color: white; border: none; border-radius: 8px; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                                <span style="font-size: 1.1rem;">+</span> Nouvelle conversation
+                            </button>
                         </div>
-                        <div id="chat-messages" style="flex-grow: 1; background: #fff; padding: 20px; overflow-y: auto; height: 400px;">
-                            <div style="margin-bottom: 15px; display: flex; gap: 10px;">
-                                <div style="width: 35px; height: 35px; background: #3498db; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">B</div>
-                                <div style="background: #f1f2f6; padding: 12px; border-radius: 0 15px 15px 15px; max-width: 80%; font-size: 0.9rem;">
-                                    Bonjour Lucas ! Je suis prêt à t'aider sur les <strong>Mathématiques</strong>. 
-                                    <br><br>
-                                    Tu as <strong>3 exercices</strong> en attente sur les fractions. Veux-tu qu'on les regarde ensemble ?
+                        
+                        <!-- Filtres -->
+                        <div style="padding: 12px 20px; border-bottom: 1px solid #e0e0e0;">
+                            <button onclick="window.toggleBotFilters()" style="display: flex; align-items: center; gap: 8px; background: none; border: none; color: #666; font-size: 0.85rem; cursor: pointer; padding: 0;">
+                                <span id="bot-filters-arrow">▶</span> Filtres
+                            </button>
+                            <div id="bot-filters-panel" style="display: none; margin-top: 10px;">
+                                <select style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.85rem;">
+                                    <option>Tous les cours</option>
+                                    <option>Mathématiques</option>
+                                    <option>Français</option>
+                                    <option>Histoire-Géo</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Section 7 derniers jours -->
+                        <div style="flex: 1; overflow-y: auto; padding: 12px;">
+                            <div style="font-size: 0.75rem; color: #888; text-transform: uppercase; margin-bottom: 8px; padding: 0 8px;">7 derniers jours</div>
+                            
+                            <!-- Liste des conversations -->
+                            <div id="bot-conversations-list">
+                                <div onclick="window.openBotConversation('algebre')" class="bot-conversation-item" style="padding: 12px; border-radius: 8px; cursor: pointer; margin-bottom: 4px; background: #f0f7ff; border-left: 3px solid #2563eb;">
+                                    <div style="font-size: 0.9rem; font-weight: 500; color: #333;">algèbre</div>
+                                    <div style="font-size: 0.75rem; color: #888; margin-top: 4px;">Mathématiques</div>
+                                </div>
+                                <div onclick="window.openBotConversation('revolution')" class="bot-conversation-item" style="padding: 12px; border-radius: 8px; cursor: pointer; margin-bottom: 4px;">
+                                    <div style="font-size: 0.9rem; font-weight: 500; color: #333;">Révolution française</div>
+                                    <div style="font-size: 0.75rem; color: #888; margin-top: 4px;">Histoire</div>
+                                </div>
+                                <div onclick="window.openBotConversation('poesie')" class="bot-conversation-item" style="padding: 12px; border-radius: 8px; cursor: pointer; margin-bottom: 4px;">
+                                    <div style="font-size: 0.9rem; font-weight: 500; color: #333;">Analyse poème</div>
+                                    <div style="font-size: 0.75rem; color: #888; margin-top: 4px;">Français</div>
                                 </div>
                             </div>
                         </div>
-                        <div style="padding: 15px; background: #f8f9fa; border-top: 1px solid #eee; display: flex; gap: 10px; align-items: center;">
-                            <label for="chat-file-upload" style="cursor: pointer; font-size: 1.2rem;" title="Joindre un fichier">📎</label>
-                            <input type="file" id="chat-file-upload" style="display: none;" onchange="handleStudentFileUpload(this)">
-                            <input type="text" id="chat-input" placeholder="Pose ta question ici..." style="flex-grow: 1; padding: 12px; border: 1px solid #ddd; border-radius: 25px; outline: none;">
-                            <button class="btn-primary" style="border-radius: 50%; width: 45px; height: 45px; padding: 0; display: flex; align-items: center; justify-content: center;" onclick="sendStudentMessage()">➔</button>
-                        </div>
                     </div>
-
-                    <div class="lab-resizer" onmousedown="initResize(event, 'right', 'assistant')" ondblclick="resetLayout('right', 'assistant')"></div>
-
-                    <!-- Colonne 3 : Workspace -->
-                    <div class="lab-column" style="width: 300px; min-width: 300px;" id="assistant-col-workspace">
-                        <div style="padding: 15px; background: #f8f9fa; border-bottom: 1px solid #eee;">
-                            <h4 style="margin: 0; font-size: 0.9rem;">🛠️ Outils de Réussite</h4>
-                        </div>
-                        <div style="padding: 15px; flex-grow: 1; overflow-y: auto;">
-                            <h5 style="margin: 0 0 10px; font-size: 0.85rem; color: #7f8c8d; text-transform: uppercase;">Générer pour ce cours</h5>
-                            <div style="display: grid; grid-template-columns: 1fr; gap: 8px;">
-                                <button class="btn-small" style="background: #f0f7ff; color: #007bff; border: 1px solid #d1e9ff; text-align: left;" onclick="openAssistantConfig('quiz')">📝 Générer un Quiz d'entraînement</button>
-                                <button class="btn-small" style="background: #f0f7ff; color: #007bff; border: 1px solid #d1e9ff; text-align: left;" onclick="openAssistantConfig('methode')">🧠 Méthode de révision personnalisée</button>
-                                <button class="btn-small" style="background: #f0f7ff; color: #007bff; border: 1px solid #d1e9ff; text-align: left;" onclick="openAssistantConfig('synthese')">📄 Résumé du cours (Fiche)</button>
-                                <button class="btn-small" style="background: #f0f7ff; color: #007bff; border: 1px solid #d1e9ff; text-align: left;" onclick="explainExercise()">❓ Expliquer l'exercice en cours</button>
+                    
+                    <!-- PANNEAU DROIT : Zone de chat -->
+                    <div style="flex: 1; display: flex; flex-direction: column; background: #fff;">
+                        
+                        <!-- Header du chat -->
+                        <div style="padding: 16px 24px; border-bottom: 1px solid #e0e0e0; display: flex; justify-content: space-between; align-items: center;">
+                            <h2 id="bot-chat-title" style="margin: 0; font-size: 1.1rem; font-weight: 600; color: #333;">Blaiz'bot Studio</h2>
+                            <div style="display: flex; gap: 12px;">
+                                <button onclick="window.configureBotStudio()" style="padding: 8px 16px; background: #f3f4f6; border: 1px solid #e0e0e0; border-radius: 6px; font-size: 0.85rem; cursor: pointer; color: #555;">
+                                    ⚙️ Configurer
+                                </button>
+                                <button onclick="window.closeBotConversation()" style="padding: 8px 16px; background: #f3f4f6; border: 1px solid #e0e0e0; border-radius: 6px; font-size: 0.85rem; cursor: pointer; color: #555;">
+                                    ✕ Fermer
+                                </button>
                             </div>
-
-                            <div id="assistant-workspace-output" style="margin-top: 20px; padding: 15px; background: #fff; border: 1px dashed #ddd; border-radius: 8px; min-height: 200px; font-size: 0.85rem;">
-                                <p style="color: #95a5a6; text-align: center; margin-top: 50px;">Tes quiz et fiches apparaîtront ici.</p>
+                        </div>
+                        
+                        <!-- Zone de messages / Écran de bienvenue -->
+                        <div id="bot-chat-area" style="flex: 1; overflow-y: auto; padding: 40px;">
+                            
+                            <!-- État vide : Bienvenue -->
+                            <div id="bot-welcome-screen" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center;">
+                                <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+                                    <span style="font-size: 2.5rem;">🤖</span>
+                                </div>
+                                <h2 style="margin: 0 0 12px; font-size: 1.5rem; font-weight: 600; color: #333;">Bienvenue dans Blaiz'bot Studio</h2>
+                                <p style="margin: 0; color: #666; font-size: 0.95rem; max-width: 400px; line-height: 1.6;">
+                                    Pose-moi des questions sur tes cours, demande des explications ou génère des quiz pour réviser.
+                                </p>
+                                
+                                <!-- Suggestions rapides -->
+                                <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; justify-content: center; max-width: 500px;">
+                                    <button onclick="window.askBotQuestion('Explique-moi les fractions')" style="padding: 10px 16px; background: #f0f7ff; border: 1px solid #d1e9ff; border-radius: 20px; font-size: 0.85rem; cursor: pointer; color: #2563eb;">
+                                        📐 Explique-moi les fractions
+                                    </button>
+                                    <button onclick="window.askBotQuestion('Quiz sur la Révolution')" style="padding: 10px 16px; background: #f0f7ff; border: 1px solid #d1e9ff; border-radius: 20px; font-size: 0.85rem; cursor: pointer; color: #2563eb;">
+                                        📝 Quiz sur la Révolution
+                                    </button>
+                                    <button onclick="window.askBotQuestion('Résume mon cours')" style="padding: 10px 16px; background: #f0f7ff; border: 1px solid #d1e9ff; border-radius: 20px; font-size: 0.85rem; cursor: pointer; color: #2563eb;">
+                                        📄 Résume mon cours
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Messages (masqué par défaut) -->
+                            <div id="bot-messages-container" style="display: none;">
+                                <!-- Message IA -->
+                                <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+                                    <div style="width: 36px; height: 36px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                        <span style="color: white; font-size: 1rem;">🤖</span>
+                                    </div>
+                                    <div style="background: #f3f4f6; padding: 14px 18px; border-radius: 4px 18px 18px 18px; max-width: 70%;">
+                                        <p style="margin: 0; font-size: 0.95rem; color: #333; line-height: 1.5;">
+                                            Bonjour Lucas ! Je suis prêt à t'aider sur l'<strong>algèbre</strong>. Qu'est-ce que tu aimerais comprendre ?
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Message utilisateur -->
+                                <div style="display: flex; gap: 12px; margin-bottom: 20px; justify-content: flex-end;">
+                                    <div style="background: #2563eb; padding: 14px 18px; border-radius: 18px 18px 4px 18px; max-width: 70%;">
+                                        <p style="margin: 0; font-size: 0.95rem; color: white; line-height: 1.5;">
+                                            Comment résoudre une équation du premier degré ?
+                                        </p>
+                                    </div>
+                                    <div style="width: 36px; height: 36px; background: #e5e7eb; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                        <span style="font-size: 0.85rem;">LP</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Réponse IA -->
+                                <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+                                    <div style="width: 36px; height: 36px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                        <span style="color: white; font-size: 1rem;">🤖</span>
+                                    </div>
+                                    <div style="background: #f3f4f6; padding: 14px 18px; border-radius: 4px 18px 18px 18px; max-width: 70%;">
+                                        <p style="margin: 0 0 10px; font-size: 0.95rem; color: #333; line-height: 1.5;">
+                                            Pour résoudre une équation du premier degré comme <strong>2x + 5 = 11</strong>, voici les étapes :
+                                        </p>
+                                        <ol style="margin: 10px 0; padding-left: 20px; font-size: 0.9rem; color: #333; line-height: 1.6;">
+                                            <li>Isoler le terme avec x : 2x = 11 - 5</li>
+                                            <li>Simplifier : 2x = 6</li>
+                                            <li>Diviser par le coefficient : x = 6 ÷ 2 = <strong>3</strong></li>
+                                        </ol>
+                                        <p style="margin: 10px 0 0; font-size: 0.9rem; color: #666;">
+                                            Tu veux essayer avec un autre exemple ? 😊
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Barre de saisie -->
+                        <div style="padding: 16px 24px; border-top: 1px solid #e0e0e0; background: #fff;">
+                            <div style="display: flex; align-items: center; gap: 12px; background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 12px; padding: 8px 16px;">
+                                <button title="Joindre un fichier" style="background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #666; padding: 4px;">📎</button>
+                                <input type="text" id="bot-chat-input" placeholder="Pose ta question..." style="flex: 1; border: none; background: transparent; font-size: 0.95rem; outline: none; padding: 8px 0;">
+                                <button title="Message vocal" style="background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #666; padding: 4px;">🎤</button>
+                                <button onclick="window.sendBotMessage()" title="Envoyer" style="width: 40px; height: 40px; background: #2563eb; border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+                                    <span style="color: white; font-size: 1.1rem;">➤</span>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -555,45 +729,271 @@
                 </div>
             </section>
 
-            <!-- SECTION : PLANNING DE RÉVISION -->
-            <section id="section-revisions" class="admin-section">
-                <header class="content-header">
-                    <div class="header-title">
-                        <h1>Planning de Révision</h1>
-                        <p>Ton agenda de cours et d'objectifs personnels</p>
+            <!-- SECTION : AGENDA -->
+            <section id="section-agenda" class="admin-section" style="padding: 2rem;">
+                <!-- Header -->
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;">
+                    <div>
+                        <h1 style="margin: 0; font-size: 1.5rem; font-weight: 600; color: #1a1a1a; display: flex; align-items: center; gap: 0.5rem;">
+                            📅 Mon Agenda
+                        </h1>
+                        <p style="margin: 0.25rem 0 0; color: #6b7280; font-size: 0.9rem;">Tous tes cours, devoirs et événements au même endroit</p>
                     </div>
-                </header>
-                
-                <div class="calendar-container">
-                    <div class="calendar-header">
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <button class="btn-icon" onclick="changeMonth(-1)">◀</button>
-                            <h2 id="calendar-month-year" style="margin: 0; min-width: 200px; text-align: center;">Décembre 2025</h2>
-                            <button class="btn-icon" onclick="changeMonth(1)">▶</button>
-                        </div>
-                        <div class="calendar-legend">
-                            <div class="legend-item">
-                                <div class="dot teacher"></div>
-                                <span>Professeur</span>
-                            </div>
-                            <div class="legend-item">
-                                <div class="dot student"></div>
-                                <span>Mes Objectifs</span>
-                            </div>
-                        </div>
+                    <div class="view-toggle" style="display: flex; gap: 0.5rem; background: #f8f9fa; padding: 4px; border-radius: 8px;">
+                        <button id="btn-calendar-view" onclick="switchStudentAgendaView('calendar')" style="padding: 0.5rem 1rem; background: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.85rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">📅 Calendrier</button>
+                        <button id="btn-list-view" onclick="switchStudentAgendaView('list')" style="padding: 0.5rem 1rem; background: transparent; border: none; border-radius: 6px; cursor: pointer; font-size: 0.85rem;">📋 Liste</button>
                     </div>
+                </div>
 
-                    <div class="calendar-grid" id="calendar-grid">
-                        <!-- En-têtes des jours -->
-                        <div class="calendar-day-header">Lun</div>
-                        <div class="calendar-day-header">Mar</div>
-                        <div class="calendar-day-header">Mer</div>
-                        <div class="calendar-day-header">Jeu</div>
-                        <div class="calendar-day-header">Ven</div>
-                        <div class="calendar-day-header">Sam</div>
-                        <div class="calendar-day-header">Dim</div>
+                <!-- Filtres -->
+                <div style="background: white; padding: 1.25rem; border-radius: 12px; border: 1px solid #e5e7eb; margin-bottom: 1.5rem;">
+                    <div style="font-size: 0.9rem; font-weight: 500; color: #6b7280; margin-bottom: 1rem;">Filtres</div>
+                    
+                    <div style="margin-bottom: 1rem;">
+                        <div style="font-size: 0.85rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem;">Type d'événement</div>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #374151; cursor: pointer;">
+                                <input type="checkbox" checked style="accent-color: #3b82f6;"> Cours
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #374151; cursor: pointer;">
+                                <input type="checkbox" checked style="accent-color: #3b82f6;"> Devoirs
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #374151; cursor: pointer;">
+                                <input type="checkbox" checked style="accent-color: #3b82f6;"> Événements
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div style="font-size: 0.85rem; font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem;">Matières</div>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #374151; cursor: pointer;">
+                                <input type="checkbox" checked style="accent-color: #3b82f6;"> Mathématiques
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #374151; cursor: pointer;">
+                                <input type="checkbox" checked style="accent-color: #3b82f6;"> Français
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #374151; cursor: pointer;">
+                                <input type="checkbox" style="accent-color: #3b82f6;"> Anglais
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: #374151; cursor: pointer;">
+                                <input type="checkbox" style="accent-color: #3b82f6;"> Histoire-Géo
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vue Calendrier -->
+                <div id="student-agenda-calendar-view" style="background: white; border-radius: 12px; border: 1px solid #e5e7eb; overflow: hidden;">
+                    <!-- Navigation du mois -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; border-bottom: 1px solid #e5e7eb;">
+                        <button onclick="changeStudentAgendaMonth(-1)" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border: 1px solid #e5e7eb; background: white; border-radius: 6px; cursor: pointer; font-size: 0.85rem;">
+                            ◀ Mois
+                        </button>
+                        <h3 id="student-agenda-month" style="margin: 0; font-size: 1.1rem; font-weight: 600; color: #1a1a1a;">Janvier 2026</h3>
+                        <button onclick="changeStudentAgendaMonth(1)" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border: 1px solid #e5e7eb; background: white; border-radius: 6px; cursor: pointer; font-size: 0.85rem;">
+                            Mois ▶
+                        </button>
+                    </div>
+                    
+                    <!-- En-têtes des jours -->
+                    <div style="display: grid; grid-template-columns: repeat(7, 1fr); background: #f9fafb; border-bottom: 1px solid #e5e7eb;">
+                        <div style="padding: 0.75rem; text-align: center; font-size: 0.8rem; font-weight: 500; color: #6b7280;">Lun</div>
+                        <div style="padding: 0.75rem; text-align: center; font-size: 0.8rem; font-weight: 500; color: #6b7280;">Mar</div>
+                        <div style="padding: 0.75rem; text-align: center; font-size: 0.8rem; font-weight: 500; color: #6b7280;">Mer</div>
+                        <div style="padding: 0.75rem; text-align: center; font-size: 0.8rem; font-weight: 500; color: #6b7280;">Jeu</div>
+                        <div style="padding: 0.75rem; text-align: center; font-size: 0.8rem; font-weight: 500; color: #6b7280;">Ven</div>
+                        <div style="padding: 0.75rem; text-align: center; font-size: 0.8rem; font-weight: 500; color: #6b7280; background: #f3f4f6;">Sam</div>
+                        <div style="padding: 0.75rem; text-align: center; font-size: 0.8rem; font-weight: 500; color: #6b7280; background: #f3f4f6;">Dim</div>
+                    </div>
+                    
+                    <!-- Grille du calendrier -->
+                    <div style="display: grid; grid-template-columns: repeat(7, 1fr);">
+                        <!-- Semaine 1 -->
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb; color: #9ca3af;">29</div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb; color: #9ca3af;">30</div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb; color: #9ca3af;">31</div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb;"><span style="font-weight: 500;">1</span></div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb;"><span style="font-weight: 500;">2</span></div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb; background: #f9fafb;"><span style="font-weight: 500;">3</span></div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; background: #f9fafb;"><span style="font-weight: 500;">4</span></div>
+                        <!-- Semaine 2 -->
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb;"><span style="font-weight: 500;">5</span></div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb;"><span style="font-weight: 500;">6</span></div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb;"><span style="font-weight: 500;">7</span></div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb;"><span style="font-weight: 500;">8</span></div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb;"><span style="font-weight: 500;">9</span></div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb; background: #f9fafb;"><span style="font-weight: 500;">10</span></div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; background: #f9fafb;"><span style="font-weight: 500;">11</span></div>
+                        <!-- Semaine 3 -->
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb;"><span style="font-weight: 500;">12</span></div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb;"><span style="font-weight: 500;">13</span></div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb;"><span style="font-weight: 500;">14</span></div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb; background: #eff6ff; border: 2px solid #3b82f6;">
+                            <span style="font-weight: 600; color: #3b82f6;">15</span>
+                            <div style="font-size: 0.75rem; color: #3b82f6; margin-top: 0.25rem;">2 événements</div>
+                        </div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb;"><span style="font-weight: 500;">16</span></div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb;">
+                            <span style="font-weight: 500;">17</span>
+                        </div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; background: #f9fafb;"><span style="font-weight: 500;">18</span></div>
+                        <!-- Semaine 4 -->
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb;"><span style="font-weight: 500;">19</span></div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb;">
+                            <span style="font-weight: 500;">20</span>
+                        </div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb;"><span style="font-weight: 500;">21</span></div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb;"><span style="font-weight: 500;">22</span></div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb;"><span style="font-weight: 500;">23</span></div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb; background: #f9fafb;"><span style="font-weight: 500;">24</span></div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-bottom: 1px solid #e5e7eb; background: #f9fafb;"><span style="font-weight: 500;">25</span></div>
+                        <!-- Semaine 5 -->
+                        <div style="padding: 0.75rem; min-height: 80px; border-right: 1px solid #e5e7eb;"><span style="font-weight: 500;">26</span></div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-right: 1px solid #e5e7eb;"><span style="font-weight: 500;">27</span></div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-right: 1px solid #e5e7eb;"><span style="font-weight: 500;">28</span></div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-right: 1px solid #e5e7eb;"><span style="font-weight: 500;">29</span></div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-right: 1px solid #e5e7eb;"><span style="font-weight: 500;">30</span></div>
+                        <div style="padding: 0.75rem; min-height: 80px; border-right: 1px solid #e5e7eb; background: #f9fafb;"><span style="font-weight: 500;">31</span></div>
+                        <div style="padding: 0.75rem; min-height: 80px; background: #f9fafb; color: #9ca3af;">1</div>
+                    </div>
+                </div>
+
+                <!-- Vue Liste (cachée par défaut) -->
+                <div id="student-agenda-list-view" style="display: none; background: white; border-radius: 12px; border: 1px solid #e5e7eb; padding: 1.5rem;">
+                    <div style="border-bottom: 1px solid #e5e7eb; padding-bottom: 1rem; margin-bottom: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <span style="background: #dbeafe; color: #1d4ed8; padding: 0.25rem 0.75rem; border-radius: 6px; font-size: 0.8rem; font-weight: 500;">Cours</span>
+                            <div>
+                                <h4 style="margin: 0; font-size: 1rem; color: #1a1a1a;">Mathématiques - Les Fractions</h4>
+                                <p style="margin: 0.25rem 0 0; font-size: 0.85rem; color: #6b7280;">🕐 15 janv. 2026 • 14h00-15h30 • Salle 203</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="border-bottom: 1px solid #e5e7eb; padding-bottom: 1rem; margin-bottom: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <span style="background: #fef3c7; color: #b45309; padding: 0.25rem 0.75rem; border-radius: 6px; font-size: 0.8rem; font-weight: 500;">Devoir</span>
+                            <div>
+                                <h4 style="margin: 0; font-size: 1rem; color: #1a1a1a;">Exercice Chapitre 3</h4>
+                                <p style="margin: 0.25rem 0 0; font-size: 0.85rem; color: #6b7280;">📅 Échéance : 17 janv. 2026</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="border-bottom: 1px solid #e5e7eb; padding-bottom: 1rem; margin-bottom: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <span style="background: #dbeafe; color: #1d4ed8; padding: 0.25rem 0.75rem; border-radius: 6px; font-size: 0.8rem; font-weight: 500;">Cours</span>
+                            <div>
+                                <h4 style="margin: 0; font-size: 1rem; color: #1a1a1a;">Français - La Poésie</h4>
+                                <p style="margin: 0.25rem 0 0; font-size: 0.85rem; color: #6b7280;">🕐 16 janv. 2026 • 10h00-11h30 • Salle 105</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <span style="background: #dcfce7; color: #15803d; padding: 0.25rem 0.75rem; border-radius: 6px; font-size: 0.8rem; font-weight: 500;">Événement</span>
+                            <div>
+                                <h4 style="margin: 0; font-size: 1rem; color: #1a1a1a;">Sortie Musée des Sciences</h4>
+                                <p style="margin: 0.25rem 0 0; font-size: 0.85rem; color: #6b7280;">🕐 20 janv. 2026 • 09h00-17h00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION : MES RÉVISIONS -->
+            <section id="section-revisions" class="admin-section" style="padding: 2rem;">
+                <!-- Header -->
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem;">
+                    <div>
+                        <h1 style="margin: 0; font-size: 1.5rem; font-weight: 600; color: #1a1a1a; display: flex; align-items: center; gap: 0.5rem;">
+                            📚 Mes Révisions
+                        </h1>
+                        <p style="margin: 0.25rem 0 0; color: #6b7280; font-size: 0.9rem;">Vos notes personnelles et cours privés</p>
+                    </div>
+                    <button style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem; background: #1a1a1a; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 500;">
+                        + Nouveau
+                    </button>
+                </div>
+
+                <!-- KPI Cards -->
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 2rem;">
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid #e5e7eb;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="font-size: 1.25rem; color: #6b7280;">📄</div>
+                            <div>
+                                <div style="font-size: 1.75rem; font-weight: 700; color: #1a1a1a;">1</div>
+                                <div style="color: #3b82f6; font-size: 0.85rem;">Suppléments</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid #e5e7eb;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="font-size: 1.25rem; color: #10b981;">📝</div>
+                            <div>
+                                <div style="font-size: 1.75rem; font-weight: 700; color: #1a1a1a;">1</div>
+                                <div style="color: #10b981; font-size: 0.85rem;">Liés aux cours</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid #e5e7eb;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="font-size: 1.25rem; color: #8b5cf6;">🎓</div>
+                            <div>
+                                <div style="font-size: 1.75rem; font-weight: 700; color: #1a1a1a;">0</div>
+                                <div style="color: #6b7280; font-size: 0.85rem;">Cours perso</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background: white; padding: 1.5rem; border-radius: 12px; border: 1px solid #e5e7eb;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="font-size: 1.25rem; color: #f59e0b;">📋</div>
+                            <div>
+                                <div style="font-size: 1.75rem; font-weight: 700; color: #1a1a1a;">2</div>
+                                <div style="color: #f59e0b; font-size: 0.85rem;">Total cartes</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Onglets -->
+                <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 0;">
+                    <button style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: white; border: 1px solid #e5e7eb; border-bottom: 2px solid #3b82f6; border-radius: 8px 8px 0 0; cursor: pointer; font-size: 0.85rem; color: #3b82f6; font-weight: 500;">
+                        📚 Tous (1)
+                    </button>
+                    <button style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: white; border: 1px solid #e5e7eb; border-bottom: none; border-radius: 8px 8px 0 0; cursor: pointer; font-size: 0.85rem; color: #6b7280;">
+                        🔗 Liés aux cours (1)
+                    </button>
+                    <button style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: white; border: 1px solid #e5e7eb; border-bottom: none; border-radius: 8px 8px 0 0; cursor: pointer; font-size: 0.85rem; color: #6b7280;">
+                        👤 Cours perso (0)
+                    </button>
+                </div>
+
+                <!-- Cards de révision -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
+                    <!-- Card : Notes sur la photosynthèse -->
+                    <div style="background: white; border: 1px solid #e5e7eb; border-radius: 12px; padding: 1.5rem; position: relative;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                <span style="font-size: 1.25rem;">📄</span>
+                                <h3 style="margin: 0; font-size: 1rem; font-weight: 600; color: #1a1a1a;">notes sur la photosynthèse</h3>
+                            </div>
+                            <button style="background: none; border: none; cursor: pointer; color: #6b7280; font-size: 1.25rem;">⋮</button>
+                        </div>
                         
-                        <!-- Les jours seront générés par JS -->
+                        <div style="margin-bottom: 1rem;">
+                            <span style="display: inline-flex; align-items: center; gap: 0.25rem; background: #f0fdf4; color: #16a34a; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.8rem;">
+                                🔗 La photosynthèse
+                            </span>
+                        </div>
+                        
+                        <div style="display: flex; gap: 1rem; color: #6b7280; font-size: 0.85rem; margin-bottom: 0.75rem;">
+                            <span>📖 1 chap.</span>
+                            <span>📋 2 cartes</span>
+                        </div>
+                        
+                        <div style="color: #9ca3af; font-size: 0.8rem;">
+                            🕐 Modifié il y a 2 jours
+                        </div>
                     </div>
                 </div>
             </section>
@@ -679,7 +1079,7 @@
     </div>
 
     <!-- Script Legacy - Utilisé temporairement car Simple Browser VS Code ne supporte pas bien les modules ES6 -->
-    <script src="student.js"></script>
+    <script src="student.js?v=20260115b"></script>
     
     <!-- Modules ES6 Refactorisés (commentés pour compatibilité Simple Browser)
     <script type="module" src="js/student.refactored.js"></script>
