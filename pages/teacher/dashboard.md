@@ -222,7 +222,7 @@ interface DashboardFilters {
 | Sidebar "Mes classes" | [classes/liste.md](classes/liste.md) |
 | Sidebar "Mes élèves" | [students/liste.md](students/liste.md) |
 | Sidebar "Mes cours" | [courses/liste.md](courses/liste.md) |
-| Sidebar "Agendas et Assignations" | [assignments/page.md](assignments/page.md) |
+| Sidebar "Agendas et Assignations" | [agendas-assignations/liste.md](agendas-assignations/liste.md) |
 | Sidebar "Messages" | [messages/page.md](messages/page.md) |
 | Bouton [↗] élève | [students/profile.md](students/profile.md?id=...) |
 

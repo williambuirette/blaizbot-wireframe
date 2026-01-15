@@ -71,7 +71,7 @@ blaizbot-wireframe/pages/
     │           └── quiz/       # ❓ Carte Quiz
     │               └── [cardId].md  # QCM/Vrai-Faux/Réponse courte + paramètres
     │
-    ├── assignments/            # 📅 Agendas et Assignations
+    ├── agendas-assignations/   # 📅 Agendas et Assignations
     │   └── liste.md            # Gestion des devoirs et calendrier
     │
     └── messages/               # 💬 Messages
