@@ -1,0 +1,33 @@
+{
+  "agents": [
+    {
+      "name": "WireframeDoc",
+      "description": "Agent de documentation technique pour BlaizBot wireframe",
+      "instructions": "file:.github/agents/wireframe-doc.md",
+      "examples": "file:.github/agents/EXEMPLES-PROMPTS.md",
+      "triggerKeywords": [
+        "wireframe",
+        "documentation",
+        "page",
+        "modale",
+        "capture",
+        "screenshot",
+        "documenter"
+      ],
+      "capabilities": {
+        "vision": true,
+        "fileCreation": true,
+        "fileEditing": true,
+        "codeGeneration": false
+      },
+      "outputFiles": [
+        "pages/**/*.md",
+        "pages/NAVIGATION-ROADMAP.md"
+      ],
+      "dependencies": [
+        "pages/_TEMPLATE.md",
+        "pages/NAVIGATION-ROADMAP.md"
+      ]
+    }
+  ]
+}

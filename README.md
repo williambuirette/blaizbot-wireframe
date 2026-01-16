@@ -33,7 +33,7 @@ python -m http.server 8000
 ## 🏗️ Architecture
 
 ```
-wireframe-edu-app/
+blaizbot-wireframe/
 ├── index.html          # Page de connexion (hub)
 ├── student.html        # Interface Élève
 ├── teacher.html        # Interface Professeur
@@ -41,6 +41,20 @@ wireframe-edu-app/
 ├── style.css           # Design System unifié
 ├── student.js          # Logique élève
 ├── teacher.js          # Logique professeur
+│
+├── pages/              # 📚 Documentation technique complète
+│   ├── _TEMPLATE.md            # Template de référence
+│   ├── NAVIGATION-ROADMAP.md   # Roadmap de navigation
+│   ├── admin/          # Docs espace Admin
+│   ├── teacher/        # Docs espace Professeur
+│   └── student/        # Docs espace Élève
+│
+├── .github/
+│   └── agents/         # 🤖 Agents IA spécialisés
+│       ├── wireframe-doc.md        # Agent de documentation
+│       ├── README.md               # Guide des agents
+│       └── GUIDE-WIREFRAME-DOC.md  # Guide d'utilisation
+│
 └── js/
     ├── modules/        # 7 modules ES6 réutilisables
     │   ├── calendar.js
@@ -99,6 +113,30 @@ wireframe-edu-app/
 - **CSS3** - Design System avec variables
 - **JavaScript ES6+** - Modules, async/await
 - **JSDoc** - Typage et documentation
+- **Markdown** - Documentation technique des pages
+
+## 🤖 Agent IA - @WireframeDoc
+
+**Nouveau** : Agent de documentation technique automatique !
+
+Partage une capture d'écran et l'agent crée automatiquement :
+- ✅ Documentation technique détaillée dans `pages/`
+- ✅ ASCII art de l'interface
+- ✅ Composants UI identifiés
+- ✅ API endpoints
+- ✅ Types TypeScript
+- ✅ Mise à jour de NAVIGATION-ROADMAP.md
+
+**Usage** :
+```
+@WireframeDoc [capture(s)] Voici [description]
+```
+
+**Exemples** :
+- `@WireframeDoc [image] Modale création classe (admin)`
+- `@WireframeDoc [3 images] Dashboard élève complet`
+
+📖 [Guide complet](.github/agents/GUIDE-WIREFRAME-DOC.md) | [Documentation agent](.github/agents/wireframe-doc.md)
 
 ## 🎓 Contexte : Vibecoding
 
