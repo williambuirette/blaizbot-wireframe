@@ -63,14 +63,16 @@ blaizbot-wireframe/pages/
 │   │       │       └── [cardId].md  # │       └─ Questions + validation réponses
 │   │       │                   # │
 │   │       └── supplements/    # └─ Section 2️⃣ : 🎒 Mes suppléments (créés par élève)
-│   │           (voir revisions/[supplementId]/cards/ ci-dessous) ──┐
+│   │           (voir revisions/[supplementId]/cards/ ci-dessous) ◄──┐
 │   │                                                                │
-│   ├── revisions/              # 📝 Mes révisions                   │
-│   │   ├── liste.md            # Liste suppléments + bouton Créer   │
-│   │   └── [supplementId]/     # Détail d'un supplément             │
+│   ├── revisions/              # 📝 Mes révisions                  │
+│   │   ├── liste.md            # Liste suppléments                  │
+│   │   ├── create.md           # ➕ Création supplément            │
+│   │   └── detail/             # Détail d'un supplément             │
+│   │       ├── [id].md         # Vue structure (chapitres → cartes) │
 │   │       └── cards/          # Cartes du supplément (5 types) ◄───┘
 │   │           │               # ⚠️ Affiché dans 2 endroits :
-│   │           │               #    • revisions/[supplementId]/ (page dédiée)
+│   │           │               #    • revisions/detail/[id].md (page dédiée)
 │   │           │               #    • courses/detail/[id].md section 2️⃣ (si lié à cours)
 │   │           │
 │   │           ├── note/       # 📝 Carte Note
@@ -209,12 +211,15 @@ dossier/
 
 #### Mes Révisions
 - [student/revisions/liste.md](student/revisions/liste.md) - Liste suppléments (notes, exercices, quiz persos)
+- [student/revisions/create.md](student/revisions/create.md) - Page : Créer un supplément (Personnel ou Lié)
+- [student/revisions/detail/[id].md](student/revisions/detail/[id].md) - Détail supplément (structure chapitres)
+- [student/revisions/liaison-cours.md](student/revisions/liaison-cours.md) - Modale : Attribution aux cours
 - **Cartes suppléments (5 types)** :
-  - [student/revisions/[supplementId]/cards/note/[cardId].md](student/revisions/[supplementId]/cards/note/[cardId].md) - 📝 Carte Note (note personnelle rich text)
-  - [student/revisions/[supplementId]/cards/lesson/[cardId].md](student/revisions/[supplementId]/cards/lesson/[cardId].md) - 📄 Carte Leçon (contenu créé par l'élève)
-  - [student/revisions/[supplementId]/cards/video/[cardId].md](student/revisions/[supplementId]/cards/video/[cardId].md) - ▶️ Carte Vidéo (vidéo enregistrée/uploadée)
-  - [student/revisions/[supplementId]/cards/exercise/[cardId].md](student/revisions/[supplementId]/cards/exercise/[cardId].md) - ✏️ Carte Exercice (exercice créé par l'élève)
-  - [student/revisions/[supplementId]/cards/quiz/[cardId].md](student/revisions/[supplementId]/cards/quiz/[cardId].md) - ❓ Carte Quiz (quiz personnalisé)
+  - [student/revisions/detail/cards/note/[cardId].md](student/revisions/detail/cards/note/[cardId].md) - 📝 Carte Note (note personnelle rich text)
+  - [student/revisions/detail/cards/lesson/[cardId].md](student/revisions/detail/cards/lesson/[cardId].md) - 📄 Carte Leçon (contenu créé par l'élève)
+  - [student/revisions/detail/cards/video/[cardId].md](student/revisions/detail/cards/video/[cardId].md) - ▶️ Carte Vidéo (vidéo enregistrée/uploadée)
+  - [student/revisions/detail/cards/exercise/[cardId].md](student/revisions/detail/cards/exercise/[cardId].md) - ✏️ Carte Exercice (exercice créé par l'élève)
+  - [student/revisions/detail/cards/quiz/[cardId].md](student/revisions/detail/cards/quiz/[cardId].md) - ❓ Carte Quiz (quiz personnalisé)
 
 #### Agenda
 *À documenter*

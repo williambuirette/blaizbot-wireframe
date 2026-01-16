@@ -10,10 +10,10 @@
 |--------|-----------|-------|-------------|----------|
 | **Admin** | 14 | 14 | ✅ 100% | - |
 | **Teacher** | 18 | 25 | 🟡 72% | Moyenne |
-| **Student** | 1 | 20 | 🔴 5% | **Haute** |
+| **Student** | 6 | 20 | 🟡 30% | **Haute** |
 | **Public** | 3 | 3 | ✅ 100% | - |
 
-**Total** : 36/62 pages (58%)
+**Total** : 41/62 pages (66%)
 
 ---
 
@@ -100,10 +100,10 @@
 
 ---
 
-### 🔴 Espace Élève (1/20 - 5%) - PRIORITÉ HAUTE
+### � Espace Élève (3/20 - 15%) - PRIORITÉ HAUTE
 
-#### Dashboard (⚠️ À faire)
-- [ ] student/dashboard.md
+#### Dashboard
+- [x] [student/dashboard.md](../pages/student/dashboard.md)
 
 #### Mes Cours (⚠️ À faire)
 - [ ] student/courses/liste.md
@@ -118,8 +118,11 @@
 - [ ] student/agenda/page.md
 - [ ] student/agenda/detail/[assignmentId].md
 
-#### Révisions (⚠️ À faire)
-- [ ] student/revisions/page.md
+#### Révisions
+- [x] [student/revisions/liste.md](../pages/student/revisions/liste.md)
+- [x] [student/revisions/create.md](../pages/student/revisions/create.md)
+- [x] [student/revisions/detail/[id].md](../pages/student/revisions/detail/[id].md)
+- [x] [student/revisions/liaison-cours.md](../pages/student/revisions/liaison-cours.md)
 - [ ] student/revisions/session/[sessionId].md
 
 #### Messages (⚠️ À faire)
