@@ -84,42 +84,83 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                                                                 │
-│  Note de compréhension                                          │
+│                                                             ×   │
+│  [Titre de la note]                                             │
 │  ┌──────┐ ┌─────────────────────┐                               │
 │  │ Note │ │ Supplément personnel│                               │
 │  └──────┘ └─────────────────────┘                               │
 │                                                                 │
-│  ## Préparation Test 2 : Compréhension de Lecture * **Objectif  │
-│  principal :** Évaluer la capacité à comprendre et interpréter  │
-│  des textes écrits. * **Types de questions possibles :** * **   │
-│  Questions factuelles :** Identifier des informations explicites│
-│  dans le texte. * **Questions d'inférence :** Déduire des       │
-│  informations implicites à partir du texte. * **Questions de    │
-│  vocabulaire :** Comprendre le sens de mots et d'expressions    │
-│  dans leur contexte. * **Questions sur l'intention de l'auteur  │
-│  :** Identifier le but de l'auteur en écrivant le texte. *      │
-│  **Questions sur la structure du texte :** Comprendre comment   │
-│  les différentes parties du texte sont organisées et liées      │
-│  entre elles. * **Stratégies de préparation :** * **Lecture     │
-│  active :** Surligner, annoter, prendre des notes pendant la    │
-│  lecture. * **Pratique régulière :** Lire différents types de   │
-│  textes (articles, essais, romans, etc.). * **Développement du  │
-│  vocabulaire :** Apprendre de nouveaux mots et expressions. *   │
-│  **Analyse de textes :** S'exercer à identifier les idées       │
-│  principales, les arguments et les conclusions. * **Conseils    │
-│  pour le jour du test :** * **Lire attentivement les questions  │
-│  :** S'assurer de bien comprendre ce qui est demandé. * **Gérer │
-│  son temps :** Ne pas passer trop de temps sur une seule        │
-│  question. * **Éliminer les réponses incorrectes :** Réduire    │
-│  les options pour augmenter les chances de choisir la bonne     │
-│  réponse. * **Relire ses réponses :** Vérifier qu'elles sont    │
-│  cohérentes avec le texte.                                      │
+│  ┌───────────────────────────────────────────────────────────┐ │
+│  │                                                           │ │
+│  │  ## Titre niveau 2                                        │ │
+│  │                                                           │ │
+│  │  Paragraphe de texte avec **gras** et *italique*.         │ │
+│  │                                                           │ │
+│  │  ### Titre niveau 3                                       │ │
+│  │                                                           │ │
+│  │  * Liste à puces item 1                                   │ │
+│  │  * Liste à puces item 2                                   │ │
+│  │    * Sous-item                                            │ │
+│  │  * Liste à puces item 3                                   │ │
+│  │                                                           │ │
+│  │  1. Liste numérotée item 1                                │ │
+│  │  2. Liste numérotée item 2                                │ │
+│  │  3. Liste numérotée item 3                                │ │
+│  │                                                           │ │
+│  │  > Citation en bloc                                       │ │
+│  │                                                           │ │
+│  │  [Contenu Markdown formaté]                               │ │
+│  │                                                           │ │
+│  │  ⋮                                                         │ │
+│  │                                                           │ │
+│  └───────────────────────────────────────────────────────────┘ │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-> ⚠️ **Note** : Le contenu Markdown est affiché en **texte brut** (les `**` et `*` sont visibles), il n'est pas rendu en HTML formaté.
+> 📝 **Fonctionnalités clés** :
+> - Affichage Markdown rendu en HTML (headings, bold, italic, listes, citations)
+> - Zone scrollable si contenu long
+> - Lecture seule (pas d'édition)
+> - Badge indiquant la source (Cours ou Supplément personnel)
+
+---
+
+## 📝 Rendu Markdown
+
+### Éléments Supportés
+
+| Syntaxe Markdown | Rendu HTML | Description |
+|------------------|------------|-------------|
+| `# Titre 1` | `<h1>` | Titre principal |
+| `## Titre 2` | `<h2>` | Titre section |
+| `### Titre 3` | `<h3>` | Sous-titre |
+| `**texte**` | `<strong>` | Texte en gras |
+| `*texte*` | `<em>` | Texte en italique |
+| `* item` | `<ul><li>` | Liste à puces |
+| `1. item` | `<ol><li>` | Liste numérotée |
+| `> citation` | `<blockquote>` | Citation |
+| `` `code` `` | `<code>` | Code inline |
+| ` ```code``` ` | `<pre><code>` | Bloc de code |
+| `[lien](url)` | `<a>` | Lien hypertexte |
+
+### Bibliothèque de Rendu
+
+**Option recommandée** : `react-markdown` avec `remark-gfm`
+
+```typescript
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+
+<ReactMarkdown 
+  remarkPlugins={[remarkGfm]}
+  className="prose prose-sm max-w-none"
+>
+  {content}
+</ReactMarkdown>
+```
+
+**Classes Tailwind CSS** : `prose` (typography plugin)
 
 ---
 
@@ -184,7 +225,27 @@ interface NoteCardModal {
 
 ---
 
-## 🔄 Comportements
+## � Structure de Données (Exemple)
+
+```json
+{
+  "id": "card-note-789",
+  "type": "NOTE",
+  "title": "[Titre de la note]",
+  "content": "## Introduction\n\nCeci est un **exemple** de contenu Markdown.\n\n### Points clés\n\n* Point 1\n* Point 2\n* Point 3\n\n> Citation importante",
+  "source": "SUPPLEMENT",
+  "supplementTitle": "[Nom du supplément]"
+}
+```
+
+**Points clés** :
+- `content` : Chaîne Markdown brute (avec `\n` pour les sauts de ligne)
+- `source` : `"COURSE"` (créé par prof) ou `"SUPPLEMENT"` (créé par élève)
+- `supplementTitle` : Affiché uniquement si `source === "SUPPLEMENT"`
+
+---
+
+## �🔄 Comportements
 
 ### Ouverture modale
 1. Clic sur une carte Note dans la liste
