@@ -51,6 +51,7 @@ blaizbot-wireframe/pages/
 │   │       │                   # ┌─ Onglet "Cours" contient 2 sections :
 │   │       │                   # │
 │   │       ├── cards/          # ├─ Section 1️⃣ : 📚 Contenu du cours (cartes prof)
+│   │       │   │               # │   ⚠️ MODE VUE 👁️ (lecture seule)
 │   │       │   ├── note/       # │   ├─ 📝 Carte Note
 │   │       │   │   └── [cardId].md  # │   │   └─ Consultation note prof
 │   │       │   ├── lesson/     # │   ├─ 📄 Carte Leçon
@@ -66,11 +67,31 @@ blaizbot-wireframe/pages/
 │   │           (voir revisions/[supplementId]/cards/ ci-dessous) ◄──┐
 │   │                                                                │
 │   ├── revisions/              # 📝 Mes révisions                  │
-│   │   ├── liste.md            # Liste suppléments                  │
-│   │   ├── create.md           # ➕ Création supplément            │
-│   │   └── detail/             # Détail d'un supplément             │
+│   │   │                       #                                    │
+│   │   │   ┌─────────────────────────────────────────────────────┐  │
+│   │   │   │ 📄 liste.md = Page principale                       │  │
+│   │   │   │                                                     │  │
+│   │   │   │ ┌─────────────┐  ┌─────────────┐                    │  │
+│   │   │   │ │ 📦 Carte    │  │ 📦 Carte    │   [+ Nouveau]      │  │
+│   │   │   │ │ supplément  │  │ supplément  │        ↓           │  │
+│   │   │   │ │   (⋮ menu)  │  │   (⋮ menu)  │   create.md        │  │
+│   │   │   │ │      ↓      │  │      ↓      │                    │  │
+│   │   │   │ │ liste/      │  │  [Clic]     │                    │  │
+│   │   │   │ │ liaison-    │  │     ↓       │                    │  │
+│   │   │   │ │ cours.md    │  │ detail/     │                    │  │
+│   │   │   │ └─────────────┘  │  [id].md    │                    │  │
+│   │   │   │                  └─────────────┘                    │  │
+│   │   │   └─────────────────────────────────────────────────────┘  │
+│   │   │                                                            │
+│   │   ├── liste.md            # Page : KPIs + Filtres + Grille cartes
+│   │   ├── liste/              # 📁 Composants de la page liste
+│   │   │   ├── supplement-card.md  # 📦 Composant : Carte de supplément
+│   │   │   └── liaison-cours.md    # 🔗 Modale : Lier à un cours (via ⋮)
+│   │   ├── create.md           # ➕ Page : Créer un supplément    │
+│   │   └── detail/             # Détail d'un supplément (clic carte)
 │   │       ├── [id].md         # Vue structure (chapitres → cartes) │
 │   │       └── cards/          # Cartes du supplément (5 types) ◄───┘
+│   │           │               # ⚠️ MODE ÉDITION ✏️ (création/modification)
 │   │           │               # ⚠️ Affiché dans 2 endroits :
 │   │           │               #    • revisions/detail/[id].md (page dédiée)
 │   │           │               #    • courses/detail/[id].md section 2️⃣ (si lié à cours)
@@ -86,8 +107,14 @@ blaizbot-wireframe/pages/
 │   │           └── quiz/       # ❓ Carte Quiz (supplément élève)
 │   │               └── [cardId].md  # Quiz personnalisé
 │   │
-│   ├── agenda/                 # 📅 Agenda (à documenter)
-│   ├── ai/                     # 🤖 Assistant IA (à documenter)                              
+│   ├── agenda/                 # 📅 Mon Agenda
+│   │   ├── page.md             # Vue Calendrier + Vue Liste (KPIs, filtres, assignations)
+│   │   └── create-objectif.md  # Modale : Nouvel objectif personnel
+│   │
+│   ├── ai/                     # 🤖 Assistant IA (Blaiz'bot Studio)
+│   │   ├── page.md             # Chat IA : Liste conversations + Zone chat
+│   │   └── create-conversation.md  # Modale : Nouvelle conversation
+│   │
 │   └── messages/               # 💬 Messages (à documenter)
 │
 └── teacher/                    # 👨‍🏫 Espace Professeur
@@ -134,7 +161,16 @@ blaizbot-wireframe/pages/
 
 ---
 
-## �📐 Logique d'Arborescence
+## 📐 Logique d'Arborescence
+
+### Modes d'Affichage des Cartes (Élève)
+
+| Interface | Mode | Icône | Description |
+|-----------|------|-------|-------------|
+| **Mes Cours** (`/student/courses`) | 👁️ VUE | Lecture seule | Cartes créées par le prof → consultation uniquement |
+| **Mes Révisions** (`/student/revisions`) | ✏️ ÉDITION | Création/Modification | Cartes créées par l'élève → contrôle total |
+
+> **Règle d'or** : L'élève ne peut JAMAIS modifier les cartes du professeur. Il peut uniquement créer ses propres cartes dans "Mes Révisions".
 
 ### Convention de Nommage des Fichiers
 
@@ -210,12 +246,14 @@ dossier/
   - [student/courses/detail/cards/quiz/[cardId].md](student/courses/detail/cards/quiz/[cardId].md) - ❓ Carte Quiz (questions + validation)
 
 #### Mes Révisions
-- [student/revisions/liste.md](student/revisions/liste.md) - Liste suppléments (notes, exercices, quiz persos)
-- [student/revisions/supplement-card.md](student/revisions/supplement-card.md) - Composant : Carte d'affichage d'un supplément
-  - [student/revisions/liaison-cours.md](student/revisions/liaison-cours.md) - Modale : Attribution aux cours (via menu ⋮)
-- [student/revisions/create.md](student/revisions/create.md) - Page : Créer un supplément (Personnel ou Lié)
-- [student/revisions/detail/[id].md](student/revisions/detail/[id].md) - Détail supplément (structure chapitres)
-- **Cartes suppléments (5 types)** :
+- [student/revisions/liste.md](student/revisions/liste.md) - **Page principale** : KPIs + Filtres (Tous, Liés, Perso) + Grille de cartes
+  - **Composants de la page** (dossier `liste/`) :
+    - [student/revisions/liste/supplement-card.md](student/revisions/liste/supplement-card.md) - 📦 Composant : Carte de supplément (affichée dans la grille)
+    - [student/revisions/liste/liaison-cours.md](student/revisions/liste/liaison-cours.md) - 🔗 Modale : Lier à un cours (via menu ⋮ ou "+ Lier à un cours")
+  - **Actions depuis la page** :
+    - [+ Nouveau] → [student/revisions/create.md](student/revisions/create.md) - ➕ Page : Créer un supplément
+    - [Clic sur carte] → [student/revisions/detail/[id].md](student/revisions/detail/[id].md) - 📂 Détail supplément
+- **Cartes suppléments (5 types)** - MODE ÉDITION ✏️ :
   - [student/revisions/detail/cards/note/[cardId].md](student/revisions/detail/cards/note/[cardId].md) - 📝 Carte Note (note personnelle rich text)
   - [student/revisions/detail/cards/lesson/[cardId].md](student/revisions/detail/cards/lesson/[cardId].md) - 📄 Carte Leçon (contenu créé par l'élève)
   - [student/revisions/detail/cards/video/[cardId].md](student/revisions/detail/cards/video/[cardId].md) - ▶️ Carte Vidéo (vidéo enregistrée/uploadée)
@@ -223,10 +261,18 @@ dossier/
   - [student/revisions/detail/cards/quiz/[cardId].md](student/revisions/detail/cards/quiz/[cardId].md) - ❓ Carte Quiz (quiz personnalisé)
 
 #### Agenda
-*À documenter*
+- [student/agenda/page.md](student/agenda/page.md) - **Page Agenda** : Vue Calendrier + Vue Liste
+  - 4 KPIs : Total, En retard, Aujourd'hui, À venir
+  - Filtres : Source, Matières, Cours, Statuts, Période
+  - 2 sources : Prof (assignations) / Perso (objectifs)
+  - [student/agenda/create-objectif.md](student/agenda/create-objectif.md) - Modale : Nouvel objectif personnel
 
-#### Assistant IA
-*À documenter*
+#### Assistant IA (Blaiz'bot Studio)
+- [student/ai/page.md](student/ai/page.md) - **Page Assistant IA** : Liste conversations + Zone chat
+  - 2 colonnes : Conversations (gauche) + Chat (droite)
+  - États : Vide (bienvenue) / Actif (fil de messages)
+  - Filtres par période + type
+  - [student/ai/create-conversation.md](student/ai/create-conversation.md) - Modale : Nouvelle conversation (Libre ou Liée à un cours)
 
 #### Messages
 *À documenter*
@@ -319,7 +365,9 @@ admin/subjects/liste.md
 | **Admin - Utilisateurs** | 3 | ✅ Complété |
 | **Admin - Classes** | 3 | ✅ Complété |
 | **Admin - Matières** | 3 | ✅ Complété |
-| **Élève** | - | ⏳ À faire |
+| **Élève - Révisions** | 9 | ✅ Complété |
+| **Élève - Agenda** | 2 | ✅ Complété |
+| **Élève - Assistant IA** | 2 | ✅ Complété |
 | **Professeur - Dashboard** | 1 | ✅ Complété |
 | **Professeur - Header Menu** | 2 | ✅ Complété |
 | **Professeur - Classes** | 2 | ✅ Complété |
@@ -328,9 +376,9 @@ admin/subjects/liste.md
 | **Professeur - Agendas** | 1 | ✅ Complété |
 | **Professeur - Messages** | - | ⏳ À faire |
 
-**Total** : 32 fichiers documentés
+**Total** : 45 fichiers documentés
 
 ---
 
-*Dernière mise à jour : 13 décembre 2025*
+*Dernière mise à jour : 16 janvier 2026*
 

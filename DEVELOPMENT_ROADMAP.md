@@ -74,7 +74,7 @@
 ┌─────────────────────────────────────────────────────────────┐
 │                      IA / CHATBOT                            │
 ├─────────────────────────────────────────────────────────────┤
-│  LLM         : OpenAI GPT-4 ou Anthropic Claude             │
+│  LLM         : Gemini ou Anthropic Claude             │
 │  RAG         : LangChain + Vector DB (Pinecone/Chroma)      │
 │  Contenu     : Embeddings des cours pour réponses précises  │
 └─────────────────────────────────────────────────────────────┘
