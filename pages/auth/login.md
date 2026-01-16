@@ -55,6 +55,14 @@
 
 ---
 
+## 📸 Capture d'écran
+
+![Page de connexion BlaizBot](../../../assets/screenshots/auth/login.png)
+
+*Interface de connexion avec formulaire standard et boutons de connexion rapide (DEV)*
+
+---
+
 ## 🧩 Composants Utilisés
 
 | Composant | Chemin | Description |
