@@ -115,7 +115,9 @@ blaizbot-wireframe/pages/
 │   │   ├── page.md             # Chat IA : Liste conversations + Zone chat
 │   │   └── create-conversation.md  # Modale : Nouvelle conversation
 │   │
-│   └── messages/               # 💬 Messages (à documenter)
+│   └── messages/               # 💬 Messages
+│       ├── page.md             # Messagerie : Liste conversations + Chat
+│       └── create-conversation.md  # Modale : Nouvelle conversation
 │
 └── teacher/                    # 👨‍🏫 Espace Professeur
     ├── dashboard.md            # Dashboard professeur
@@ -275,7 +277,11 @@ dossier/
   - [student/ai/create-conversation.md](student/ai/create-conversation.md) - Modale : Nouvelle conversation (Libre ou Liée à un cours)
 
 #### Messages
-*À documenter*
+- [student/messages/page.md](student/messages/page.md) - **Page Messages** : Liste conversations + Zone chat
+  - 2 colonnes : Conversations (gauche) + Chat (droite)
+  - Filtres : Année scolaire, dates, matière, cours, recherche
+  - Groupes : Conversations privées, de cours
+  - [student/messages/create-conversation.md](student/messages/create-conversation.md) - Modale : Nouvelle conversation (3 types : Professeur, Élève, Groupe)
 
 ---
 
@@ -368,6 +374,7 @@ admin/subjects/liste.md
 | **Élève - Révisions** | 9 | ✅ Complété |
 | **Élève - Agenda** | 2 | ✅ Complété |
 | **Élève - Assistant IA** | 2 | ✅ Complété |
+| **Élève - Messages** | 2 | ✅ Complété |
 | **Professeur - Dashboard** | 1 | ✅ Complété |
 | **Professeur - Header Menu** | 2 | ✅ Complété |
 | **Professeur - Classes** | 2 | ✅ Complété |
@@ -376,7 +383,7 @@ admin/subjects/liste.md
 | **Professeur - Agendas** | 1 | ✅ Complété |
 | **Professeur - Messages** | - | ⏳ À faire |
 
-**Total** : 45 fichiers documentés
+**Total** : 47 fichiers documentés
 
 ---
 
