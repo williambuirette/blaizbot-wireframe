@@ -43,11 +43,50 @@ blaizbot-wireframe/pages/
 │   │   ├── mon-profil.md       # 👤 Profil (2 onglets)
 │   │   └── parametres.md       # ⚙️ Paramètres
 │   │
-│   ├── courses/                # 📚 Mes cours (à documenter)
+│   ├── courses/                # 📚 Mes cours
+│   │   ├── liste.md            # Liste cours (KPIs + tableau)
+│   │   └── detail/             # Détail d'un cours
+│   │       ├── [id].md         # 2 onglets : Informations + Cours
+│   │       │                   # 
+│   │       │                   # ┌─ Onglet "Cours" contient 2 sections :
+│   │       │                   # │
+│   │       ├── cards/          # ├─ Section 1️⃣ : 📚 Contenu du cours (cartes prof)
+│   │       │   ├── note/       # │   ├─ 📝 Carte Note
+│   │       │   │   └── [cardId].md  # │   │   └─ Consultation note prof
+│   │       │   ├── lesson/     # │   ├─ 📄 Carte Leçon
+│   │       │   │   └── [cardId].md  # │   │   └─ Contenu leçon + ressources
+│   │       │   ├── video/      # │   ├─ ▶️ Carte Vidéo
+│   │       │   │   └── [cardId].md  # │   │   └─ Lecteur vidéo + transcription
+│   │       │   ├── exercise/   # │   ├─ ✏️ Carte Exercice
+│   │       │   │   └── [cardId].md  # │   │   └─ Énoncé + soumission réponse
+│   │       │   └── quiz/       # │   └─ ❓ Carte Quiz
+│   │       │       └── [cardId].md  # │       └─ Questions + validation réponses
+│   │       │                   # │
+│   │       └── supplements/    # └─ Section 2️⃣ : 🎒 Mes suppléments (créés par élève)
+│   │           (voir revisions/[supplementId]/cards/ ci-dessous) ──┐
+│   │                                                                │
+│   ├── revisions/              # 📝 Mes révisions                   │
+│   │   ├── liste.md            # Liste suppléments + bouton Créer   │
+│   │   └── [supplementId]/     # Détail d'un supplément             │
+│   │       └── cards/          # Cartes du supplément (5 types) ◄───┘
+│   │           │               # ⚠️ Affiché dans 2 endroits :
+│   │           │               #    • revisions/[supplementId]/ (page dédiée)
+│   │           │               #    • courses/detail/[id].md section 2️⃣ (si lié à cours)
+│   │           │
+│   │           ├── note/       # 📝 Carte Note
+│   │           │   └── [cardId].md  # Note personnelle rich text
+│   │           ├── lesson/     # 📄 Carte Leçon (supplément élève)
+│   │           │   └── [cardId].md  # Contenu leçon créé par l'élève
+│   │           ├── video/      # ▶️ Carte Vidéo (supplément élève)
+│   │           │   └── [cardId].md  # Vidéo enregistrée/uploadée
+│   │           ├── exercise/   # ✏️ Carte Exercice (supplément élève)
+│   │           │   └── [cardId].md  # Exercice créé par l'élève
+│   │           └── quiz/       # ❓ Carte Quiz (supplément élève)
+│   │               └── [cardId].md  # Quiz personnalisé
+│   │
 │   ├── agenda/                 # 📅 Agenda (à documenter)
-│   ├── messages/               # 💬 Messages (à documenter)
-│   ├── revisions/              # 📝 Révisions (à documenter)
-│   └── ai/                     # 🤖 Assistant IA (à documenter)
+│   ├── ai/                     # 🤖 Assistant IA (à documenter)                              
+│   └── messages/               # 💬 Messages (à documenter)
 │
 └── teacher/                    # 👨‍🏫 Espace Professeur
     ├── dashboard.md            # Dashboard professeur
@@ -71,7 +110,9 @@ blaizbot-wireframe/pages/
     │   ├── new.md              # Création cours (2 onglets : Infos + Contenu IA)
     │   └── detail/             # Détail d'un cours
     │       ├── [id].md         # 2 onglets : Infos + Structure (chapitres → cartes)
-    │       └── cards/          # Édition des cartes (4 types)
+    │       └── cards/          # Édition des cartes (5 types)
+    │           ├── note/       # 📝 Carte Note
+    │           │   └── [cardId].md  # Éditeur rich text pour notes
     │           ├── lesson/     # 📄 Carte Leçon
     │           │   └── [cardId].md  # Éditeur rich text + ressources
     │           ├── video/      # ▶️ Carte Vidéo
@@ -157,18 +198,31 @@ dossier/
 - [student/header-menu/parametres.md](student/header-menu/parametres.md) - Paramètres (Notifications, Préférences, Assistant IA en lecture seule)
 
 #### Mes Cours
-*À documenter*
+- [student/courses/liste.md](student/courses/liste.md) - Liste des cours (KPIs + filtres + tableau)
+- [student/courses/detail/[id].md](student/courses/detail/[id].md) - Détail cours (2 onglets : Informations + Cours)
+- **Cartes pédagogiques (5 types)** :
+  - [student/courses/detail/cards/note/[cardId].md](student/courses/detail/cards/note/[cardId].md) - 📝 Carte Note (consultation note prof)
+  - [student/courses/detail/cards/lesson/[cardId].md](student/courses/detail/cards/lesson/[cardId].md) - 📄 Carte Leçon (contenu + ressources)
+  - [student/courses/detail/cards/video/[cardId].md](student/courses/detail/cards/video/[cardId].md) - ▶️ Carte Vidéo (lecteur + transcription)
+  - [student/courses/detail/cards/exercise/[cardId].md](student/courses/detail/cards/exercise/[cardId].md) - ✏️ Carte Exercice (énoncé + soumission)
+  - [student/courses/detail/cards/quiz/[cardId].md](student/courses/detail/cards/quiz/[cardId].md) - ❓ Carte Quiz (questions + validation)
+
+#### Mes Révisions
+- [student/revisions/liste.md](student/revisions/liste.md) - Liste suppléments (notes, exercices, quiz persos)
+- **Cartes suppléments (5 types)** :
+  - [student/revisions/[supplementId]/cards/note/[cardId].md](student/revisions/[supplementId]/cards/note/[cardId].md) - 📝 Carte Note (note personnelle rich text)
+  - [student/revisions/[supplementId]/cards/lesson/[cardId].md](student/revisions/[supplementId]/cards/lesson/[cardId].md) - 📄 Carte Leçon (contenu créé par l'élève)
+  - [student/revisions/[supplementId]/cards/video/[cardId].md](student/revisions/[supplementId]/cards/video/[cardId].md) - ▶️ Carte Vidéo (vidéo enregistrée/uploadée)
+  - [student/revisions/[supplementId]/cards/exercise/[cardId].md](student/revisions/[supplementId]/cards/exercise/[cardId].md) - ✏️ Carte Exercice (exercice créé par l'élève)
+  - [student/revisions/[supplementId]/cards/quiz/[cardId].md](student/revisions/[supplementId]/cards/quiz/[cardId].md) - ❓ Carte Quiz (quiz personnalisé)
 
 #### Agenda
 *À documenter*
 
-#### Messages
-*À documenter*
-
-#### Révisions
-*À documenter*
-
 #### Assistant IA
+*À documenter*
+
+#### Messages
 *À documenter*
 
 ---
@@ -193,8 +247,9 @@ dossier/
 #### Mes Cours
 - [teacher/courses/liste.md](teacher/courses/liste.md) - Mes cours (contenus pédagogiques, performances)
 - [teacher/courses/new.md](teacher/courses/new.md) - Nouveau cours (2 onglets : Informations + Contenu & Fichiers avec Assistant IA)
-- [teacher/courses/detail/[id].md](teacher/courses/detail/[id].md) - Détail cours (2 onglets : Informations + Structure arborescente avec chapitres → cartes [Leçon/Vidéo/Exercice/Quiz])
-- **Cartes pédagogiques (4 types)** :
+- [teacher/courses/detail/[id].md](teacher/courses/detail/[id].md) - Détail cours (2 onglets : Informations + Structure arborescente avec chapitres → cartes [Note/Leçon/Vidéo/Exercice/Quiz])
+- **Cartes pédagogiques (5 types)** :
+  - [teacher/courses/detail/cards/note/[cardId].md](teacher/courses/detail/cards/note/[cardId].md) - 📝 Carte Note (éditeur rich text pour notes)
   - [teacher/courses/detail/cards/lesson/[cardId].md](teacher/courses/detail/cards/lesson/[cardId].md) - 📄 Carte Leçon (éditeur rich text + ressources)
   - [teacher/courses/detail/cards/video/[cardId].md](teacher/courses/detail/cards/video/[cardId].md) - ▶️ Carte Vidéo (YouTube/Vimeo/Upload + transcription auto)
   - [teacher/courses/detail/cards/exercise/[cardId].md](teacher/courses/detail/cards/exercise/[cardId].md) - ✏️ Carte Exercice (questions ouvertes + correction IA/Manuelle)

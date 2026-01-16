@@ -1,15 +1,3 @@
-# Liste des Révisions Élève
+# Mes Révisions - Liste
 
-> **Chemin** : Dashboard Élève → Sidebar → **Mes révisions**  
-> **Route** : `/student/revisions`  
-> **Rôle** : STUDENT  
-
----
-
-*À compléter avec capture d'écran*
-
-**Navigation** :
-- ← [Dashboard](../dashboard.md)
-- → [Créer un supplément](create.md)
-- → [Détail supplément](detail/[id].md)
-
+*À documenter*
