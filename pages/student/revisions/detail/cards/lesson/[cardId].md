@@ -10,23 +10,16 @@
 
 ## 🔑 Contexte Clé
 
-**Type de carte** : Leçon créée par le professeur, enrichissable par l'élève
+**Type de carte** : Leçon créée DE ZÉRO par l'élève (NON une modification de leçon prof)
 
-**Source du contenu** : Créée et envoyée par l'enseignant
+**Important** :
+- ✅ L'élève CRÉE ses propres leçons dans Révisions
+- ❌ L'élève ne peut PAS modifier les leçons du prof (Mes Cours = lecture seule)
+- 🔗 Ses leçons perso peuvent être liées à un cours du prof (optionnel)
 
-**Capacités de l'élève** : 
-- Ajouter notes personnelles
-- Enrichir explications
-- Ajouter références et mnémoniques
-
----
-
-## 📊 Différences selon contexte d'affichage
-
-| Contexte | Environnement | Détail |
-|----------|---------------|--------|
-| **Mes Révisions** | ✏️ **ÉDITION COMPLÈTE** | Peut enrichir contenu prof |
-| **Mes Cours** | 👁️ **Lecture seule (modal)** | Affiche contenu + notes, pas d'édition |
+**Accès** :
+- Révisions : ✏️ Création/édition de ses propres leçons
+- Mes Cours : 👁️ Lecture seule des leçons du professeur
 
 ---
 
@@ -37,7 +30,12 @@
 - **Sections** : Contenu original + zone notes élève
 - **Type de carte** : Immutable (Leçon)
 
-**Point critique** : Même leçon = **LECTURE SEULE** dans "Mes Cours"
+**Points clés** :
+- ✅ **Création perso** : L'élève crée ses propres Leçons de zéro
+- ✅ **Environnement complet** : Accès à tous les outils d'un "vrai" éditeur
+- ❌ **Pas d'accès aux leçons du prof** : Ne voit les leçons du prof qu'en lecture seule (Mes Cours)
+- 🔗 **Liaison optionnelle** : Peut lier ses Leçons à un cours du prof
+- 🔓 **Isolation** : Ses Leçons perso sont complètement séparées
 
 ---
 

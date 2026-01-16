@@ -10,24 +10,16 @@
 
 ## 🔑 Contexte Clé
 
-**Type de carte** : Vidéo uploadée par le professeur, enrichissable par l'élève
+**Type de carte** : Vidéo uploadée DE ZÉRO par l'élève (NON une modification de vidéo prof)
 
-**Source du contenu** : Fichier vidéo créé et uploadé par l'enseignant
+**Important** :
+- ✅ L'élève CRÉE ses propres vidéos dans Révisions
+- ❌ L'élève ne peut PAS modifier les vidéos du prof (Mes Cours = lecture seule)
+- 🔗 Ses vidéos perso peuvent être liées à un cours du prof (optionnel)
 
-**Capacités de l'élève** :
-- Ajouter titre personnalisé
-- Ajouter résumé/notes de visionnage
-- Documenter timestamps clés
-- Marquer points importants
-
----
-
-## 📊 Différences selon contexte d'affichage
-
-| Contexte | Environnement | Détail |
-|----------|---------------|--------|
-| **Mes Révisions** | ✏️ **ÉDITION COMPLÈTE** | Peut ajouter notes et timestamps |
-| **Mes Cours** | 👁️ **Visionneur + modal lecture** | Affiche vidéo + notes, pas d'édition |
+**Accès** :
+- Révisions : ✏️ Upload/édition de ses propres vidéos
+- Mes Cours : 👁️ Visionneur seul pour vidéos du professeur
 
 ---
 
@@ -38,7 +30,12 @@
 - **Fichier vidéo** : Immutable (créé par prof)
 - **Type de carte** : Immutable (Vidéo)
 
-**Point critique** : Même vidéo = **LECTURE SEULE** dans "Mes Cours"
+**Points clés** :
+- ✅ **Upload perso** : L'élève upload ses propres Vidéos de zéro
+- ✅ **Environnement complet** : Accès à tous les outils d'un "vrai" éditeur
+- ❌ **Pas d'accès aux vidéos du prof** : Ne voit les vidéos du prof qu'en lecture seule (Mes Cours)
+- 🔗 **Liaison optionnelle** : Peut lier ses Vidéos à un cours du prof
+- 🔓 **Isolation** : Ses Vidéos perso sont complètement séparées
 
 ---
 

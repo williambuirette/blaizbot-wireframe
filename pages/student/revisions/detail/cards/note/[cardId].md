@@ -10,14 +10,16 @@
 
 ## 🔑 Contexte Clé
 
-**Type de carte** : Note personnelle créée entièrement par l'élève
+**Type de carte** : Note créée DE ZÉRO par l'élève (NON une modification de carte prof)
 
-**Différences selon contexte d'affichage** :
+**Important** :
+- ✅ L'élève CRÉE ses propres cartes Note dans Révisions
+- ❌ L'élève ne peut PAS modifier les cartes Note du prof (Mes Cours = lecture seule)
+- 🔗 Ses cartes perso peuvent être liées à un cours du prof (optionnel)
 
-| Contexte | Environnement |
-|----------|---------------|
-| **Mes Révisions** (detail/[id].md) | ✏️ **ÉDITION COMPLÈTE** |
-| **Mes Cours** (courses/detail/[id].md) | 👁️ **Lecture seule** (modal) |
+**Accès** :
+- Révisions : ✏️ Création/édition de ses propres cartes Note
+- Mes Cours : 👁️ Lecture seule des cartes Note du professeur
 
 ---
 
@@ -29,9 +31,11 @@
 - **Sauvegarde** : API synchrone, persistance immédiate
 
 **Points clés** :
-- Pas de limitations : l'élève a l'environnement complet du professeur
-- Cohérence UI garantie
-- Type de carte inchangeable (Note = Note)
+- ✅ **Création perso** : L'élève crée ses propres Notes de zéro
+- ✅ **Environnement complet** : Accès à tous les outils d'un "vrai" éditeur
+- ❌ **Pas d'accès aux notes du prof** : Ne voit les Notes du prof qu'en lecture seule (Mes Cours)
+- 🔗 **Liaison optionnelle** : Peut lier ses Notes à un cours du prof
+- 🔓 **Isolation** : Ses Notes perso sont complètement séparées
 
 ---
 

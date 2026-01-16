@@ -10,24 +10,16 @@
 
 ## 🔑 Contexte Clé
 
-**Type de carte** : Quiz créé par le professeur, enrichissable par l'élève
+**Type de carte** : Quiz créé DE ZÉRO par l'élève (NON une modification de quiz prof)
 
-**Source du contenu** : Structure quiz (questions, réponses correctes) créée par l'enseignant
+**Important** :
+- ✅ L'élève CRÉE ses propres quizzes dans Révisions (QuizBuilder)
+- ❌ L'élève ne peut PAS modifier les quizzes du prof (Mes Cours = jeu seul)
+- 🔗 Ses quizzes perso peuvent être liés à un cours du prof (optionnel)
 
-**Capacités de l'élève** :
-- Ajouter questions personnalisées
-- Créer variantes du quiz prof
-- Ajouter explications/feedback
-- Personnaliser structure d'entraînement
-
----
-
-## 📊 Différences selon contexte d'affichage
-
-| Contexte | Environnement | Détail |
-|----------|---------------|--------|
-| **Mes Révisions** | ✏️ **ÉDITEUR COMPLET (QuizBuilder)** | Peut ajouter questions perso |
-| **Mes Cours** | 👁️ **MODE ENTRAÎNEMENT (jeu interactive)** | Jouer quiz, voir correction, pas d'édition |
+**Accès** :
+- Révisions : ✏️ Création/édition via QuizBuilder
+- Mes Cours : 👁️ Mode entraînement seul (jeu interactif)
 
 ---
 

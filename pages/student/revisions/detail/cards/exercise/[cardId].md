@@ -10,24 +10,16 @@
 
 ## 🔑 Contexte Clé
 
-**Type de carte** : Exercice créé par le professeur, enrichissable par l'élève
+**Type de carte** : Exercice créé DE ZÉRO par l'élève (NON une modification d'exercice prof)
 
-**Source du contenu** : Énoncé créé et assigné par l'enseignant
+**Important** :
+- ✅ L'élève CRÉE ses propres exercices dans Révisions
+- ❌ L'élève ne peut PAS modifier les exercices du prof (Mes Cours = lecture seule)
+- 🔗 Ses exercices perso peuvent être liés à un cours du prof (optionnel)
 
-**Capacités de l'élève** :
-- Ajouter réponses personnelles
-- Ajouter solutions détaillées
-- Ajouter explications de démarche
-- Documenter avec formules mathématiques
-
----
-
-## 📊 Différences selon contexte d'affichage
-
-| Contexte | Environnement | Détail |
-|----------|---------------|--------|
-| **Mes Révisions** | ✏️ **ÉDITION COMPLÈTE** | Peut ajouter réponses et solutions |
-| **Mes Cours** | 👁️ **Modal de correction (lecture)** | Affiche énoncé + correction + réponses, pas d'édition |
+**Accès** :
+- Révisions : ✏️ Création/édition de ses propres exercices
+- Mes Cours : 👁️ Lecture seule des exercices du professeur
 
 ---
 
@@ -39,7 +31,12 @@
 - **Énoncé** : Immutable (créé par prof)
 - **Type de carte** : Immutable (Exercice)
 
-**Point critique** : Même exercice = **CORRECTION EN LECTURE** dans "Mes Cours"
+**Points clés** :
+- ✅ **Création perso** : L'élève crée ses propres Exercices de zéro
+- ✅ **Environnement complet** : Accès à tous les outils d'un "vrai" éditeur
+- ❌ **Pas d'accès aux exercices du prof** : Ne voit les exercices du prof qu'en lecture seule (Mes Cours)
+- 🔗 **Liaison optionnelle** : Peut lier ses Exercices à un cours du prof
+- 🔓 **Isolation** : Ses Exercices perso sont complètement séparés
 
 ---
 
