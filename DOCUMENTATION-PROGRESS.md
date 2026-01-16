@@ -10,10 +10,10 @@
 |--------|-----------|-------|-------------|----------|
 | **Admin** | 14 | 14 | ✅ 100% | - |
 | **Teacher** | 18 | 25 | 🟡 72% | Moyenne |
-| **Student** | 6 | 20 | 🟡 30% | **Haute** |
+| **Student** | 7 | 20 | 🟡 35% | **Haute** |
 | **Public** | 3 | 3 | ✅ 100% | - |
 
-**Total** : 41/62 pages (66%)
+**Total** : 42/62 pages (68%)
 
 ---
 
@@ -120,6 +120,7 @@
 
 #### Révisions
 - [x] [student/revisions/liste.md](../pages/student/revisions/liste.md)
+- [x] [student/revisions/supplement-card.md](../pages/student/revisions/supplement-card.md)
 - [x] [student/revisions/create.md](../pages/student/revisions/create.md)
 - [x] [student/revisions/detail/[id].md](../pages/student/revisions/detail/[id].md)
 - [x] [student/revisions/liaison-cours.md](../pages/student/revisions/liaison-cours.md)

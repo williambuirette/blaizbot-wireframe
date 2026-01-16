@@ -211,9 +211,10 @@ dossier/
 
 #### Mes Révisions
 - [student/revisions/liste.md](student/revisions/liste.md) - Liste suppléments (notes, exercices, quiz persos)
+- [student/revisions/supplement-card.md](student/revisions/supplement-card.md) - Composant : Carte d'affichage d'un supplément
+  - [student/revisions/liaison-cours.md](student/revisions/liaison-cours.md) - Modale : Attribution aux cours (via menu ⋮)
 - [student/revisions/create.md](student/revisions/create.md) - Page : Créer un supplément (Personnel ou Lié)
 - [student/revisions/detail/[id].md](student/revisions/detail/[id].md) - Détail supplément (structure chapitres)
-- [student/revisions/liaison-cours.md](student/revisions/liaison-cours.md) - Modale : Attribution aux cours
 - **Cartes suppléments (5 types)** :
   - [student/revisions/detail/cards/note/[cardId].md](student/revisions/detail/cards/note/[cardId].md) - 📝 Carte Note (note personnelle rich text)
   - [student/revisions/detail/cards/lesson/[cardId].md](student/revisions/detail/cards/lesson/[cardId].md) - 📄 Carte Leçon (contenu créé par l'élève)
