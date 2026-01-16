@@ -36,8 +36,18 @@ blaizbot-wireframe/pages/
 │       ├── create.md           # Modale : Créer
 │       └── edit.md             # Modale : Modifier
 │
-├── student/                    # 🎓 Espace Élève (à documenter)
-│   └── ...
+├── student/                    # 🎓 Espace Élève
+│   ├── dashboard.md            # Dashboard élève
+│   │
+│   ├── header-menu/            # Modales globales (header)
+│   │   ├── mon-profil.md       # 👤 Profil (2 onglets)
+│   │   └── parametres.md       # ⚙️ Paramètres
+│   │
+│   ├── courses/                # 📚 Mes cours (à documenter)
+│   ├── agenda/                 # 📅 Agenda (à documenter)
+│   ├── messages/               # 💬 Messages (à documenter)
+│   ├── revisions/              # 📝 Révisions (à documenter)
+│   └── ai/                     # 🤖 Assistant IA (à documenter)
 │
 └── teacher/                    # 👨‍🏫 Espace Professeur
     ├── dashboard.md            # Dashboard professeur
@@ -72,10 +82,11 @@ blaizbot-wireframe/pages/
     │               └── [cardId].md  # QCM/Vrai-Faux/Réponse courte + paramètres
     │
     ├── agendas-assignations/   # 📅 Agendas et Assignations
-    │   └── liste.md            # Gestion des devoirs et calendrier
+    │   ├── liste.md            # Gestion des devoirs et calendrier (2 onglets)
+    │   └── create.md           # Modale : Nouvelle assignation (7 étapes)
     │
     └── messages/               # 💬 Messages
-        └── liste.md            # Messagerie professeur
+        └── page.md             # Messagerie professeur
 ```
 
 ---
@@ -138,7 +149,27 @@ dossier/
 
 ### Espace Élève (`/student`)
 
-*À compléter*
+#### Dashboard
+- [student/dashboard.md](student/dashboard.md) - Dashboard élève (Bienvenue + KPIs + Accès rapide)
+
+#### Header Menu (Modales globales)
+- [student/header-menu/mon-profil.md](student/header-menu/mon-profil.md) - Profil utilisateur (onglets : Informations + Sécurité)
+- [student/header-menu/parametres.md](student/header-menu/parametres.md) - Paramètres (Notifications, Préférences, Assistant IA en lecture seule)
+
+#### Mes Cours
+*À documenter*
+
+#### Agenda
+*À documenter*
+
+#### Messages
+*À documenter*
+
+#### Révisions
+*À documenter*
+
+#### Assistant IA
+*À documenter*
 
 ---
 
@@ -170,10 +201,12 @@ dossier/
   - [teacher/courses/detail/cards/quiz/[cardId].md](teacher/courses/detail/cards/quiz/[cardId].md) - ❓ Carte Quiz (QCM/Vrai-Faux/Réponse courte + scoring automatique)
 
 #### Agendas et Assignations
-- [teacher/agendas-assignations/liste.md](teacher/agendas-assignations/liste.md) - Calendrier interactif (4 vues : Mois/Semaine/Jour/Agenda) + filtres multi-critères + assignations avec stats
+- [teacher/agendas-assignations/liste.md](teacher/agendas-assignations/liste.md) - Calendrier interactif (2 onglets : Calendrier + Liste) + filtres + stats
+- [teacher/agendas-assignations/create.md](teacher/agendas-assignations/create.md) - Modale : Nouvelle assignation (workflow 7 étapes)
 
 #### Messages
-- [teacher/messages/liste.md](teacher/messages/liste.md) - Messagerie professeur (à documenter)
+- [teacher/messages/page.md](teacher/messages/page.md) - Messagerie temps réel (2 colonnes : Conversations + Messages)
+- [teacher/messages/create.md](teacher/messages/create.md) - Modale : Nouvelle conversation (3 types : Un élève, Plusieurs élèves, Classe entière)
 
 ---
 
