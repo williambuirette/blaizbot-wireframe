@@ -1,4 +1,4 @@
-# Page d'Accueil
+# 🏠 Page d'Accueil (Redirection)
 
 > **Route** : `/`  
 > **Rôle(s)** : Public (redirection automatique)  
@@ -34,38 +34,17 @@ Cette page ne s'affiche jamais visuellement. Elle redirige immédiatement vers `
 
 ---
 
-## 📦 Dépendances
-
-### Packages NPM
-```json
-{
-  "next": "15.x"
-}
-```
-
-### Imports Next.js
-```typescript
-import { redirect } from "next/navigation";
-```
-
-### Composants shadcn/ui
-- Aucun
-
-### Composants Custom
-- Aucun
-
----
-
 ## 🔗 API Endpoints
 
 Aucun appel API.
 
 ---
 
-## 💾 Types & Interfaces
+## 💾 Code Source
 
 ```typescript
-// Pas de props, page statique
+import { redirect } from "next/navigation";
+
 export default function Home() {
   redirect("/login");
 }
@@ -84,45 +63,14 @@ export default function Home() {
 
 ---
 
-## 📋 Checklist de Recréation
+## 📂 Fichiers Liés
 
-### Structure
-- [x] Route Next.js créée (`app/page.tsx`)
-- [x] Redirection serveur (pas de rendu client)
-
-### Code complet
-```tsx
-import { redirect } from "next/navigation";
-
-export default function Home() {
-  redirect("/login");
-}
-```
-
-### Points clés
-- Utilise `redirect()` de Next.js (redirection côté serveur)
-- Pas de rendu HTML
-- Comportement instantané
+| Fichier | Description |
+|---------|-------------|
+| [login.md](login.md) | Page de connexion (destination) |
 
 ---
 
-## 🔗 Navigation
-
-| Direction | Page | Route |
-|-----------|------|-------|
-| → Suivant | Login | `/login` |
-
----
-
-## 📝 Notes de Développement
-
-> **Pourquoi une redirection ?**  
-> L'application n'a pas de landing page publique. Tous les utilisateurs doivent s'authentifier pour accéder aux fonctionnalités.
-
-> **Alternative possible** :  
-> Une landing page marketing avec bouton "Se connecter" pourrait être ajoutée ultérieurement.
-
----
-
-*Date : 13 décembre 2025*
-
+**Mots-clés** : Accueil, Redirection, Public  
+**Temps de lecture** : 1 minute  
+**Pages estimées** : 0.5

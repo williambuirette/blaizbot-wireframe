@@ -9,9 +9,10 @@
 ```
 blaizbot-wireframe/pages/
 │
-├── 00-accueil.md               # Page d'accueil (/)
-├── 01-login.md                 # Authentification (/login)
-├── 02-unauthorized.md          # Accès refusé
+├── auth/                       # 🔐 Authentification
+│   ├── accueil.md              # Page d'accueil (/) - Redirection
+│   ├── login.md                # Connexion (/login)
+│   └── unauthorized.md         # Accès refusé (/unauthorized)
 │
 ├── admin/
 │   ├── 00-dashboard.md         # Dashboard administrateur
@@ -194,10 +195,10 @@ dossier/
 
 ## Structure
 
-### Pages Publiques
-- [00-accueil.md](00-accueil.md) - Page d'accueil (`/`)
-- [01-login.md](01-login.md) - Authentification (`/login`)
-- [02-unauthorized.md](02-unauthorized.md) - Accès refusé (`/unauthorized`)
+### Authentification (`auth/`)
+- [auth/accueil.md](auth/accueil.md) - Page d'accueil (`/`) - Redirection vers login
+- [auth/login.md](auth/login.md) - Connexion (`/login`) - Formulaire + DEV buttons
+- [auth/unauthorized.md](auth/unauthorized.md) - Accès refusé (`/unauthorized`)
 
 ---
 

@@ -1,4 +1,4 @@
-# Page Accès Non Autorisé
+# 🛡️ Page Accès Non Autorisé
 
 > **Route** : `/unauthorized`  
 > **Rôle(s)** : Public (page d'erreur)  
@@ -8,15 +8,16 @@
 
 ## 📸 Aperçu Visuel
 
+### Utilisateur Connecté
+
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                                                                             │
 │                                                                             │
-│                                                                             │
 │                          ┌─────────────────┐                                │
 │                          │                 │                                │
-│                          │   🛡️❌          │  (cercle rouge clair)          │
-│                          │   (ShieldX)     │                                │
+│                          │   🛡️❌          │  ← Cercle rouge clair         │
+│                          │   (ShieldX)     │     avec icône                │
 │                          │                 │                                │
 │                          └─────────────────┘                                │
 │                                                                             │
@@ -38,7 +39,7 @@
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
 
-### Variante : Non connecté
+### Utilisateur Non Connecté
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -47,21 +48,11 @@
 │                                                                             │
 │                   ┌──────────┐    ┌──────────────────┐                      │
 │                   │  Retour  │    │  Se connecter    │                      │
-│                   │ (outline)│    │                  │                      │
+│                   │ (outline)│    │   (primary)      │                      │
 │                   └──────────┘    └──────────────────┘                      │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
-
-### Légende des éléments
-
-| Zone | Description |
-|------|-------------|
-| Icône | ShieldX de lucide-react dans cercle rouge |
-| Titre | "Accès non autorisé" |
-| Message | Explication + suggestion de contacter admin |
-| Bouton Retour | `router.back()` |
-| Bouton Principal | Dépend de la session (connecté ou non) |
 
 ---
 
@@ -75,167 +66,66 @@
 
 ---
 
-## 📦 Dépendances
+## 🔄 Comportements
 
-### Packages NPM
-```json
-{
-  "next": "15.x",
-  "react": "19.x",
-  "next-auth": "4.x",
-  "lucide-react": "latest"
-}
-```
+### Bouton "Retour"
+- Action : `router.back()`
+- Retourne à la page précédente dans l'historique
 
-### Composants shadcn/ui
-- [x] `Button`
+### Bouton Principal (conditionnel)
 
-### Icônes lucide-react
-- [x] `ShieldX`
-- [x] `Home`
+| État Session | Bouton | Action |
+|--------------|--------|--------|
+| **Connecté** | "Mon tableau de bord" | Redirige vers dashboard du rôle |
+| **Non connecté** | "Se connecter" | Redirige vers `/login` |
 
-### Hooks
-- [x] `useRouter` (next/navigation)
-- [x] `useSession` (next-auth/react)
+### Détermination du Dashboard
+
+| Rôle | Destination |
+|------|-------------|
+| `ADMIN` | `/admin` |
+| `TEACHER` | `/teacher` |
+| `STUDENT` | `/student` |
 
 ---
 
 ## 🔗 API Endpoints
 
-Aucun appel API direct. Utilise la session NextAuth via `useSession()`.
+Aucun appel API direct. Utilise `useSession` de NextAuth.
 
 ---
 
-## 💾 Types & Interfaces
+## 🔐 Cas d'Usage
 
-### Session utilisateur
-```typescript
-interface Session {
-  user?: {
-    role?: 'ADMIN' | 'TEACHER' | 'STUDENT';
-    // ... autres champs
-  };
-}
-```
+Cette page s'affiche quand :
 
-### Logique de redirection
-```typescript
-const getDashboardUrl = () => {
-  const role = session?.user?.role;
-  if (role === 'ADMIN') return '/admin';
-  if (role === 'TEACHER') return '/teacher';
-  if (role === 'STUDENT') return '/student';
-  return '/login';
-};
-```
+1. **Accès à une route protégée sans session**
+   - Ex: `/admin` sans être connecté
+
+2. **Accès à une route avec mauvais rôle**
+   - Ex: Élève essayant d'accéder à `/admin`
+
+3. **Token expiré**
+   - Session invalide, redirection automatique
 
 ---
 
-## 🔐 Authentification & Autorisations
+## 📂 Fichiers Liés
 
-| Aspect | Détail |
-|--------|--------|
-| **Session** | Optionnelle (vérifie si connecté) |
-| **Rôles autorisés** | Tous (page d'erreur publique) |
-| **Comportement** | Adapte les boutons selon la session |
-
-### Scénarios d'affichage
-
-| Condition | Bouton Principal |
-|-----------|------------------|
-| `session` existe | "Mon tableau de bord" → `/{role}` |
-| Pas de session | "Se connecter" → `/login` |
+| Fichier | Description |
+|---------|-------------|
+| [login.md](login.md) | Destination si non connecté |
+| [accueil.md](accueil.md) | Page d'accueil |
 
 ---
 
-## 🎨 États de l'Interface
-
-### État avec session
-```
-Boutons : [Retour] [🏠 Mon tableau de bord]
-```
-
-### État sans session
-```
-Boutons : [Retour] [Se connecter]
-```
+**Navigation** :
+- ← Retour (page précédente)
+- → [Login](login.md) (si non connecté)
+- → Dashboard (si connecté, selon rôle)
 
 ---
 
-## 📱 Responsive Design
-
-| Breakpoint | Comportement |
-|------------|--------------|
-| `mobile` < 768px | Boutons empilés ou gap réduit |
-| `tablet` 768px+ | Boutons côte à côte |
-| `desktop` 1024px+ | Idem tablet |
-
-### Classes Tailwind clés
-```css
-/* Page */
-.min-h-screen .flex .items-center .justify-center .bg-gray-50
-
-/* Contenu */
-.text-center .space-y-6 .p-8
-
-/* Icône */
-.rounded-full .bg-red-100 .p-6
-.h-16 .w-16 .text-red-600
-
-/* Boutons */
-.flex .gap-4 .justify-center
-```
-
----
-
-## 📋 Checklist de Recréation
-
-### Structure
-- [x] Route Next.js (`app/unauthorized/page.tsx`)
-- [x] Directive `'use client'` (hooks React)
-- [ ] Métadonnées SEO
-
-### UI
-- [x] Fond gris clair centré
-- [x] Icône ShieldX dans cercle rouge
-- [x] Titre "Accès non autorisé"
-- [x] Message explicatif
-- [x] Bouton "Retour" (outline)
-- [x] Bouton principal conditionnel
-
-### Fonctionnalités
-- [x] Vérification session (useSession)
-- [x] Navigation retour (router.back)
-- [x] Redirection vers dashboard selon rôle
-- [x] Fallback vers login si pas de session
-
-### Qualité
-- [x] Responsive
-- [x] Accessibilité (texte lisible)
-- [ ] Tests unitaires
-
----
-
-## 🔗 Navigation
-
-| Direction | Page | Route |
-|-----------|------|-------|
-| ← Retour | Page précédente | `router.back()` |
-| → Dashboard | Selon rôle | `/admin`, `/teacher`, `/student` |
-| → Login | Si non connecté | `/login` |
-
----
-
-## 📝 Notes de Développement
-
-> **Quand cette page s'affiche ?**  
-> Le middleware redirige vers `/unauthorized` quand un utilisateur tente d'accéder à une route réservée à un autre rôle (ex: élève tentant d'accéder à `/admin`).
-
-> **UX** : Le bouton "Retour" permet de revenir à la page précédente sans perdre l'historique de navigation.
-
-> **Sécurité** : Cette page ne divulgue aucune information sensible, juste que l'accès est refusé.
-
----
-
-*Date : 13 décembre 2025*
-
+**Mots-clés** : Unauthorized, Accès refusé, Erreur, Permissions, Rôles  
+**Temps de lecture** : 2 minutes  
+**Pages estimées** : 1
